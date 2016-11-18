@@ -11,6 +11,7 @@ export default React.createClass({
           <li><NavLink to="/hourEntry">Hour Entry</NavLink></li>
           <li><NavLink to="/login">Login</NavLink></li>
           <li><NavLink to="/schedulemaker">Schedule Maker</NavLink></li>
+          <li><a href="calendar.html">Calendar</a></li>
         </ul>
         {this.props.children}
       </div>
