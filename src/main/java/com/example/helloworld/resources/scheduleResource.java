@@ -22,7 +22,7 @@ import comp110.KarenBot;
 import comp110.Schedule;
 //import javax.ws.rs.container;
 
-@Path("/schedule")
+@Path("/schedule/{date}")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 
@@ -30,10 +30,10 @@ public class scheduleResource {
    // @Context ResourceContext rc;
     @GET
     @UnitOfWork
-    public String getSchedule() {
+    public String getSchedule(@PathParam("date") String dateId) {
 
     KarenBot karenBot = new KarenBot(new FXAlgo());
-    return  karenBot.run("11/13/2016", 100, false);
+    return  karenBot.run(dateId, 100, false);
     }
 
 }
