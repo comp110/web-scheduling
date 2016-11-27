@@ -16,6 +16,9 @@ import java.util.Objects;
         @NamedQuery(
             name = "com.example.helloworld.core.Master.findAll",
             query = "SELECT p FROM Master p"
+        ),@NamedQuery(
+            name = "com.example.helloworld.core.Master.findDate",
+            query = "SELECT p FROM Master p where p.weekStartDate = :weekStartDate "
         )
     })
 public class Master {
@@ -31,9 +34,6 @@ public class Master {
 
     @Column(name = "numPeople", nullable = false)
     private int numPeople;
-
-
-    
 
     @Column(name = "weekStartDate", nullable = false)
     private String weekstartdate;
