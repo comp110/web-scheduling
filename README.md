@@ -60,3 +60,20 @@ To test the example application run the following commands.
 	http://www.dropwizard.io/0.7.1/docs/manual/migrations.html
 	open http://localhost:8080/people
 # dockertest
+
+# Deployment to UNC Cloudapps
+
+* Go to https://console.ose.devapps.unc.edu and download the CLI Command Line Tools under the "?" icon.
+
+* After the tools are installed.
+
+---
+	oc login
+---
+	oc new-project project-name
+---
+	oc new-app https://github.com/comp110/web-scheduling
+---
+
+* Once it finishes building and deploying, create a new route in the Overview page of the cloudapps web console and use the default settings.
+** Note: This process can take awhile and may temporarily give you a 503 Error when visiting the created route. **
