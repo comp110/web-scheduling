@@ -16,7 +16,7 @@ import javax.ws.rs.NotFoundException;
 import javax.ws.rs.PathParam;
 import java.io.*;
 import java.io.PrintWriter;
-@Path("/master/copytoJson")
+@Path("/master/copytoJson/{date}")
 @Produces(MediaType.APPLICATION_JSON)
 public class MasterResourceCopyJson {
 
@@ -28,8 +28,10 @@ public class MasterResourceCopyJson {
 
     @GET
     @UnitOfWork
-    public List<Master> listPeople() {
-       String arr = peopleDAO.findAll().toString();   
+    
+    public List<Master> listPeople(@PathParam("date") String dateId) {
+        dateId =    dateId.replace('-', '/');
+       String arr = peopleDAO.findDate(dateId).toString();   
        try{
          PrintWriter writer = new PrintWriter("data/week.json");
          writer.println(arr);
@@ -38,7 +40,7 @@ public class MasterResourceCopyJson {
         e.printStackTrace();
     }
 
-    return peopleDAO.findAll();
+    return peopleDAO.findDate(dateId);
 }   
 
 

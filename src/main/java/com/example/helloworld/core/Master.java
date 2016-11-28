@@ -36,17 +36,17 @@ public class Master {
     private int numPeople;
 
     @Column(name = "weekStartDate", nullable = false)
-    private String weekstartdate;
+    private String weekStartDate;
 	
     public Master() {
     }
 
-    public Master( String day, int hour, int numPeople, String weekstartdate) {
+    public Master( String day, int hour, int numPeople, String weekStartDate) {
        
     this.day= day;
 	this.hour = hour;
     this.numPeople= numPeople;
-	this.weekstartdate=weekstartdate;
+	this.weekStartDate=weekStartDate;
 	
     }
 
@@ -58,12 +58,12 @@ public class Master {
         this.id = id;
     }
  
-    public void setWeekStartDate(String weekstartdate) {
-        this.weekstartdate = weekstartdate;
+    public void setWeekStartDate(String weekStartDate) {
+        this.weekStartDate = weekStartDate;
     }
 
     public String getWeekStartDate() {
-        return weekstartdate;
+        return weekStartDate;
     }
 
 
@@ -92,6 +92,6 @@ public class Master {
     }
 
     public String toString(){
-          return "{" + "\"day\":" + "\"" + this.day + "\""+",\"hour\":" + this.hour  +",\"numPeople\":"  + this.numPeople +",\"weekStartDate\":" + "\"" + this.weekstartdate +  "\"" +"}";
+          return "{" + "\"day\":" + "\"" + this.day + "\""+",\"hour\":" + this.hour  +",\"numPeople\":"  + this.numPeople +",\"weekStartDate\":" + "\"" + this.weekStartDate +  "\"" +"}";
     }
 }

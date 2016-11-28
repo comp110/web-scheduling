@@ -40,4 +40,11 @@ public class MasterDAO extends AbstractDAO<Master> {
     public List<Master> findAll() {
         return list(namedQuery("com.example.helloworld.core.Master.findAll"));
     }
+
+    public List<Master> findDate(String date) {
+        return  list(
+                        namedQuery("com.example.helloworld.core.Master.findDate")
+                        .setParameter("weekStartDate", date)
+               );
+    }
 }

@@ -39,14 +39,6 @@ public class MasterResource {
     @GET
     @UnitOfWork
     public List<Master> listPeople() {
-       String arr = peopleDAO.findAll().toString();   
-       try{
-         PrintWriter writer = new PrintWriter("data/week.json");
-         writer.println(arr);
-         writer.close();
-     }catch (IOException e) {
-        e.printStackTrace();
-    }
 
     return peopleDAO.findAll();
 }   

@@ -31,7 +31,7 @@ public class scheduleResource {
     @GET
     @UnitOfWork
     public String getSchedule(@PathParam("date") String dateId) {
-
+    dateId =    dateId.replace('-', '/');
     KarenBot karenBot = new KarenBot(new FXAlgo());
     return  karenBot.run(dateId, 100, false);
     }
