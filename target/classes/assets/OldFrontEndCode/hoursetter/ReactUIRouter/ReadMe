@@ -1,0 +1,4 @@
+To Use the ReactUI Router, go to command line or terminal and do the following:
+1)cd into the ReactUIRouter file
+2)python -m http.server 8080
+3)go to localhost:8080 in the browser of your choice

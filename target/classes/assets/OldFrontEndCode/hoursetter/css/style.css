@@ -1,0 +1,244 @@
+          * {
+                padding:0;
+                margin:0;
+            }
+
+            html,
+            body {
+              margin: 0;
+              padding: 0;
+              color: #3a455c;
+              font-family: sans-serif;
+              font-variant-numeric: lining-nums;
+              -moz-font-feature-settings: "lnum";
+              -ms-font-feature-settings: "lnum";
+              -webkit-font-feature-settings: "lnum";
+              font-feature-settings: "lnum";
+              background-color: #f7f7f7;
+            }
+            td {
+              width: auto;
+              margin: 0 auto;
+              font-size: 1em;
+              min-height: 50px;
+              text-align: center;
+              background-color: #00bcec;
+              color: #FFF;
+              border: none;
+              border-radius: 3px;
+              padding: 0 25px;
+              text-transform: uppercase;
+              font-family: sans-serif;
+              cursor: pointer;
+              cursor: hand;
+            }
+            td:hover {
+              background-color: #00a5cf;
+            }
+            .basicForm {
+              margin: 3em;
+              width: 455px;
+              padding: 35px 55px;
+              background-color: #FFF;
+              border: 1px solid #e1e1e1;
+            }
+            .basicForm label {
+              font-family: sans-serif;
+            }
+            .basicForm h1 {
+              text-align: center;
+              margin: 0 0 1em 0;
+            }
+            .basicForm input,
+            .basicForm select {
+              width: calc(100% - 30px);
+              padding: 15px;
+              margin-top: .8em;
+              margin-bottom: 1.8em;
+              font-size: 1em;
+              font-family: sans-serif;
+              border: 1px solid #e1e1e1;
+            }
+            .basicForm select {
+              height: 50px;
+              border-radius: 0;
+              -webkit-appearance: none;
+              width: 100%;
+              background-color: #FFF;
+              background: url(images/selectArrow.png) no-repeat right #FFF;
+            }
+            .basicForm select:required:invalid {
+              color: #999;
+            }
+            .basicForm option[value=""][disabled] {
+              display: none;
+            }
+            .basicForm option {
+              color: #000;
+            }
+            .basicForm .placeholder {
+              color: #f7f7f7;
+            }
+            .basicForm .half {
+              display: inline-block;
+              width: calc(50% - 45px);
+              margin-right: 25px;
+            }
+            .basicForm select.half {
+              width: calc(50% - 12.5px);
+            }
+            .basicForm input[type=submit] {
+              display: block;
+              margin: 2em auto 1em auto;
+              width: auto;
+              font-size: 1em;
+              min-height: 50px;
+              text-align: center;
+              background-color: #00bcec;
+              color: #FFF;
+              border: none;
+              border-radius: 3px;
+              padding: 0 25px;
+              text-transform: uppercase;
+              font-family: sans-serif;
+              cursor: pointer;
+              cursor: hand;
+            }
+            .basicForm input[type=submit]:hover {
+              background-color: #00a5cf;
+            }
+            .basicForm a {
+              display: block;
+              margin-top: -15px;
+              text-decoration: underline;
+              color: #008db1;
+              cursor: pointer;
+              cursor: hand;
+            }
+            .basicForm span {
+              font-family: sans-serif;
+            }
+            .basicForm span a {
+              color: #008db1;
+              display: inherit;
+            }
+            .formContainer {
+              width: 100%;
+              height: auto;
+              padding: 3em 0;
+              background-color: #f7f7f7;
+            }
+            .formContainer h1 {
+              text-align: center;
+              margin: 0 auto;
+              font-size: 1.8em;
+              width: 455px;
+            }
+            .formContainer .basicForm {
+              margin: 3em auto;
+            }
+            input[type=checkbox] {
+              display: none;
+            }
+            div{
+                list-style: none;
+                display: inline-block;
+                width: 340px;
+                text-align: left;
+            }
+
+            #level tr{
+                display: block;
+                padding: 15px 20px;
+                color: #7B8585;
+                margin-bottom: 3px;
+                position: relative;
+                cursor: pointer;
+
+                transition: 0.3s;
+            }
+
+            #level tr b{
+                right: 28px;
+                line-height: 16px;
+                width: 100px;
+                color: #808787;
+                text-align: right;
+            }
+          
+            #time tr:hover{
+                background-color:#d8f2f1; 
+            }
+
+            #level tr.active b{
+                color: #fff;
+            }
+
+            ul{
+                list-style:none;
+                display: inline-block;
+            }
+
+            ul li{
+                display: inline-block;
+                padding: 10px 20px;
+                cursor:pointer;
+                background-color:#eee;
+                color:#7B8585;
+
+                transition:0.3s;
+            }
+
+
+            table td:hover{
+                background-color:#beecea;
+            }
+
+            td{
+                padding-top:15px;
+                font-size:12px;
+            }
+          
+            #scheduleArea {
+                width: 600px;
+            }
+          
+            #userArea {
+                 width: 400px;
+            }
+          
+            #userArea, #scheduleArea {
+                float: left;
+                min-height: 450px;
+                padding: 15px;
+            }
+          
+
+            #container {
+                width: 1005px;
+/*                position: absolute;
+
+                top: 50%;
+                left: 50%;
+                margin-top: -50px;
+                margin-left: -50px;
+                border-style: solid;
+*/
+            }
+
+          
+            h4, #button {
+                display: inline;
+                margin-left: 15px;
+            }
+          
+            #button {
+                background-color: #00bcec;
+                text-align: center;
+                color: #fff;
+                border-color: #2e6da4;
+                padding: 5px 8px;
+                font-size: 14px;
+                line-height: 1.3333333;
+                border-radius: 6px;
+            }
