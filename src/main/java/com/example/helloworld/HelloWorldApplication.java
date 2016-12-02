@@ -76,7 +76,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
         // Enable variable substitution with environment variables
        bootstrap.addBundle(new AssetsBundle("/assets/FrontEndDevelopment", "/", "index.html"));
-        bootstrap.addBundle(new AssetsBundle("/assets/FrontEndDevelopment", "/hourset", "index.html"));
+    //    bootstrap.addBundle(new AssetsBundle("/assets/FrontEndDevelopment", "/hourset", "index.html"));
     //   bootstrap.addBundle(new AssetsBundle("/assets", "/js",  "load-events.js"));
    //  bootstrap.addBundle(new AssetsBundle("/assets", "/js", "calendar-events.js"));
    //   bootstrap.addBundle(new AssetsBundle("/assets", "/css", "style.css"));

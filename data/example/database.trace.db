@@ -1,0 +1,12 @@
+2016-12-01 17:02:09 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "LEARNINGASSISTANTS" not found; SQL statement:
+/* com.example.helloworld.core.LA.findAll */ select la0_.id as id1_0_, la0_.day as day2_0_, la0_.end as end3_0_, la0_.experiencelevel as experien4_0_, la0_.gender as gender5_0_, la0_.hourscapacity as hourscap6_0_, la0_.name as name7_0_, la0_.start as start8_0_, la0_.weekstartdate as weekstar9_0_ from LearningAssistants la0_ [42102-192]
+2016-12-01 17:02:18 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "LEARNINGASSISTANTS" not found; SQL statement:
+/* com.example.helloworld.core.LA.findAll */ select la0_.id as id1_0_, la0_.day as day2_0_, la0_.end as end3_0_, la0_.experiencelevel as experien4_0_, la0_.gender as gender5_0_, la0_.hourscapacity as hourscap6_0_, la0_.name as name7_0_, la0_.start as start8_0_, la0_.weekstartdate as weekstar9_0_ from LearningAssistants la0_ [42102-192]
+2016-12-01 17:02:27 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "LEARNINGASSISTANTS" not found; SQL statement:
+/* com.example.helloworld.core.LA.findAll */ select la0_.id as id1_0_, la0_.day as day2_0_, la0_.end as end3_0_, la0_.experiencelevel as experien4_0_, la0_.gender as gender5_0_, la0_.hourscapacity as hourscap6_0_, la0_.name as name7_0_, la0_.start as start8_0_, la0_.weekstartdate as weekstar9_0_ from LearningAssistants la0_ [42102-192]
+2016-12-02 15:53:21 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "LEARNINGASSISTANTS" not found; SQL statement:
+/* com.example.helloworld.core.LA.findAll */ select la0_.id as id1_0_, la0_.day as day2_0_, la0_.end as end3_0_, la0_.experiencelevel as experien4_0_, la0_.gender as gender5_0_, la0_.hourscapacity as hourscap6_0_, la0_.name as name7_0_, la0_.start as start8_0_, la0_.weekstartdate as weekstar9_0_ from LearningAssistants la0_ [42102-192]
