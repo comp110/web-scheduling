@@ -1,0 +1,17 @@
+Compiling dropwizard (requires maven >= 3.0.1):
+$ mvn package
+
+Running dropwizard (requires java >= 1.8.0):
+$ java -jar target/dropwizard-example-1.0.1-SNAPSHOT.jar server example.yml
+
+
+API CALLS
+
+Polling information from dropwizard (curl):
+$ curl http://localhost:8080/hello-world
+
+Polling information from dropwizard (web):
+jQuery.ajaxSetup({ cache: false });
+jQuery.getJSON('http://localhost:8080/hello-world', function(data) {
+	alert(JSON.stringify(data))
+});
