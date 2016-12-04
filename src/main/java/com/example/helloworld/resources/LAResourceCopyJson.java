@@ -17,7 +17,15 @@ import javax.ws.rs.PathParam;
 import java.util.List;
 import java.io.*;
 import java.io.PrintWriter;
+
+import com.example.helloworld.core.User;
+import io.dropwizard.auth.Auth;
+
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+
 @Path("/hoursetter/copytoJson")
+
 @Produces(MediaType.APPLICATION_JSON)
 public class LAResourceCopyJson {
 
@@ -30,8 +38,8 @@ public class LAResourceCopyJson {
   
     @GET
     @UnitOfWork
-    
-    public String copylistLA(@PathParam("copy") final String copy) {
+    @RolesAllowed("ADMIN")
+    public String copylistLA(@PathParam("copy") final String copy, @Auth User user) {
        String arr = laDAO.findAll().toString();   
        try{
            PrintWriter writer = new PrintWriter("data/staff.json");

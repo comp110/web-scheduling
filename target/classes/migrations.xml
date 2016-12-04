@@ -100,5 +100,19 @@
             <column name="role" value="admin"/>
             <column name="password" value="123"/>
         </insert>
-           </changeSet>
+          <insert tableName="userTable">
+            <column name="id" value="2"/>
+            <column name="name" value="LA1"/>
+            <column name="role" value="la"/>
+            <column name="password" value="123"/>
+        </insert>
+           <insert tableName="userTable">
+            <column name="id" value="3"/>
+            <column name="name" value="LA2"/>
+            <column name="role" value="la"/>
+            <column name="password" value="comp110"/>
+        </insert>
+</changeSet>
+      
 </databaseChangeLog>
+

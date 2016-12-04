@@ -18,8 +18,13 @@ import com.example.helloworld.core.Person;
 import com.example.helloworld.db.PersonDAO;
 import io.dropwizard.hibernate.UnitOfWork;
 import java.util.List;
+import com.example.helloworld.core.User;
+import io.dropwizard.auth.Auth;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 @Path("/people/{personId}")
+@RolesAllowed("la")
 @Produces(MediaType.APPLICATION_JSON)
 public class PersonResource {
     public final PersonDAO peopleDAO;
@@ -30,16 +35,14 @@ public class PersonResource {
 
     @GET
     @UnitOfWork
-    public Person getPerson(@PathParam("personId") LongParam personId) {
+    public Person getPerson(@PathParam("personId") LongParam personId,@Auth User user) {
         return findSafely(personId.get());
     }
 
 
     @PUT
     @UnitOfWork
-    public Person updatePerson(@PathParam("personId") LongParam personId,Person person) { 
-  //   return peopleDAO.update(personId.get(),person);
-
+    public Person updatePerson(@PathParam("personId") LongParam personId,Person person,@Auth User user) { 
         Person oldVersion = findSafely(personId.get());
         oldVersion.setStart(person.getStart());
         oldVersion.setEnd(person.getEnd());
@@ -52,7 +55,6 @@ public class PersonResource {
     @DELETE
     @UnitOfWork
     public void delete(@PathParam("personId") LongParam personId) {
-    	// peopleDAO.delete(person);
     	 peopleDAO.delete(findSafely(personId.get()));
     }
     @GET

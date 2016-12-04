@@ -16,30 +16,31 @@ import javax.ws.rs.NotFoundException;
 import javax.ws.rs.PathParam;
 import java.io.*;
 import java.io.PrintWriter;
+
+import com.example.helloworld.core.User;
+import io.dropwizard.auth.Auth;
+
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 @Path("/master")
+@RolesAllowed("ADMIN")
 @Produces(MediaType.APPLICATION_JSON)
 public class MasterResource {
-
     private final MasterDAO peopleDAO;
-
     public MasterResource(MasterDAO peopleDAO) {
         this.peopleDAO = peopleDAO;
     }
 
     @POST
     @UnitOfWork
-    public void createPerson(Master[] person) {
+    public void createPerson(Master[] person, @Auth User user) {
         for(int i =0 ; i < person.length; i ++){
             peopleDAO.create(person[i]);
         }
     }
-
-
-
     @GET
     @UnitOfWork
     public List<Master> listPeople() {
-
     return peopleDAO.findAll();
 }   
 

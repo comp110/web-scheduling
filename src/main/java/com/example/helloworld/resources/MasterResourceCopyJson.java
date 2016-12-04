@@ -16,7 +16,13 @@ import javax.ws.rs.NotFoundException;
 import javax.ws.rs.PathParam;
 import java.io.*;
 import java.io.PrintWriter;
+import com.example.helloworld.core.User;
+import io.dropwizard.auth.Auth;
+
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 @Path("/master/copytoJson/{date}")
+@RolesAllowed("ADMIN")
 @Produces(MediaType.APPLICATION_JSON)
 public class MasterResourceCopyJson {
 
@@ -28,8 +34,7 @@ public class MasterResourceCopyJson {
 
     @GET
     @UnitOfWork
-    
-    public List<Master> listPeople(@PathParam("date") String dateId) {
+    public List<Master> listPeople(@PathParam("date") String dateId, @Auth User user) {
         dateId =    dateId.replace('-', '/');
        String arr = peopleDAO.findDate(dateId).toString();   
        try{

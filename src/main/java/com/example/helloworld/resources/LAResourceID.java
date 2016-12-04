@@ -16,6 +16,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
+
+import com.example.helloworld.core.User;
+import io.dropwizard.auth.Auth;
+
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 @Path("/hoursetter/{personId}")
 @Produces(MediaType.APPLICATION_JSON)
 public class LAResourceID {
@@ -26,15 +32,17 @@ public class LAResourceID {
     }
 
     @GET
+    @RolesAllowed("BASIC_GUY")
     @UnitOfWork
-    public LA getPerson(@PathParam("personId") LongParam personId) {
+    public LA getPerson(@PathParam("personId") LongParam personId, @Auth User user) {
         return findSafely(personId.get());
     }
 
 
     @PUT
+    @RolesAllowed("BASIC_GUY")
     @UnitOfWork
-    public LA updatePerson(@PathParam("personId") LongParam personId,LA person) { 
+    public LA updatePerson(@PathParam("personId") LongParam personId,LA person,@Auth User user) { 
   //   return peopleDAO.update(personId.get(),person);
 
         LA oldVersion = findSafely(personId.get());
@@ -49,6 +57,7 @@ public class LAResourceID {
    
     
     @DELETE
+    @RolesAllowed("ADMIN")
     @UnitOfWork
     public void delete(@PathParam("personId") LongParam personId) {
     	// peopleDAO.delete(person);

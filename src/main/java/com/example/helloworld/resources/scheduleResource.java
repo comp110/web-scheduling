@@ -20,8 +20,11 @@ import javax.ws.rs.Consumes;
 import comp110.FXCrew.FXAlgo;
 import comp110.KarenBot;
 import comp110.Schedule;
-//import javax.ws.rs.container;
+import com.example.helloworld.core.User;
+import io.dropwizard.auth.Auth;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 @Path("/schedule/{date}")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -30,7 +33,8 @@ public class scheduleResource {
    // @Context ResourceContext rc;
     @GET
     @UnitOfWork
-    public String getSchedule(@PathParam("date") String dateId) {
+    @RolesAllowed("ADMIN")
+    public String getSchedule(@Auth User user, @PathParam("date") String dateId) {
     dateId = dateId.replace('-', '/');
     KarenBot karenBot = new KarenBot(new FXAlgo());
     return  karenBot.run(dateId, 100, false);

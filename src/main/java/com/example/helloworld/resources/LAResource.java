@@ -17,6 +17,11 @@ import javax.ws.rs.PathParam;
 import java.util.List;
 import java.io.*;
 import java.io.PrintWriter;
+import com.example.helloworld.core.User;
+import io.dropwizard.auth.Auth;
+
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 @Path("/hoursetter")
 @Produces(MediaType.APPLICATION_JSON)
 public class LAResource {
@@ -28,8 +33,9 @@ public class LAResource {
     }
 
     @POST
+    @RolesAllowed("BASIC_GUY")
     @UnitOfWork
-    public void createPerson(LA[] person) {
+    public void createPerson(LA[] person, @Auth User user) {
         for(int i =0 ; i < person.length; i ++){
             laDAO.create(person[i]);
         }
@@ -38,8 +44,9 @@ public class LAResource {
 
 
     @GET
+    @RolesAllowed("BASIC_GUY")
     @UnitOfWork
-    public List<LA> listLA() {
+    public List<LA> listLA(@Auth User user) {
     return  laDAO.findAll(); 
 } 
 

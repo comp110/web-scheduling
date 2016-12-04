@@ -16,6 +16,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import java.util.List;
 import javax.ws.rs.Consumes;
+
+import com.example.helloworld.core.User;
+import io.dropwizard.auth.Auth;
+
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+
 @Path("/userDatabase")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -29,14 +36,16 @@ public class UserResource {
 
     @POST
     @UnitOfWork
-    public User2 createPerson(User2 person) {
+    @RolesAllowed("ADMIN")
+    public User2 createPerson(User2 person,  @Auth User user) {
             userDAO.create(person);
             return person;
     }
    
     @GET
+    @RolesAllowed("ADMIN")
     @UnitOfWork
-    public List<User2> listUser() {
+    public List<User2> listUser( @Auth User user) {
         return userDAO.findAll();
     }   
 
