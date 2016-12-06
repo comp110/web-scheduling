@@ -9,8 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {      
-    "babelify": "^6.1.3",
-    "browserify": "^11.0.1",
+    "babelify": "*",
+    "browserify": "*",
     "events": "*",
     "flux": "*",
     "gulp": "*",
@@ -23,7 +23,7 @@
     "react-dom": "*",
     "run-sequence": "*",
     "vinyl-source-stream": "*",
-    "react-router": "^2.0.0"
+    "react-router": "*"
   },
   "devDependencies": {
     "babel-core": "^6.5.1",
