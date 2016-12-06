@@ -105,32 +105,32 @@ function createWorkableShifts(work_hours){
     return workable_shifts;
 }
 var workhours = initializeWorkHours();
-
+var week_start_date = "12/4/2016";
 function initializeWeek(){
     var num_people =new Array(23);
     for(var i=0; i<23; i++){
         num_people[i] = new Array(7);
-        num_people[i][0]={"day": "Sunday", "number": 0};
-        num_people[i][1]={"day": "Monday", "number": 0};
-        num_people[i][2]={"day": "Tuesday", "number": 0};
-        num_people[i][3]={"day": "Wednesday", "number": 0};
-        num_people[i][4]={"day": "Thursday", "number": 0};
-        num_people[i][5]={"day": "Friday", "number": 0};
-        num_people[i][6]={"day": "Saturday", "number": 0};
+        num_people[i][0]={"day": "Sun", "numPeople": 0, "hour": i, "weekStartDate": week_start_date};
+        num_people[i][1]={"day": "Mon", "numPeople": 0, "hour": i, "weekStartDate": week_start_date};
+        num_people[i][2]={"day": "Tue", "numPeople": 0, "hour": i, "weekStartDate": week_start_date};
+        num_people[i][3]={"day": "Wed", "numPeople": 0, "hour": i, "weekStartDate": week_start_date};
+        num_people[i][4]={"day": "Thu", "numPeople": 0, "hour": i, "weekStartDate": week_start_date};
+        num_people[i][5]={"day": "Fri", "numPeople": 0, "hour": i, "weekStartDate": week_start_date};
+        num_people[i][6]={"day": "Sat", "numPeople": 0, "hour": i, "weekStartDate": week_start_date};
     }
     return num_people;
 }
 function addPerson(hour,week, num_people){
-    num_people[hour][week].number+=1;
+    num_people[hour][week].numPeople+=1;
     return num_people;
 }
 function removePerson(hour,week, num_people){
     if(getNumber(hour,week,num_people)>0)
-        num_people[hour][week].number-=1;
+        num_people[hour][week].numPeople-=1;
     return num_people;
 }
 function getNumber(hour, week, num_people){
-    return num_people[hour][week].number;
+    return num_people[hour][week].numPeople;
 }
 function getData(hour,week,num_people){
     return num_people[hour][week];
@@ -208,7 +208,7 @@ var WeekSetterTableData = React.createClass({
                         <br></br>
                         {hourMap[this.props.hour]}
                         <br></br>
-                        {this.props.numObj[this.props.hour][this.props.day].number}
+                        {this.props.numObj[this.props.hour][this.props.day].numPeople}
                     </td>
         );
     }
@@ -269,22 +269,21 @@ var WeekSetterTable = React.createClass({
     },
     handleClick : function(){
 //        var week = createWorkableShifts(this.state.num_people);
-        
+        var reduced = [].concat.apply([], numpeople);
         console.log(numpeople);
-//        $.ajax({
-//        	headers: {
-//        		'Accept': 'application/json',
-//        		'Content-Type': 'application/json'
-//        	},
-//        	type: 'POST',
-//        	url: 'http://localhost:8080/hoursetter',
-//        	data: JSON.stringify(shifts),
-//        	dataType: 'json',
-//        	success: function() {
-//        		alert('Success');
-//        	}
-//        });
-//                               
+        reduced = JSON.stringify(reduced);
+        //reduced = reduced.toString();
+        console.log(reduced);
+        
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        
+        };
+      xhttp.open("POST", "/api/master", true);
+      xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xhttp.send(reduced);
+        
+                              
     },
     render: function(){
         return(
