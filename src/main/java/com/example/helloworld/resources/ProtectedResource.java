@@ -18,7 +18,7 @@ public class ProtectedResource {
     @GET
     @UnitOfWork
     public String showSecret(@Auth User user) {
-        return String.format("Hey there, %s. You know the secret! %d", user.getName(), user.getId());
+        return "true";
     }
 
     @RolesAllowed("ADMIN")
@@ -26,6 +26,6 @@ public class ProtectedResource {
     @UnitOfWork
     @Path("admin")
     public String showAdminSecret(@Auth User user) {
-        return String.format("Hey there, %s. It looks like you are an admin. %d", user.getName(), user.getId());
+        return "true";
     }
 }
