@@ -28,32 +28,29 @@
 	var username ="ervin";
 	var password = "123";
 
-
+	var date = "11-13-2016";
 	$.ajax({
     	headers: {
     		'Accept': 'application/json',
     		'Content-Type': 'application/json'
     	},
-    	beforeSend: function (xhr) {
-    xhr.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
-},
+    	headers: {
+    "Authorization": "Basic " + btoa(username + ":" + password)
+  },
     	type: 'GET',
-    	url: '/api/hoursetter/copytoJson',
+    	url: '/api/hoursetter/copytoJson/'+ date,
     	dataType: 'text',
     	success: function() {
 			//$.getJSON('http://' + DROPWIZARD_IP + ':8080/api/master/copytoJson');
 
 			// Run KarenBot by issuing a GET request to the dropwizard server
-			$.getJSON('/api/schedule/11-13-2016', function(data) {
+			$.getJSON('/api/schedule/'+date, function(data) {
 				// Post schedule to database
 				$.ajax({
 		        	headers: {
 		        		'Accept': 'application/json',
 		        		'Content-Type': 'application/json'
 		        	},
-		        	  	beforeSend: function (xhr) {
-    xhr.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
-},
 		        	type: 'POST',
 		        	url: '/api/people',
 		        	data: JSON.stringify(data),

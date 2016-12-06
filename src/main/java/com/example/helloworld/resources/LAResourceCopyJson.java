@@ -40,6 +40,7 @@ public class LAResourceCopyJson {
     @UnitOfWork
     @RolesAllowed("ADMIN")
     public String copylistLA(@PathParam("date") String dateId, @Auth User user) {
+        dateId =    dateId.replace('-', '/');
        String arr = laDAO.findDate(dateId).toString();   
        try{
            PrintWriter writer = new PrintWriter("data/staff.json");

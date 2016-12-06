@@ -60,8 +60,8 @@ public class LAResourceID {
     @RolesAllowed("ADMIN")
     @UnitOfWork
     public void delete(@PathParam("personId") LongParam personId) {
-    	// peopleDAO.delete(person);
-    	 laDAO.delete(findSafely(personId.get()));
+        // peopleDAO.delete(person);
+         laDAO.delete(findSafely(personId.get()));
     }
    
 

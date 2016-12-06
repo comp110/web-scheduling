@@ -34,11 +34,11 @@
     		'Accept': 'application/json',
     		'Content-Type': 'application/json'
     	},
-    	beforeSend: function (xhr) {
-    xhr.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
-},
+    	headers: {
+    "Authorization": "Basic " + btoa(username + ":" + password)
+  },
     	type: 'GET',
-    	url: '/api/hoursetter/copytoJson',
+    	url: '/api/hoursetter/copytoJson/11-13-2016',
     	dataType: 'text',
     	success: function() {
 			//$.getJSON('http://' + DROPWIZARD_IP + ':8080/api/master/copytoJson');
@@ -51,9 +51,6 @@
 		        		'Accept': 'application/json',
 		        		'Content-Type': 'application/json'
 		        	},
-		        	  	beforeSend: function (xhr) {
-    xhr.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
-},
 		        	type: 'POST',
 		        	url: '/api/people',
 		        	data: JSON.stringify(data),

@@ -40,7 +40,7 @@ public class LADAO extends AbstractDAO<LA> {
  public List<LA> findDate(String date) {
            return  list(
                         namedQuery("com.example.helloworld.core.LA.findDate")
-                        .setParameter("weekStartDate", date)
+                        .setParameter("weekstartdate", date)
                );
     }
 
