@@ -24,7 +24,7 @@ import io.dropwizard.auth.Auth;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 
-@Path("/hoursetter/copytoJson")
+@Path("/hoursetter/copytoJson/{date}")
 
 @Produces(MediaType.APPLICATION_JSON)
 public class LAResourceCopyJson {
@@ -39,8 +39,8 @@ public class LAResourceCopyJson {
     @GET
     @UnitOfWork
     @RolesAllowed("ADMIN")
-    public String copylistLA(@PathParam("copy") final String copy, @Auth User user) {
-       String arr = laDAO.findAll().toString();   
+    public String copylistLA(@PathParam("date") String dateId, @Auth User user) {
+       String arr = laDAO.findDate(dateId).toString();   
        try{
            PrintWriter writer = new PrintWriter("data/staff.json");
            writer.println(arr);
