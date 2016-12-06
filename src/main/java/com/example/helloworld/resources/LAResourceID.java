@@ -50,6 +50,7 @@ public class LAResourceID {
         oldVersion.setEnd(person.getEnd());
         oldVersion.setDay(person.getDay());
         oldVersion.setHoursCapacity(person.getHoursCapacity());
+        oldVersion.setWeekStartDate(person.getWeekStartDate());
         laDAO.saveOrUpdate(oldVersion);
         return oldVersion;
     }
