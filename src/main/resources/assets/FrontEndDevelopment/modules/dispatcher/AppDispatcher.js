@@ -18,4 +18,12 @@ AppDispatcher.userAction = function(action){
     });
 };
 
+//LA Creation Actions
+AppDispatcher.laAction = function(action){
+  this.dispatch({
+     source: 'VIEW_ACTION',
+     action: action
+  });  
+};
+
 module.exports = AppDispatcher;
