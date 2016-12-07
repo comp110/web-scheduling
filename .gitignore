@@ -3,3 +3,8 @@
 .settings
 dependency-reduced-pom.xml
 **/node_modules/
+target/*
+
+# Unignore any necessary target files
+!target/example
+!target/dropwizard-example-1.1.0-SNAPSHOT.jar
