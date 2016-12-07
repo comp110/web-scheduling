@@ -184,14 +184,14 @@
 	configureScheduler();
 
 	// Query database and build schedule
-//	$.getJSON('http://' + DROPWIZARD_IP + ':8080/api/people', function(data) {
-//		console.log(data);
-//		buildSchedulesFromDatabaseJSON(data);
-//		renderAllSchedules();
-//	});
+	$.getJSON('/api/people', function(data) {
+		console.log(data);
+		buildSchedulesFromDatabaseJSON(data);
+		renderAllSchedules();
+	});
 
 	// Example of structure of JSON; uncomment to run on hardcoded data
-	var database_json = [
+	/*var database_json = [
 		{weekStartDate: '10/2/2016', day: 'Sun', name: 'Billy', start: 11, end: 13},
 		{weekStartDate: '10/2/2016', day: 'Sun', name: 'Billy', start: 17, end: 19},
 		{weekStartDate: '10/2/2016', day: 'Sun', name: 'Sally', start: 10, end: 12},
@@ -214,6 +214,7 @@
 	]
 	buildSchedulesFromDatabaseJSON(database_json);
 	renderAllSchedules();
+*/
 });
 
         </script>
