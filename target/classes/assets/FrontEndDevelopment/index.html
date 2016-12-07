@@ -12,8 +12,6 @@
 <head>
 <meta charset=utf-8/>
 <title>Scheduling Application</title>
-<link rel=stylesheet href=index.css>
-<link rel="stylesheet" type="text/css" href="css/style.css">
     <script src='http://dhtmlx.com/docs/products/dhtmlxScheduler/codebase/dhtmlxscheduler.js'></script>
 		<link rel='stylesheet' type='text/css' href='http://dhtmlx.com/docs/products/dhtmlxScheduler/codebase/dhtmlxscheduler.css'>
 		<link rel='stylesheet' type='text/css' href='index.css'>
@@ -61,7 +59,7 @@
 				});
 			});
 
-			
+
     	}
     });
 }
@@ -134,7 +132,7 @@
 		date = date.toLocaleDateString();
 		renderDaySchedule(day, date, name_filter);
 	}
-} 
+}
 
             function renderAllSchedules(name_filter) {
 	// Do nothing if we have not loaded info from database yet
@@ -237,7 +235,7 @@
 </head>
 <body>
 <div id=app></div>
-<div id="wrapper" style="visibility: hidden"> 
+<div id="wrapper" style="visibility: hidden">
 		<div id="filter">
 			Filter: <input id="filter_input">
 			<button onclick="runKarenBot()">Generate Schedule</button>
@@ -254,7 +252,7 @@
 			</div>
 			<div class="dhx_cal_header"></div>
 			<div class="dhx_cal_data"></div>
-		</div>  
+		</div>
         </div>
 <!--<div id="app2" style="visibility: hidden">Test me bro</div>-->
 <script src="dist/bundle.js"></script>
