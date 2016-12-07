@@ -133,13 +133,18 @@ var HourSetterTableData = React.createClass({
         this.props.handleClick(props.hour, props.day);
     },
     render: function(){
-        return(
-             <td onClick={()=>this.handleClick(this.props)} style = {this.state}>
-                {dayMap[this.props.day]}
-                <br></br>
-                {hourMap[this.props.hour]}
-            </td>
-        );
+        if(this.state.backgroundColor=='#00bcec')
+            return(
+                 <td onClick={()=>this.handleClick(this.props)} style = {this.state}>
+                    {hourMap[this.props.hour]}
+                </td>
+            );
+        else
+            return(
+                 <td onClick={()=>this.handleClick(this.props)} style = {this.state}>
+                    <div dangerouslySetInnerHTML={{__html: '&#10003'}} />
+                </td>
+            );
     }
 });
 
@@ -202,7 +207,22 @@ var HourSetterTable = React.createClass({
     },
     render: function(){
         return(
-            <div>
+            <div className="col-md-12">
+                <div className="row">
+                    <div className="col-md-6 inline-div profile-div">
+                <div className="row inner-profile">
+                    <div className="col-md-3 offset-md-4">
+                    <h3>User Profile</h3>
+                    Username: Sally<br></br>
+                    Gender: Female<br></br>
+                    Experience: 3<br></br>
+                    Hours Capacity: 3<br></br>
+                    Week_Start_Date: 12/05/2016<br></br>
+                    </div>
+                    <button type="button" className="  col-md-4 offset-md-4 btn btn-primary active">Active Primary</button>
+                </div>
+                </div>
+                <div className="col-md-5 inline-div">
                 <table>
                     <thead>
                         <th>Sun  </th>
@@ -228,7 +248,8 @@ var HourSetterTable = React.createClass({
                     <HourSetterRow handleClick={this.handleTDClick} hour={20} />
                 </table>
                 <button id= "button" onClick={this.handleClick}>Submit</button>
-            
+                </div>
+                </div>
             </div>
         );
     }

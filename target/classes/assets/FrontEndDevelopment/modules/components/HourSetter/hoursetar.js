@@ -234,120 +234,120 @@ var HourSetterTable = React.createClass({
                     <tbody>
                         <tr>
                             <th scope="row">8 am</th>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
                         </tr>
                         <tr>
                             <th scope="row">9 am</th>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
                         </tr>
                         <tr>
                             <th scope="row">10 am</th>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
                         </tr>
                         <tr>
                             <th scope="row">11 am</th>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
                         </tr>
                         <tr>
                             <th scope="row">12 pm</th>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
                         </tr>
                         <tr>
                             <th scope="row">1 pm</th>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
                         </tr>
                         <tr>
                             <th scope="row">2 pm</th>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
                         </tr>
                         <tr>
                             <th scope="row">3 pm</th>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
                         </tr>
                         <tr>
                             <th scope="row">4 pm</th>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
                         </tr>
                         <tr>
                             <th scope="row">5 pm</th>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
                         </tr>
                         <tr>
                             <th scope="row">6 pm</th>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
                         </tr>
                         <tr>
                             <th scope="row">7 pm</th>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10007</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
                         </tr>
                         <tr>
                             <th scope="row">8 pm</th>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
-                            <td>&#10003</td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
+                            <td><div dangerouslySetInnerHTML={{__html: '&#10003'}} /></td>
                         </tr>
                     </tbody>
                 </table>
