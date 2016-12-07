@@ -8,6 +8,7 @@ var HourSetter = require('./modules/components/HourSetter/HourSetter');
 //var HourSetter = require('./modules/components/HourSetter/hoursetar');
 var WeekSetter = require('./modules/components/WeekSetter/WeekSetter');
 var ScheduleMaker = require('./modules/components/ScheduleMaker/ScheduleMaker');
+var LACreator = require('./modules/components/LACreator/LACreator');
 
 render((
   <Router history={browserHistory}>
@@ -16,6 +17,7 @@ render((
       <Route path="/weekset" component={WeekSetter}/>
       <Route path="/hourset" component={HourSetter}/>
       <Route path="/calendar" component={ScheduleMaker}/>
+       <Route path="/create" component={LACreator}/>
     </Route>
   </Router>
 ), document.getElementById('app'))

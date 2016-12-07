@@ -24,6 +24,9 @@ export default React.createClass({
                 <li className="nav-item">
                     <NavLink className="nav-link" to="/calendar">Calendar</NavLink>
                 </li>
+                <li className="nav-item">
+                    <NavLink className="nav-link" to="/create">Create New LA</NavLink>
+                </li>
             </ul>
         </nav>
                     {this.props.children}
