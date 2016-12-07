@@ -1,4 +1,14 @@
 #!/bin/bash
 
+# Exit on fail
+set -e
+
+# Build frontend
+cd assets/FrontEndDevelopment && gulp default && cd ../..
+
+# Build jar
+mvn package
+
+# Reset database
 java -jar target/dropwizard-example-1.1.0-SNAPSHOT.jar db drop-all --confirm-delete-everything example.yml
 java -jar target/dropwizard-example-1.1.0-SNAPSHOT.jar db migrate example.yml

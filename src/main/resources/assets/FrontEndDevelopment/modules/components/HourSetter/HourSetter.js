@@ -24,7 +24,7 @@ var hourMap = [
     "8pm",
     "9pm",
     "10pm",
-    "11pm"    
+    "11pm"
 ];
 var dayMap = [
     "Sun",
@@ -38,14 +38,13 @@ var dayMap = [
 function initializeWorkHours(){
     var work_hours =new Array(23);
     for(var i=0; i<23; i++){
-        work_hours[i] = new Array(7);
+        work_hours[i] = new Array(6);
         work_hours[i][0]={"day": "Sun", "isAvailable": false};
         work_hours[i][1]={"day": "Mon", "isAvailable": false};
         work_hours[i][2]={"day": "Tue", "isAvailable": false};
         work_hours[i][3]={"day": "Wed", "isAvailable": false};
         work_hours[i][4]={"day": "Thu", "isAvailable": false};
         work_hours[i][5]={"day": "Fri", "isAvailable": false};
-        work_hours[i][6]={"day": "Sat", "isAvailable": false};
 
     }
     return work_hours;
@@ -66,7 +65,7 @@ function createWorkableShifts(work_hours){
     var start_time = -1;
     var end_time=0;
     var workable_shifts = [];
-    for(var j=0; j<7; j++){
+    for(var j=0; j<6; j++){
         start_time=-1;
         end_time=0;
         for(var i = 0; i<23; i++){
@@ -80,8 +79,8 @@ function createWorkableShifts(work_hours){
                     "experienceLevel": Profile.experience_level,
                     "hoursCapacity": Profile.hours_capacity,
                     "weekStartDate": Profile.week_start_date,
-                    "day":getDay(i,j,work_hours), 
-                    "start":start_time, 
+                    "day":getDay(i,j,work_hours),
+                    "start":start_time,
                     "end": end_time
                 });
                 start_time=-1;
@@ -94,8 +93,8 @@ function createWorkableShifts(work_hours){
                     "experienceLevel": Profile.experience_level,
                     "hoursCapacity": Profile.hours_capacity,
                     "weekStartDate": Profile.week_start_date,
-                    "day":getDay(i,j,work_hours), 
-                    "start":start_time, 
+                    "day":getDay(i,j,work_hours),
+                    "start":start_time,
                     "end": end_time
                 });
                 start_time=-1;
@@ -112,7 +111,7 @@ var Profile = {
 	"gender": "male",
 	"experience_level": 3,
 	"hours_capacity": 4,
-	"week_start_date":"12/04/2016",
+	"week_start_date":getNextSundayDate().toLocaleDateString()
 };
 
 var HourSetterTableData = React.createClass({
@@ -163,7 +162,6 @@ var HourSetterRow = React.createClass({
                 <HourSetterTableData handleClick={this.props.handleClick} day = {3} hour={this.props.hour}/>
                 <HourSetterTableData handleClick={this.props.handleClick} day = {4} hour={this.props.hour}/>
                 <HourSetterTableData handleClick={this.props.handleClick} day = {5} hour={this.props.hour}/>
-                <HourSetterTableData handleClick={this.props.handleClick} day = {6} hour={this.props.hour}/>
             </tr>
         );
     }
@@ -179,15 +177,15 @@ var HourSetterTable = React.createClass({
     componentWillMount(){
 //        workhours = initializeWorkHours();
         this.setState({work_hours: workhours});
-    }, 
+    },
     handleTDClick: function(i, j){
         workhours = setWorkHour(i,j, workhours);
         this.setState({work_hours: workhours});
     },
     handleClick : function(){
         var shifts = createWorkableShifts(this.state.work_hours);
-        
-        
+
+
         var reduced_shifts = JSON.stringify(shifts);
         var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){};
@@ -195,15 +193,15 @@ var HourSetterTable = React.createClass({
             xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhttp.send(reduced_shifts);
             console.log(reduced_shifts);
-        
+
 //        for(var shift of shifts){
 //            reduced_shift= JSON.stringify(shift);
-//            
+//
 //        }
-        
 
-        
-                     
+
+
+
     },
     render: function(){
         return(
@@ -217,7 +215,7 @@ var HourSetterTable = React.createClass({
                     Gender: Female<br></br>
                     Experience: 3<br></br>
                     Hours Capacity: 3<br></br>
-                    Week_Start_Date: 12/05/2016<br></br>
+                    Week_Start_Date: {getNextSundayDate().toLocaleDateString()}<br></br>
                     </div>
                     <button type="button" className="  col-md-4 offset-md-4 btn btn-primary active">Active Primary</button>
                 </div>
@@ -231,7 +229,6 @@ var HourSetterTable = React.createClass({
                         <th>Wed  </th>
                         <th>Thu  </th>
                         <th>Fri  </th>
-                        <th>Sat  </th>
                     </thead>
                     <HourSetterRow handleClick={this.handleTDClick} hour={8} />
                     <HourSetterRow handleClick={this.handleTDClick} hour={9} />

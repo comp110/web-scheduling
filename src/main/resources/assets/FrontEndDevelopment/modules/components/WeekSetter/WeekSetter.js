@@ -24,7 +24,7 @@ var hourMap = [
     "8pm",
     "9pm",
     "10pm",
-    "11pm"    
+    "11pm"
 ];
 var dayMap = [
     "Sunday",
@@ -39,14 +39,13 @@ var dayMap = [
 function initializeWorkHours(){
     var work_hours =new Array(23);
     for(var i=0; i<23; i++){
-        work_hours[i] = new Array(7);
+        work_hours[i] = new Array(6);
         work_hours[i][0]={"day": "Sunday", "isAvailable": false};
         work_hours[i][1]={"day": "Monday", "isAvailable": false};
         work_hours[i][2]={"day": "Tuesday", "isAvailable": false};
         work_hours[i][3]={"day": "Wednesday", "isAvailable": false};
         work_hours[i][4]={"day": "Thursday", "isAvailable": false};
         work_hours[i][5]={"day": "Friday", "isAvailable": false};
-        work_hours[i][6]={"day": "Saturday", "isAvailable": false};
 
     }
     return work_hours;
@@ -65,7 +64,7 @@ function createWorkableShifts(work_hours){
     var start_time = -1;
     var end_time=0;
     var workable_shifts = [];
-    for(var j=0; j<7; j++){
+    for(var j=0; j<6; j++){
         start_time=-1;
         end_time=0;
         for(var i = 0; i<23; i++){
@@ -79,8 +78,8 @@ function createWorkableShifts(work_hours){
                     "experienceLevel": Profile.experience_level,
                     "hoursCapacity": Profile.hours_capacity,
                     "weekStartDate": Profile.week_start_date,
-                    "day":getDay(i,j,work_hours), 
-                    "start":start_time, 
+                    "day":getDay(i,j,work_hours),
+                    "start":start_time,
                     "end": end_time
                 });
                 start_time=-1;
@@ -93,8 +92,8 @@ function createWorkableShifts(work_hours){
                     "experienceLevel": Profile.experience_level,
                     "hoursCapacity": Profile.hours_capacity,
                     "weekStartDate": Profile.week_start_date,
-                    "day":getDay(i,j,work_hours), 
-                    "start":start_time, 
+                    "day":getDay(i,j,work_hours),
+                    "start":start_time,
                     "end": end_time
                 });
                 start_time=-1;
@@ -105,18 +104,17 @@ function createWorkableShifts(work_hours){
     return workable_shifts;
 }
 var workhours = initializeWorkHours();
-var week_start_date = "12/4/2016";
+var week_start_date = getNextSundayDate().toLocaleDateString();
 function initializeWeek(){
     var num_people =new Array(23);
     for(var i=0; i<23; i++){
-        num_people[i] = new Array(7);
+        num_people[i] = new Array(6);
         num_people[i][0]={"day": "Sun", "numPeople": 0, "hour": i, "weekStartDate": week_start_date};
         num_people[i][1]={"day": "Mon", "numPeople": 0, "hour": i, "weekStartDate": week_start_date};
         num_people[i][2]={"day": "Tue", "numPeople": 0, "hour": i, "weekStartDate": week_start_date};
         num_people[i][3]={"day": "Wed", "numPeople": 0, "hour": i, "weekStartDate": week_start_date};
         num_people[i][4]={"day": "Thu", "numPeople": 0, "hour": i, "weekStartDate": week_start_date};
         num_people[i][5]={"day": "Fri", "numPeople": 0, "hour": i, "weekStartDate": week_start_date};
-        num_people[i][6]={"day": "Sat", "numPeople": 0, "hour": i, "weekStartDate": week_start_date};
     }
     return num_people;
 }
@@ -143,7 +141,7 @@ var Profile = {
 	"gender": "male",
 	"experience_level": 3,
 	"hours_capacity": 4,
-	"week_start_date":"11/27/2016",
+	"week_start_date":getNextSundayDate().toLocaleDateString(),
 };
 
 var WeekSetterDataPreview = React.createClass({
@@ -173,7 +171,7 @@ var WeekSetterDataPreview = React.createClass({
            <button onClick={()=>this.props.handleAdd(this.props.dataObj.hour,this.props.dataObj.day)}> + </button>
         </div>
        );
-   } 
+   }
 });
 
 
@@ -202,8 +200,8 @@ var WeekSetterTableData = React.createClass({
         this.props.handleSubtract(i,j);
     },
     render: function(){
-        return(                  
-                     <td onClick={()=>this.handleClick(this.props)} style = {this.state}>                        
+        return(
+                     <td onClick={()=>this.handleClick(this.props)} style = {this.state}>
                         {dayMap[this.props.day]}
                         <br></br>
                         {hourMap[this.props.hour]}
@@ -224,18 +222,16 @@ var WeekSetterRow = React.createClass({
         return(
             <tr>
                 <WeekSetterTableData handleSubtract={this.props.handleSubtract} handleAdd={this.props.handleAdd} handleClick={this.props.handleClick} day = {0} hour={this.props.hour} numObj={this.props.numObj} />
-            
+
                 <WeekSetterTableData handleSubtract={this.props.handleSubtract} handleAdd={this.props.handleAdd} handleClick={this.props.handleClick} day = {1} hour={this.props.hour} numObj={this.props.numObj} />
-            
+
                 <WeekSetterTableData handleSubtract={this.props.handleSubtract} handleAdd={this.props.handleAdd} handleClick={this.props.handleClick} day = {2} hour={this.props.hour} numObj={this.props.numObj} />
-            
+
                 <WeekSetterTableData handleSubtract={this.props.handleSubtract} handleAdd={this.props.handleAdd} handleClick={this.props.handleClick} day = {3} hour={this.props.hour} numObj={this.props.numObj} />
-            
+
                 <WeekSetterTableData handleSubtract={this.props.handleSubtract} handleAdd={this.props.handleAdd} handleClick={this.props.handleClick} day = {4} hour={this.props.hour} numObj={this.props.numObj} />
-            
+
                 <WeekSetterTableData handleSubtract={this.props.handleSubtract} handleAdd={this.props.handleAdd} handleClick={this.props.handleClick} day = {5} hour={this.props.hour} numObj={this.props.numObj} />
-            
-                <WeekSetterTableData handleSubtract={this.props.handleSubtract} handleAdd={this.props.handleAdd} handleClick={this.props.handleClick} day = {6} hour={this.props.hour} numObj={this.props.numObj} />
             </tr>
         );
     }
@@ -252,7 +248,7 @@ var WeekSetterTable = React.createClass({
     componentWillMount(){
 //        workhours = initializeWorkHours();
         this.setState({num_people: numpeople});
-    }, 
+    },
     handleTDClick: function(i, j){
 //        numpeople = setWorkHour(i,j, numpeople);
 //        this.setState({num_people: numpeople});
@@ -274,16 +270,16 @@ var WeekSetterTable = React.createClass({
         reduced = JSON.stringify(reduced);
         //reduced = reduced.toString();
         console.log(reduced);
-        
+
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
-        
+
         };
       xhttp.open("POST", "/api/master", true);
       xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
       xhttp.send(reduced);
-        
-                              
+
+
     },
     render: function(){
         return(
@@ -298,32 +294,31 @@ var WeekSetterTable = React.createClass({
                         <th>Wed  </th>
                         <th>Thu  </th>
                         <th>Fri  </th>
-                        <th>Sat  </th>
                     </thead>
                     <WeekSetterRow  handleClick={this.handleTDClick} hour={8} numObj={this.state.num_people} />
-            
+
                     <WeekSetterRow handleSubtract={this.handleSubtract} handleAdd={this.handleAdd} handleClick={this.handleTDClick} hour={9} numObj={this.state.num_people} />
-            
+
                     <WeekSetterRow handleSubtract={this.handleSubtract} handleAdd={this.handleAdd} handleClick={this.handleTDClick} hour={10} numObj={this.state.num_people} />
-            
+
                     <WeekSetterRow handleSubtract={this.handleSubtract} handleAdd={this.handleAdd} handleClick={this.handleTDClick} hour={11} numObj={this.state.num_people} />
-            
+
                     <WeekSetterRow handleSubtract={this.handleSubtract} handleAdd={this.handleAdd} handleClick={this.handleTDClick} hour={12} numObj={this.state.num_people} />
-            
+
                     <WeekSetterRow handleSubtract={this.handleSubtract} handleAdd={this.handleAdd} handleClick={this.handleTDClick} hour={13} numObj={this.state.num_people} />
-            
+
                     <WeekSetterRow handleSubtract={this.handleSubtract} handleAdd={this.handleAdd} handleClick={this.handleTDClick} hour={14} numObj={this.state.num_people} />
-            
+
                     <WeekSetterRow handleSubtract={this.handleSubtract} handleAdd={this.handleAdd} handleClick={this.handleTDClick} hour={15} numObj={this.state.num_people} />
-            
+
                     <WeekSetterRow handleSubtract={this.handleSubtract} handleAdd={this.handleAdd} handleClick={this.handleTDClick} hour={16} numObj={this.state.num_people} />
-            
+
                     <WeekSetterRow handleSubtract={this.handleSubtract} handleAdd={this.handleAdd} handleClick={this.handleTDClick} hour={17} numObj={this.state.num_people} />
-            
+
                     <WeekSetterRow handleSubtract={this.handleSubtract} handleAdd={this.handleAdd} handleClick={this.handleTDClick} hour={18} numObj={this.state.num_people} />
-            
+
                     <WeekSetterRow handleSubtract={this.handleSubtract} handleAdd={this.handleAdd} handleClick={this.handleTDClick} hour={19} numObj={this.state.num_people} />
-            
+
                     <WeekSetterRow handleSubtract={this.handleSubtract} handleAdd={this.handleAdd} handleClick={this.handleTDClick} hour={20} numObj={this.state.num_people} />
                 </table>
                 </div>
@@ -336,7 +331,7 @@ var WeekSetterTable = React.createClass({
                                 fontSize: 16,
                                 float: 'right'}} id= "button" onClick={this.handleClick}>Submit</button>
             </div>
-        ); 
+        );
     }
 });
 
