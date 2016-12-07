@@ -12,17 +12,18 @@ export default React.createClass({
                 }}>
                     <h1>Hour Entry Form</h1>
                 </li>
+
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="/" onlyActiveOnIndex>Log In</NavLink>
+                    <NavLink className="nav-link" to="/" onlyActiveOnIndex>Calendar</NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink className="nav-link" to="/login" >Log In</NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink className="nav-link" to="/hourset">HourSet</NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink className="nav-link" to="/weekset">WeekSet</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link" to="/calendar">Calendar</NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink className="nav-link" to="/create">Create New LA</NavLink>

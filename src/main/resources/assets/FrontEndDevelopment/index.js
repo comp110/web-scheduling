@@ -13,11 +13,11 @@ var LACreator = require('./modules/components/LACreator/LACreator');
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={LogIn}/>
+      <IndexRoute component={ScheduleMaker}/>
       <Route path="/weekset" component={WeekSetter}/>
+      <Route path="/login" component={LogIn}/>
       <Route path="/hourset" component={HourSetter}/>
-      <Route path="/calendar" component={ScheduleMaker}/>
-       <Route path="/create" component={LACreator}/>
+      <Route path="/create" component={LACreator}/>
     </Route>
   </Router>
 ), document.getElementById('app'))
