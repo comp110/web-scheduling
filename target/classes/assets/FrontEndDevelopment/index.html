@@ -54,7 +54,7 @@
     	url: '/api/hoursetter/copytoJson/'+ date,
     	dataType: 'text',
     	success: function() {
-			$.getJSON('/api/master/copytoJson'+date, function() {
+			$.getJSON('/api/master/copytoJson/'+date, function() {
 				// Run KarenBot by issuing a GET request to the dropwizard server
 				$.getJSON('/api/schedule/'+date, function(data) {
 					// Post schedule to database
