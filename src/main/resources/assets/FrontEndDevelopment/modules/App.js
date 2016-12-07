@@ -10,7 +10,7 @@ export default React.createClass({
                 <li className="nav-item active" style={{
                     color: 'white'
                 }}>
-                    <h1>Hour Entry Form</h1>
+                    <h2>COMP 110</h2>
                 </li>
 
                 <li className="nav-item">
