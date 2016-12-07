@@ -24,7 +24,7 @@ import io.dropwizard.auth.Auth;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 @Path("/people/{personId}")
-@RolesAllowed("la")
+//@RolesAllowed("la")
 @Produces(MediaType.APPLICATION_JSON)
 public class PersonResource {
     public final PersonDAO peopleDAO;
@@ -35,14 +35,14 @@ public class PersonResource {
 
     @GET
     @UnitOfWork
-    public Person getPerson(@PathParam("personId") LongParam personId,@Auth User user) {
+    public Person getPerson(@PathParam("personId") LongParam personId) {
         return findSafely(personId.get());
     }
 
 
     @PUT
     @UnitOfWork
-    public Person updatePerson(@PathParam("personId") LongParam personId,Person person,@Auth User user) { 
+    public Person updatePerson(@PathParam("personId") LongParam personId,Person person) { 
         Person oldVersion = findSafely(personId.get());
         oldVersion.setStart(person.getStart());
         oldVersion.setEnd(person.getEnd());
