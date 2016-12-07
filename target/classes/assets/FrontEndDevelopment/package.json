@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {      
-    "babelify": "*",
+    "babelify": "^6.4.0",
     "browserify": "*",
     "events": "*",
     "flux": "*",
