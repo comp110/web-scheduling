@@ -4,7 +4,7 @@
 set -e
 
 # Build frontend
-cd assets/FrontEndDevelopment && gulp default && cd ../..
+cd src/main/resources/assets/FrontEndDevelopment && gulp default && cd ../../../../..
 
 # Build jar
 mvn package
