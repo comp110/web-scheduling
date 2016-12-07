@@ -201,33 +201,6 @@
 		buildSchedulesFromDatabaseJSON(data);
 		renderAllSchedules();
 	});
-
-	// Example of structure of JSON; uncomment to run on hardcoded data
-	/*var database_json = [
-		{weekStartDate: '10/2/2016', day: 'Sun', name: 'Billy', start: 11, end: 13},
-		{weekStartDate: '10/2/2016', day: 'Sun', name: 'Billy', start: 17, end: 19},
-		{weekStartDate: '10/2/2016', day: 'Sun', name: 'Sally', start: 10, end: 12},
-		{weekStartDate: '10/2/2016', day: 'Sun', name: 'Sally', start: 14, end: 16},
-
-		{weekStartDate: '10/2/2016', day: 'Mon', name: 'Jim', start: 13, end: 15},
-		{weekStartDate: '10/2/2016', day: 'Mon', name: 'Tucker', start: 16, end: 18},
-
-		{weekStartDate: '10/2/2016', day: 'Tue', name: 'Jim', start: 13, end: 15},
-		{weekStartDate: '10/2/2016', day: 'Tue', name: 'Tucker', start: 16, end: 18},
-
-		{weekStartDate: '10/2/2016', day: 'Wed', name: 'Jim', start: 13, end: 15},
-		{weekStartDate: '10/2/2016', day: 'Wed', name: 'Tucker', start: 16, end: 18},
-
-		{weekStartDate: '10/2/2016', day: 'Thu', name: 'Jim', start: 13, end: 15},
-		{weekStartDate: '10/2/2016', day: 'Thu', name: 'Tucker', start: 16, end: 18},
-
-		{weekStartDate: '10/2/2016', day: 'Fri', name: 'Jim', start: 13, end: 15},
-		{weekStartDate: '10/2/2016', day: 'Fri', name: 'Tucker', start: 16, end: 18}
-	]
-	buildSchedulesFromDatabaseJSON(database_json);
-
-	renderAllSchedules();
-	*/
 });
 
         </script>
@@ -245,7 +218,51 @@
     height: 100%;
 }
 
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  
+}
+            //Log IN CSS
 
+.wrapper {
+    background-color: #3f4144;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
         </style>
 </head>
 <body>

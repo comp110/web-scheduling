@@ -12,15 +12,18 @@ var AddUser = React.createClass({
         this.refs.password.value = '';
     },
     render: function(){
-        return(<div>
-                UserName: <br></br>
-               <input type="text" ref="username" placeholder="John Doe"/>
-               <br></br>
-               Password: <br></br>
-               <input type="text" ref="password" placeholder="********"/>
-               <br></br>
-               <button onClick={this.handleLogIn}>Submit</button>
-              </div>);
+        return(
+            <div>
+               <form className="form-signin">
+                    <h2 className="form-signin-heading" style={{color:"white"}}>Please sign in</h2>
+                <label className="sr-only">Username</label>
+                <input  className="form-control" placeholder="Username" ref="username" type="text" autoFocus={true}/>
+               <label  className="sr-only">Password</label>
+                <input ref="password" type="password" className="form-control" placeholder="Password" required={true}/>
+               <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleLogIn}>Submit</button>
+               </form>
+            </div>
+        );
     }
 });
         

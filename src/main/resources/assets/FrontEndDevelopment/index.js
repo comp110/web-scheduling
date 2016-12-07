@@ -4,7 +4,8 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
 import App from './modules/App'
 var LogIn = require('./modules/components/LogIn/LogIn');
-var HourSetter = require('./modules/components/HourSetter/HourSetter');
+//var HourSetter = require('./modules/components/HourSetter/HourSetter');
+var HourSetter = require('./modules/components/HourSetter/hoursetar');
 var WeekSetter = require('./modules/components/WeekSetter/WeekSetter');
 var ScheduleMaker = require('./modules/components/ScheduleMaker/ScheduleMaker');
 

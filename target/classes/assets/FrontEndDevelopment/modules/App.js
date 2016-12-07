@@ -4,10 +4,7 @@ import NavLink from './NavLink'
 export default React.createClass({
   render() {
     return (
-      <div className="container" style={{
-        height: 100,
-        width: 800
-        }}>
+      <div className="container">
         <nav className="navbar navbar-inverse -bg-faded">
             <ul role="nav" className="nav navbar-nav">
                 <li className="nav-item active" style={{
@@ -28,9 +25,8 @@ export default React.createClass({
                     <NavLink className="nav-link" to="/calendar">Calendar</NavLink>
                 </li>
             </ul>
-                    {this.props.children}
         </nav>
-        
+                    {this.props.children}
       </div>
     )
   }

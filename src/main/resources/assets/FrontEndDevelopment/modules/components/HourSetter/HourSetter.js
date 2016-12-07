@@ -228,6 +228,7 @@ var HourSetterTable = React.createClass({
                     <HourSetterRow handleClick={this.handleTDClick} hour={20} />
                 </table>
                 <button id= "button" onClick={this.handleClick}>Submit</button>
+            
             </div>
         );
     }

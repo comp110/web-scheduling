@@ -15,6 +15,24 @@ var LogIn = React.createClass({
     },
     handleSetUser: function(user){
         userActions.setUser(user);
+
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            headers: {
+        "Authorization": "Basic " + btoa(user.username + ":" + user.password)
+      },
+            type: 'GET',
+            url: '/api/protected',
+            dataType: 'text',
+            success: function(response) {
+                alert(response);
+               
+            }
+        });
+        
     },
     _onChange: function(){
         this.setState({
@@ -22,12 +40,15 @@ var LogIn = React.createClass({
         })
     },
     test: function(){
-        console.log(this.state.user);
+        console.log(this.state.user)
     },
     render: function(){
        return (<div>
-                <AddUser setUser={this.handleSetUser}/>
-                <button onClick={this.test}>Test</button>
+                    <div className="container" style={{
+                         backgroundColor: '#3f4144'
+                    }}>
+                        <AddUser setUser={this.handleSetUser}/>
+                    </div>
                </div>);
    } 
 });
