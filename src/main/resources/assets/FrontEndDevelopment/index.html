@@ -58,29 +58,9 @@ function runKarenBot() {
       success: function() {
       $.getJSON('/api/master/copytoJson/'+date, function() {
         // Run KarenBot by issuing a GET request to the dropwizard server
-        alert("Date: " + date)
-        $.getJSON('/api/schedule/'+date, function(data) {
-          // Post schedule to database
-          console.log("Posting data:");
-          console.log(data);
-          $.ajax({
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            type: 'POST',
-            url: '/api/people',
-            data: JSON.stringify(data),
-            dataType: 'json',
-            success: function() {
-              alert('Schedule successfully generated!');
-              refreshSchedule();
-            }
-          });
-        });
+        alert("Schedule successfully generated!");
+        refreshSchedule();
       });
-
-
     }
   });
 }
@@ -89,7 +69,7 @@ function configureScheduler() {
   // Configure/initialize "scheduler" tool
   scheduler.config.first_hour = 10;
   scheduler.config.last_hour = 21;
-    scheduler.config.readonly = true;
+  scheduler.config.readonly = true;
   scheduler.config.drag_create = false;
   scheduler.config.drag_resize = false;
   scheduler.config.dblclick_create = false;
@@ -194,7 +174,8 @@ function buildSchedulesFromDatabaseJSON(database_json) {
 
 function refreshSchedule() {
   // Query database and build schedule
-  $.getJSON('/api/people', function(data) {
+  var date = getNextSundayDate().toLocaleDateString().replace(/\//g, '-');
+  $.getJSON('/api/schedule/' + date, function(data) {
     console.log(data);
     buildSchedulesFromDatabaseJSON(data);
     renderAllSchedules();

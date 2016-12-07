@@ -7,7 +7,7 @@ set -e
 cd src/main/resources/assets/FrontEndDevelopment && gulp default && cd ../../../../..
 
 # Build jar
-mvn package
+mvn clean package
 
 # Reset database
 java -jar target/dropwizard-example-1.1.0-SNAPSHOT.jar db drop-all --confirm-delete-everything example.yml
