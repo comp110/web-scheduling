@@ -4,7 +4,7 @@ ADD target/dropwizard-example-1.1.0-SNAPSHOT.jar /data/dropwizard-example-1.1.0-
 
 ADD src/main/resources/assets /data/assets
 
-ADD example.yml /data/example.yml
+ADD example.openshift.yml /data/example.yml
 
 RUN ["java", "-jar", "/data/dropwizard-example-1.1.0-SNAPSHOT.jar", "db", "migrate", "/data/example.yml"]
 
