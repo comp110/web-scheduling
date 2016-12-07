@@ -10,19 +10,20 @@ export default React.createClass({
                 <li className="nav-item active" style={{
                     color: 'white'
                 }}>
-                    <h1>Hour Entry Form</h1>
+                    <h2>COMP 110</h2>
+                </li>
+
+                <li className="nav-item">
+                    <NavLink className="nav-link" to="/" onlyActiveOnIndex>Calendar</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="/" onlyActiveOnIndex>Log In</NavLink>
+                    <NavLink className="nav-link" to="/login" >Log In</NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink className="nav-link" to="/hourset">HourSet</NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink className="nav-link" to="/weekset">WeekSet</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link" to="/calendar">Calendar</NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink className="nav-link" to="/create">Create New LA</NavLink>
