@@ -28,7 +28,7 @@
 	var username ="ervin";
 	var password = "123";
 
-
+	var date = "11-13-2016";
 	$.ajax({
     	headers: {
     		'Accept': 'application/json',
@@ -38,28 +38,30 @@
     "Authorization": "Basic " + btoa(username + ":" + password)
   },
     	type: 'GET',
-    	url: '/api/hoursetter/copytoJson/11-13-2016',
+    	url: '/api/hoursetter/copytoJson/'+ date,
     	dataType: 'text',
     	success: function() {
-			//$.getJSON('http://' + DROPWIZARD_IP + ':8080/api/master/copytoJson');
-
-			// Run KarenBot by issuing a GET request to the dropwizard server
-			$.getJSON('/api/schedule/11-13-2016', function(data) {
-				// Post schedule to database
-				$.ajax({
-		        	headers: {
-		        		'Accept': 'application/json',
-		        		'Content-Type': 'application/json'
-		        	},
-		        	type: 'POST',
-		        	url: '/api/people',
-		        	data: JSON.stringify(data),
-		        	dataType: 'json',
-		        	success: function() {
-		        		alert('Schedule successfully generated!');
-		        	}
-		        });
+			$.getJSON('/api/master/copytoJson'+date, function() {
+				// Run KarenBot by issuing a GET request to the dropwizard server
+				$.getJSON('/api/schedule/'+date, function(data) {
+					// Post schedule to database
+					$.ajax({
+			        	headers: {
+			        		'Accept': 'application/json',
+			        		'Content-Type': 'application/json'
+			        	},
+			        	type: 'POST',
+			        	url: '/api/people',
+			        	data: JSON.stringify(data),
+			        	dataType: 'json',
+			        	success: function() {
+			        		alert('Schedule successfully generated!');
+			        	}
+			        });
+				});
 			});
+
+			
     	}
     });
 }
@@ -181,14 +183,14 @@
 	configureScheduler();
 
 	// Query database and build schedule
-//	$.getJSON('http://' + DROPWIZARD_IP + ':8080/api/people', function(data) {
-//		console.log(data);
-//		buildSchedulesFromDatabaseJSON(data);
-//		renderAllSchedules();
-//	});
+	$.getJSON('/api/people', function(data) {
+		console.log(data);
+		buildSchedulesFromDatabaseJSON(data);
+		renderAllSchedules();
+	});
 
 	// Example of structure of JSON; uncomment to run on hardcoded data
-	var database_json = [
+	/*var database_json = [
 		{weekStartDate: '10/2/2016', day: 'Sun', name: 'Billy', start: 11, end: 13},
 		{weekStartDate: '10/2/2016', day: 'Sun', name: 'Billy', start: 17, end: 19},
 		{weekStartDate: '10/2/2016', day: 'Sun', name: 'Sally', start: 10, end: 12},
@@ -210,7 +212,9 @@
 		{weekStartDate: '10/2/2016', day: 'Fri', name: 'Tucker', start: 16, end: 18}
 	]
 	buildSchedulesFromDatabaseJSON(database_json);
+
 	renderAllSchedules();
+	*/
 });
 
         </script>

@@ -8,12 +8,9 @@
   },
   "author": "",
   "license": "ISC",
-<<<<<<< HEAD
-  "dependencies": {      
-=======
+
   "dependencies": {
     "babel-preset-react": "^6.16.0",
->>>>>>> 9e62d657730898489b87238f1270808ee997f05f
     "babelify": "^6.4.0",
     "browserify": "*",
     "events": "*",

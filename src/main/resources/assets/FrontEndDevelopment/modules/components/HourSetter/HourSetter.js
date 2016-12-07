@@ -27,25 +27,25 @@ var hourMap = [
     "11pm"    
 ];
 var dayMap = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat"
 ];
 function initializeWorkHours(){
     var work_hours =new Array(23);
     for(var i=0; i<23; i++){
         work_hours[i] = new Array(7);
-        work_hours[i][0]={"day": "Sunday", "isAvailable": false};
-        work_hours[i][1]={"day": "Monday", "isAvailable": false};
-        work_hours[i][2]={"day": "Tuesday", "isAvailable": false};
-        work_hours[i][3]={"day": "Wednesday", "isAvailable": false};
-        work_hours[i][4]={"day": "Thursday", "isAvailable": false};
-        work_hours[i][5]={"day": "Friday", "isAvailable": false};
-        work_hours[i][6]={"day": "Saturday", "isAvailable": false};
+        work_hours[i][0]={"day": "Sun", "isAvailable": false};
+        work_hours[i][1]={"day": "Mon", "isAvailable": false};
+        work_hours[i][2]={"day": "Tue", "isAvailable": false};
+        work_hours[i][3]={"day": "Wed", "isAvailable": false};
+        work_hours[i][4]={"day": "Thu", "isAvailable": false};
+        work_hours[i][5]={"day": "Fri", "isAvailable": false};
+        work_hours[i][6]={"day": "Sat", "isAvailable": false};
 
     }
     return work_hours;
@@ -182,21 +182,23 @@ var HourSetterTable = React.createClass({
     handleClick : function(){
         var shifts = createWorkableShifts(this.state.work_hours);
         
-        console.log(shifts);
-//        $.ajax({
-//        	headers: {
-//        		'Accept': 'application/json',
-//        		'Content-Type': 'application/json'
-//        	},
-//        	type: 'POST',
-//        	url: 'http://localhost:8080/hoursetter',
-//        	data: JSON.stringify(shifts),
-//        	dataType: 'json',
-//        	success: function() {
-//        		alert('Success');
-//        	}
-//        });
-//                               
+        
+        var reduced_shifts = JSON.stringify(shifts);
+        var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){};
+            xhttp.open("POST", "/api/hoursetter",true);
+            xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhttp.send(reduced_shifts);
+            console.log(reduced_shifts);
+        
+//        for(var shift of shifts){
+//            reduced_shift= JSON.stringify(shift);
+//            
+//        }
+        
+
+        
+                     
     },
     render: function(){
         return(
@@ -209,6 +211,7 @@ var HourSetterTable = React.createClass({
                         <th>Wed  </th>
                         <th>Thu  </th>
                         <th>Fri  </th>
+                        <th>Sat  </th>
                     </thead>
                     <HourSetterRow handleClick={this.handleTDClick} hour={8} />
                     <HourSetterRow handleClick={this.handleTDClick} hour={9} />
