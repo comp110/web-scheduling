@@ -24,7 +24,7 @@ var hourMap = [
     "8pm",
     "9pm",
     "10pm",
-    "11pm"    
+    "11pm"
 ];
 var dayMap = [
     "Sun",
@@ -80,8 +80,8 @@ function createWorkableShifts(work_hours){
                     "experienceLevel": Profile.experience_level,
                     "hoursCapacity": Profile.hours_capacity,
                     "weekStartDate": Profile.week_start_date,
-                    "day":getDay(i,j,work_hours), 
-                    "start":start_time, 
+                    "day":getDay(i,j,work_hours),
+                    "start":start_time,
                     "end": end_time
                 });
                 start_time=-1;
@@ -94,8 +94,8 @@ function createWorkableShifts(work_hours){
                     "experienceLevel": Profile.experience_level,
                     "hoursCapacity": Profile.hours_capacity,
                     "weekStartDate": Profile.week_start_date,
-                    "day":getDay(i,j,work_hours), 
-                    "start":start_time, 
+                    "day":getDay(i,j,work_hours),
+                    "start":start_time,
                     "end": end_time
                 });
                 start_time=-1;
@@ -112,7 +112,7 @@ var Profile = {
 	"gender": "male",
 	"experience_level": 3,
 	"hours_capacity": 4,
-	"week_start_date":"12/04/2016",
+	"week_start_date":"12/4/2016",
 };
 
 var HourSetterTableData = React.createClass({
@@ -174,15 +174,15 @@ var HourSetterTable = React.createClass({
     componentWillMount(){
 //        workhours = initializeWorkHours();
         this.setState({work_hours: workhours});
-    }, 
+    },
     handleTDClick: function(i, j){
         workhours = setWorkHour(i,j, workhours);
         this.setState({work_hours: workhours});
     },
     handleClick : function(){
         var shifts = createWorkableShifts(this.state.work_hours);
-        
-        
+
+
         var reduced_shifts = JSON.stringify(shifts);
         var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){};
@@ -190,15 +190,15 @@ var HourSetterTable = React.createClass({
             xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhttp.send(reduced_shifts);
             console.log(reduced_shifts);
-        
+
 //        for(var shift of shifts){
 //            reduced_shift= JSON.stringify(shift);
-//            
+//
 //        }
-        
 
-        
-                     
+
+
+
     },
     render: function(){
         return(
@@ -213,7 +213,7 @@ var HourSetterTable = React.createClass({
                     Gender: Female<br></br>
                     Experience: 3<br></br>
                     Hours Capacity: 3<br></br>
-                    Week_Start_Date: 12/05/2016<br></br>
+                    Week_Start_Date: 12/4/2016<br></br>
                     </div>
                     <button type="button" className="  col-md-4 offset-md-4 btn btn-primary active">Active Primary</button>
                 </div>
