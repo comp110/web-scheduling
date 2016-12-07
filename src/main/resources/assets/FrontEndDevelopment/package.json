@@ -4,26 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-     "start": "webpack-dev-server --inline --content-base . --history-api-fallback"
+    "start": "webpack-dev-server --inline --content-base . --history-api-fallback"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {      
-    "babelify": "*",
+  "dependencies": {
+    "babel-preset-react": "^6.16.0",
+    "babelify": "^6.4.0",
     "browserify": "*",
     "events": "*",
     "flux": "*",
     "gulp": "*",
-    "gulp-rename": "*",
-    "gulp-uglify": "*",
     "gulp-concat": "*",
     "gulp-connect": "*",
+    "gulp-rename": "*",
+    "gulp-uglify": "*",
     "object-assign": "*",
     "react": "*",
     "react-dom": "*",
+    "react-router": "*",
     "run-sequence": "*",
-    "vinyl-source-stream": "*",
-    "react-router": "*"
+    "vinyl-source-stream": "*"
   },
   "devDependencies": {
     "babel-core": "^6.5.1",
