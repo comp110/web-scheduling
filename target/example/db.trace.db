@@ -1,9 +1,9 @@
-2016-12-07 16:33:51 jdbc[3]: exception
+2016-12-07 16:59:03 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLException: Table "DATABASECHANGELOGLOCK" not found; SQL statement:
 select count(*) from PUBLIC.DATABASECHANGELOGLOCK [42102-192]
-2016-12-07 16:33:51 jdbc[3]: exception
+2016-12-07 16:59:03 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLException: Table "DATABASECHANGELOGLOCK" not found; SQL statement:
 select count(*) from PUBLIC.DATABASECHANGELOGLOCK [42102-192]
-2016-12-07 16:33:55 jdbc[3]: exception
+2016-12-07 16:59:07 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLException: Table "DATABASECHANGELOGLOCK" not found; SQL statement:
 select count(*) from PUBLIC.DATABASECHANGELOGLOCK [42102-192]
