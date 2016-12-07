@@ -80,8 +80,8 @@ logging:
     - type: file
       threshold: INFO
       logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
-      currentLogFilename: /data/example/application.log
-      archivedLogFilenamePattern: /data/example/application-%d{yyyy-MM-dd}-%i.log.gz
+      currentLogFilename: /target/example/application.log
+      archivedLogFilenamePattern: /target/example/application-%d{yyyy-MM-dd}-%i.log.gz
       archivedFileCount: 7
       timeZone: UTC
       maxFileSize: 10MB
