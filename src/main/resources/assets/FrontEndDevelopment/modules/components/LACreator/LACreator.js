@@ -14,11 +14,22 @@ var LACreator = React.createClass({
     },
     handleUserCreation: function(e){
         var LA = {
-            username: this.refs.username.value,
+            name: this.refs.username.value,
             password: this.refs.password.value,
             role: this.refs.role.value
             
         };
+        
+        var jsonLA = JSON.stringify(LA);
+        console.log(jsonLA);
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        };
+        xhttp.open("POST", "/api/userDatabase", true);
+        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhttp.send(jsonLA);
+        
         createActions.addLA(LA);
         this._onChange();
         this.refs.username.value = '';
