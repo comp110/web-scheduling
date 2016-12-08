@@ -33,7 +33,7 @@ public class UserResource {
     public UserResource(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
-
+ 
     @POST
     @UnitOfWork
    // @RolesAllowed("ADMIN")
