@@ -6,11 +6,16 @@ var EventEmitter = require('events').EventEmitter;
 var CHANGE_EVENT = 'change';
 
 var _store = {
-    user: {}
+    user: {},
+    profile: {}
 };
 
 var setUser = function(user){
     _store.user = user;
+};
+
+var setProfile = function(profile){
+    _store.profile = profile;
 };
 
 var userStore = objectAssign({}, EventEmitter.prototype, {
@@ -22,6 +27,9 @@ var userStore = objectAssign({}, EventEmitter.prototype, {
     },
     getUser: function(){
         return _store.user;
+    },
+    getProfile: function(){
+        return _store.profile;
     }
 });
 
@@ -29,7 +37,11 @@ AppDispatcher.register(function(payload){
     var action = payload.action;
     switch(action.actionType){
         case appConstants.ADD_USER:
-            setUser(action.data)
+            setUser(action.data);
+            userStore.emit(CHANGE_EVENT);
+            break;
+        case appConstants.ADD_PROFILE:
+            setProfile(action.data);
             userStore.emit(CHANGE_EVENT);
             break;
         default:

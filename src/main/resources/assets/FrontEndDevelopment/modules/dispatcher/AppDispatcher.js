@@ -18,6 +18,13 @@ AppDispatcher.userAction = function(action){
     });
 };
 
+AppDispatcher.profileAction = function(action){
+    this.dispatch({
+        source: 'VIEW_ACTION',
+        action: action
+    });
+};
+
 //LA Creation Actions
 AppDispatcher.laAction = function(action){
   this.dispatch({

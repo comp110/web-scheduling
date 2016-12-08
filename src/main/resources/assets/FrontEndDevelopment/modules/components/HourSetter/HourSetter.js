@@ -1,4 +1,6 @@
 import React from 'react'
+var userStore = require('../../stores/userStore');
+var userActions = require('../../actions/userActions');
 
 var hourMap = [
     "12am",
@@ -171,12 +173,20 @@ var HourSetterRow = React.createClass({
 var HourSetterTable = React.createClass({
     getInitialState: function(){
         return {
-            work_hours: workhours
+            work_hours: workhours,
+            user: userStore.getUser(),
+            profile: userStore.getProfile()
         };
     },
     componentWillMount(){
 //        workhours = initializeWorkHours();
         this.setState({work_hours: workhours});
+        console.log("User Check", this.state.user);
+        console.log("Profile Check", this.state.profile);
+        userStore.addChangeListener(this._onChange);
+    },
+    componentWillUnmount: function(){
+        userStore.removeChangeListener(this._onChange);
     },
     handleTDClick: function(i, j){
         workhours = setWorkHour(i,j, workhours);
@@ -193,59 +203,68 @@ var HourSetterTable = React.createClass({
             xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhttp.send(reduced_shifts);
             console.log(reduced_shifts);
-
-//        for(var shift of shifts){
-//            reduced_shift= JSON.stringify(shift);
-//
-//        }
-
-
-
-
+    },
+    handleProfileClick: function(){
+        var profile = {
+            gender: this.refs.gender.value,
+            experience: this.refs.experience.value,
+            hoursCapacity: this.refs.hoursCapacity.value
+            
+        };
+        userActions.setProfile(profile);
+        this.refs.gender.value = '';
+        this.refs.experience.value = '';
+        this.refs.hoursCapacity.value = '';
+    },
+    _onChange: function(){
+        this.setState({profile: userStore.getProfile()});
     },
     render: function(){
         return(
             <div className="col-md-12">
                 <div className="row">
                     <div className="col-md-6 inline-div profile-div">
-                <div className="row inner-profile">
-                    <div className="col-md-3 offset-md-4">
-                    <h3>User Profile</h3>
-                    Username: Sally<br></br>
-                    Gender: Female<br></br>
-                    Experience: 3<br></br>
-                    Hours Capacity: 3<br></br>
-                    Week_Start_Date: {getNextSundayDate().toLocaleDateString()}<br></br>
+                        <div className="row inner-profile">
+                            
+                                <h2 className="form-signin-heading" style={{color:"white", alignContent: "center"}}>User Profile</h2>
+                                <form className="form-signin">
+                                    <h5>Name: {this.state.user.username}</h5>
+                                    <input className="form-control" value={this.state.profile.gender} placeholder="gender" ref="gender" type="text"/>
+                                    <input className="form-control" value={this.state.profile.experience} ref="experience" placeholder="experience level"/>
+                                    <input className="form-control" value={this.state.profile.hoursCapacity} ref="hoursCapacity" placeholder="hours capacity"/>
+                                    <h5>Week_Start_Date: {getNextSundayDate().toLocaleDateString()}</h5>
+                                </form>
+                                
+                            
+                            <button type="button" onClick={this.handleProfileClick} className="  col-md-4 offset-md-4 btn btn-primary active">Active Primary</button>
+                        </div>
                     </div>
-                    <button type="button" className="  col-md-4 offset-md-4 btn btn-primary active">Active Primary</button>
-                </div>
-                </div>
-                <div className="col-md-5 inline-div">
-                <table>
-                    <thead>
-                        <th>Sun  </th>
-                        <th>Mon  </th>
-                        <th>Tue  </th>
-                        <th>Wed  </th>
-                        <th>Thu  </th>
-                        <th>Fri  </th>
-                    </thead>
-                    <HourSetterRow handleClick={this.handleTDClick} hour={8} />
-                    <HourSetterRow handleClick={this.handleTDClick} hour={9} />
-                    <HourSetterRow handleClick={this.handleTDClick} hour={10} />
-                    <HourSetterRow handleClick={this.handleTDClick} hour={11} />
-                    <HourSetterRow handleClick={this.handleTDClick} hour={12} />
-                    <HourSetterRow handleClick={this.handleTDClick} hour={13} />
-                    <HourSetterRow handleClick={this.handleTDClick} hour={14} />
-                    <HourSetterRow handleClick={this.handleTDClick} hour={15} />
-                    <HourSetterRow handleClick={this.handleTDClick} hour={16} />
-                    <HourSetterRow handleClick={this.handleTDClick} hour={17} />
-                    <HourSetterRow handleClick={this.handleTDClick} hour={18} />
-                    <HourSetterRow handleClick={this.handleTDClick} hour={19} />
-                    <HourSetterRow handleClick={this.handleTDClick} hour={20} />
-                </table>
-                <button id= "button" onClick={this.handleClick}>Submit</button>
-                </div>
+                    <div className="col-md-5 inline-div">
+                        <table>
+                            <thead>
+                                <th>Sun  </th>
+                                <th>Mon  </th>
+                                <th>Tue  </th>
+                                <th>Wed  </th>
+                                <th>Thu  </th>
+                                <th>Fri  </th>
+                            </thead>
+                            <HourSetterRow handleClick={this.handleTDClick} hour={8} />
+                            <HourSetterRow handleClick={this.handleTDClick} hour={9} />
+                            <HourSetterRow handleClick={this.handleTDClick} hour={10} />
+                            <HourSetterRow handleClick={this.handleTDClick} hour={11} />
+                            <HourSetterRow handleClick={this.handleTDClick} hour={12} />
+                            <HourSetterRow handleClick={this.handleTDClick} hour={13} />
+                            <HourSetterRow handleClick={this.handleTDClick} hour={14} />
+                            <HourSetterRow handleClick={this.handleTDClick} hour={15} />
+                            <HourSetterRow handleClick={this.handleTDClick} hour={16} />
+                            <HourSetterRow handleClick={this.handleTDClick} hour={17} />
+                            <HourSetterRow handleClick={this.handleTDClick} hour={18} />
+                            <HourSetterRow handleClick={this.handleTDClick} hour={19} />
+                            <HourSetterRow handleClick={this.handleTDClick} hour={20} />
+                        </table>
+                        <button id= "button" onClick={this.handleClick}>Submit</button>
+                    </div>
                 </div>
             </div>
         );

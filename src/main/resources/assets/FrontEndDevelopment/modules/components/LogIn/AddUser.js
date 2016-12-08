@@ -14,13 +14,13 @@ var AddUser = React.createClass({
     render: function(){
         return(
             <div>
-               <form className="form-signin">
+                <form className="form-signin">
                     <h2 className="form-signin-heading" style={{color:"white"}}>Please sign in</h2>
-                <label className="sr-only">Username</label>
-                <input  className="form-control" placeholder="Username" ref="username" type="text" autoFocus={true}/>
-               <label  className="sr-only">Password</label>
-                <input ref="password" type="password" className="form-control" placeholder="Password" required={true}/>
-               <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleLogIn}>Submit</button>
+                    <label className="sr-only">Username</label>
+                    <input  className="form-control" placeholder="Username" ref="username" type="text" autoFocus={true}/>
+                    <label  className="sr-only">Password</label>
+                    <input ref="password" type="password" className="form-control" placeholder="Password" required={true}/>
+                    <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleLogIn}>Submit</button>
                </form>
             </div>
         );
