@@ -32,17 +32,17 @@ public class LAResourceID {
     }
 
     @GET
-    @RolesAllowed("BASIC_GUY")
+   // @RolesAllowed("BASIC_GUY")
     @UnitOfWork
-    public LA getPerson(@PathParam("personId") LongParam personId, @Auth User user) {
+    public LA getPerson(@PathParam("personId") LongParam personId) {
         return findSafely(personId.get());
     }
 
 
     @PUT
-    @RolesAllowed("BASIC_GUY")
+   // @RolesAllowed("BASIC_GUY")
     @UnitOfWork
-    public LA updatePerson(@PathParam("personId") LongParam personId,LA person,@Auth User user) { 
+    public LA updatePerson(@PathParam("personId") LongParam personId,LA person) { 
   //   return peopleDAO.update(personId.get(),person);
 
         LA oldVersion = findSafely(personId.get());
@@ -58,7 +58,7 @@ public class LAResourceID {
    
     
     @DELETE
-    @RolesAllowed("ADMIN")
+   // @RolesAllowed("ADMIN")
     @UnitOfWork
     public void delete(@PathParam("personId") LongParam personId) {
         // peopleDAO.delete(person);
