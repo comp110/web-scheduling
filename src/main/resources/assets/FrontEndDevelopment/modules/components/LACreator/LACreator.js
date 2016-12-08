@@ -41,28 +41,20 @@ var LACreator = React.createClass({
             LAs: createStore.getLAs()
         })
     },
-    test: function(){
-        console.log(this.state.LAs)
-    },
     render: function(){
         return(
             <div className="container" style={{
                          backgroundColor: '#3f4144'
                     }}>
                <form className="form-signin">
-                    <h2 className="form-signin-heading" style={{color:"white"}}>Create LA</h2>
-            
+                    <h2 className="form-signin-heading" style={{color:"white"}}>Create LA</h2>           
                 <label className="sr-only">Username</label>
-                <input  className="form-control" placeholder="Username" ref="username" type="text" autoFocus={true}/>
-            
+                <input  className="form-control" placeholder="Username" ref="username" type="text" autoFocus={true}/>       
                <label  className="sr-only">Password</label>
-                <input ref="password" type="password" className="form-control" placeholder="Password" required={true}/>
-            
+                <input style={{margin:0}} ref="password" type="password" className="form-control" placeholder="Password" required={true}/>          
                  <label  className="sr-only">Password</label>
-                <input ref="role" type="text" className="form-control" placeholder="Password" required={true}/>
-            
+                <input style={{margin:0}} ref="role" type="text" className="form-control" placeholder="Role" required={true}/>         
                <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleUserCreation}>Submit</button>
-                <button onClick={this.test}>Test</button>
                </form>
             </div>
         );
