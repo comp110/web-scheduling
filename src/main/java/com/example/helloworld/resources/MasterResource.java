@@ -23,7 +23,7 @@ import io.dropwizard.auth.Auth;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 @Path("/master")
-//@RolesAllowed("ADMIN")
+@RolesAllowed("ADMIN")
 @Produces(MediaType.APPLICATION_JSON)
 public class MasterResource {
     private final MasterDAO peopleDAO;
@@ -33,14 +33,14 @@ public class MasterResource {
 
     @POST
     @UnitOfWork
-    public void createPerson(Master[] person) {
+    public void createPerson(Master[] person,@Auth User user) {
         for(int i =0 ; i < person.length; i ++){
             peopleDAO.create(person[i]);
         }
     }
     @GET
     @UnitOfWork
-    public List<Master> listPeople() {
+    public List<Master> listPeople(@Auth User user) {
     return peopleDAO.findAll();
 }   
 

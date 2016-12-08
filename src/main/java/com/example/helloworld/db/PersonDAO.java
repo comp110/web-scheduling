@@ -22,11 +22,6 @@ public class PersonDAO extends AbstractDAO<Person> {
         return persist(person);
     }
     
-  /* public  List<Person>  update(Long id, Person person) {
-      return  list(namedQuery("com.example.helloworld.core.Person.update").setParameter("id",id)
-                                                                          .setParameter("start",person.getStart())
-                                                                          .setParameter("end",person.getEnd()));
-    }*/
  
     public Person saveOrUpdate(Person person) {
     return persist(person);

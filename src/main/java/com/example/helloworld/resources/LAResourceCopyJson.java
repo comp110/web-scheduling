@@ -38,8 +38,8 @@ public class LAResourceCopyJson {
   
     @GET
     @UnitOfWork
-   // @RolesAllowed("ADMIN")
-    public String copylistLA(@PathParam("date") String dateId) {
+   @RolesAllowed("ADMIN")
+    public String copylistLA(@PathParam("date") String dateId,@Auth User user) {
         dateId =    dateId.replace('-', '/');
        String arr = laDAO.findDate(dateId).toString();   
        try{

@@ -32,7 +32,7 @@ public class LAResourceID {
     }
 
     @GET
-   // @RolesAllowed("BASIC_GUY")
+    @RolesAllowed("BASIC_GUY")
     @UnitOfWork
     public LA getPerson(@PathParam("personId") LongParam personId) {
         return findSafely(personId.get());
@@ -40,7 +40,7 @@ public class LAResourceID {
 
 
     @PUT
-   // @RolesAllowed("BASIC_GUY")
+   @RolesAllowed("BASIC_GUY")
     @UnitOfWork
     public LA updatePerson(@PathParam("personId") LongParam personId,LA person) { 
   //   return peopleDAO.update(personId.get(),person);
@@ -58,7 +58,7 @@ public class LAResourceID {
    
     
     @DELETE
-   // @RolesAllowed("ADMIN")
+    @RolesAllowed("BASIC_GUY")
     @UnitOfWork
     public void delete(@PathParam("personId") LongParam personId) {
         // peopleDAO.delete(person);

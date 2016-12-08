@@ -37,6 +37,11 @@ public class LADAO extends AbstractDAO<LA> {
         return list(namedQuery("com.example.helloworld.core.LA.findAll"));
     }
 
+ public List<LA> deletebyName(String name) {
+        return list(namedQuery("com.example.helloworld.core.LA.Delete")   
+                     .setParameter("name", name));
+    }
+
  public List<LA> findDate(String date) {
            return  list(
                         namedQuery("com.example.helloworld.core.LA.findDate")

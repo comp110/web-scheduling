@@ -22,8 +22,9 @@ import io.dropwizard.auth.Auth;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 @Path("/master/copytoJson/{date}")
-//@RolesAllowed("ADMIN")
+@RolesAllowed("ADMIN")
 @Produces(MediaType.APPLICATION_JSON)
+
 public class MasterResourceCopyJson {
 
     private final MasterDAO peopleDAO;
@@ -34,7 +35,7 @@ public class MasterResourceCopyJson {
 
     @GET
     @UnitOfWork
-    public List<Master> listPeople(@PathParam("date") String dateId) {
+    public List<Master> listPeople(@PathParam("date") String dateId, @Auth User user) {
         dateId =    dateId.replace('-', '/');
        String arr = peopleDAO.findDate(dateId).toString();   
        try{

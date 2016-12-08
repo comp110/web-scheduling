@@ -19,6 +19,9 @@ import java.util.Objects;
 	        ),@NamedQuery(
             name = "com.example.helloworld.core.LA.findDate",
             query = "SELECT p FROM LA p where p.weekstartdate = :weekstartdate "
+             ),@NamedQuery(
+            name = "com.example.helloworld.core.LA.Delete",
+            query = "DELETE FROM LA p where p.name = :name"
              )
 	    }
 	)

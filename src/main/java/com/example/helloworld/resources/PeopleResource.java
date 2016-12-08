@@ -20,7 +20,7 @@ import io.dropwizard.auth.Auth;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 @Path("/people")
-  // @RolesAllowed("BASIC_GUY")
+@RolesAllowed("BASIC_GUY")
 @Produces(MediaType.APPLICATION_JSON)
 public class PeopleResource {
 
@@ -32,7 +32,7 @@ public class PeopleResource {
 
     @POST
     @UnitOfWork
-    public void createPerson(Person[] person) {
+    public void createPerson(Person[] person,@Auth User user) {
         for(int i =0 ; i < person.length; i ++){
             peopleDAO.create(person[i]);
         }
@@ -41,7 +41,7 @@ public class PeopleResource {
     
     @GET
     @UnitOfWork
-    public List<Person> listPeople() {
+    public List<Person> listPeople(@Auth User user) {
         return peopleDAO.findAll();
     }   
   

@@ -36,16 +36,16 @@ public class UserResource {
  
     @POST
     @UnitOfWork
-   // @RolesAllowed("ADMIN")
-    public User2 createPerson(User2 person) {
+   @RolesAllowed("ADMIN")
+    public User2 createPerson(User2 person,@Auth User user) {
             userDAO.create(person);
             return person;
     }
    
     @GET
-   // @RolesAllowed("ADMIN")
+   @RolesAllowed("ADMIN")
     @UnitOfWork
-    public List<User2> listUser() {
+    public List<User2> listUser(@Auth User user) {
         return userDAO.findAll();
     }   
 
