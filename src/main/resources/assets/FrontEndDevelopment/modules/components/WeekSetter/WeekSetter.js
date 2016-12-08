@@ -157,6 +157,11 @@ var WeekSetterDataPreview = React.createClass({
             float: 'right'
         };
     },
+    handleClick: function(){
+        console.log("hour",this.props.dataObj.hour);
+        console.log("day", this.props.dataObj.day);
+        console.log(this.props.dataObj2[this.props.dataObj.hour][this.props.dataObj.day].numPeople);
+    },
    render: function(){
        return (
         <div style={this.state}>
@@ -167,8 +172,10 @@ var WeekSetterDataPreview = React.createClass({
             Hour: {hourMap[this.props.dataObj.hour]}
            <br></br>
            <button onClick={()=>this.props.handleSubtract(this.props.dataObj.hour,this.props.dataObj.day)}>-</button>
-            Number: {this.props.dataObj2.number}
+            Number: {this.props.dataObj2[this.props.dataObj.hour][this.props.dataObj.day].numPeople}
            <button onClick={()=>this.props.handleAdd(this.props.dataObj.hour,this.props.dataObj.day)}> + </button>
+            <button onClick={this.handleClick}>Check</button>
+            <h5>Week_Start_Date: {getNextSundayDate().toLocaleDateString()}</h5>
         </div>
        );
    }
@@ -248,6 +255,7 @@ var WeekSetterTable = React.createClass({
     componentWillMount(){
 //        workhours = initializeWorkHours();
         this.setState({num_people: numpeople});
+        this.setState({current_data: {hour:8, day:0}});
     },
     handleTDClick: function(i, j){
 //        numpeople = setWorkHour(i,j, numpeople);
