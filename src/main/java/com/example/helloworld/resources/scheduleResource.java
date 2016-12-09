@@ -33,8 +33,8 @@ public class scheduleResource {
    // @Context ResourceContext rc;
     @GET
     @UnitOfWork
-    @RolesAllowed("ADMIN")
-    public String getSchedule( @PathParam("date") String dateId,@Auth User user) {
+   
+    public String getSchedule( @PathParam("date") String dateId) {
     dateId = dateId.replace('-', '/');
     KarenBot karenBot = new KarenBot(new FXAlgo());
     return  karenBot.run(dateId, 100, false);
