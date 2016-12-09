@@ -30,25 +30,27 @@ of the PersonDAO in their constructors.
 
 As with all the modules the db example is wired up in the `initialize` function of the `HelloWorldApplication`.
 
+# Software Requirements to Run
+
+* Java 1.8
+* Maven 3.3.9+
+* npm 2.15.9+
+
 # Running The Application
 
-To test the example application run the following commands.
+To test the application run the following commands.
 
-* To package the example run.
+* To package the application run.
 
-        mvn package
+        ./deploy
 
-* To setup the h2 database run.
+* To run the server.
 
-        java -jar target/dropwizard-example-1.0.1-SNAPSHOT.jar db migrate example.yml
+        ./serve
 
-* To run the server run.
+* To see the program running locally go to the following url.
 
-        java -jar target/dropwizard-example-1.0.1-SNAPSHOT.jar server example.yml
-
-* To hit the Hello World example (hit refresh a few times).
-
-	http://localhost:8080/hello-world
+	http://localhost:8080
 
 * To post data into the application.
 
@@ -59,21 +61,3 @@ To test the example application run the following commands.
 * how to delete/drop and add database.
 	http://www.dropwizard.io/0.7.1/docs/manual/migrations.html
 	open http://localhost:8080/people
-# dockertest
-
-# Deployment to UNC Cloudapps
-
-* Go to https://console.ose.devapps.unc.edu and download the CLI Command Line Tools under the "?" icon.
-
-* After the tools are installed.
-
----
-	oc login
----
-	oc new-project project-name
----
-	oc new-app https://github.com/comp110/web-scheduling
----
-
-* Once it finishes building and deploying, create a new route in the Overview page of the cloudapps web console and use the default settings.
-** Note: This process can take awhile and may temporarily give you a 503 Error when visiting the created route. **
