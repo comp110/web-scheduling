@@ -30,6 +30,12 @@ of the PersonDAO in their constructors.
 
 As with all the modules the db example is wired up in the `initialize` function of the `HelloWorldApplication`.
 
+# Software Requirements to Run
+
+* Java 1.8
+* Maven 3.3.9+
+* npm 2.15.9+
+
 # Running The Application
 
 To test the application run the following commands.
