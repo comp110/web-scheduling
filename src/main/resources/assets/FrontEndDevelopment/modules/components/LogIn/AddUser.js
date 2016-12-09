@@ -19,7 +19,7 @@ var AddUser = React.createClass({
                     <input  className="form-control" placeholder="Username" ref="username" type="text" autoFocus={true}/>
                     <label  className="sr-only">Password</label>
                     <input ref="password" type="password" className="form-control" placeholder="Password" required={true}/>
-                    <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleLogIn}>Submit</button>
+                    <button className="btn btn-lg btn-primary btn-block" type="submit" onSubmit={this.handleLogIn} onClick={this.handleLogIn}>Submit</button>
                </form>
             </div>
         );

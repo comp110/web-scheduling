@@ -28,8 +28,10 @@ var LogIn = React.createClass({
             url: '/api/protected',
             dataType: 'text',
             success: function(response) {
-                // Show
                 alert('todo: show appropriate new buttons and such, hide login button');
+            },
+            error: function(response) {
+                alert('Invalid username/password!');
             }
         });
 
