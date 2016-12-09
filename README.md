@@ -46,16 +46,6 @@ To test the application run the following commands.
 
 	http://localhost:8080
 
-* To post data into the application.
-
-	
-	curl -H "Content-Type: application/json" -X POST http://localhost:8080/people -d "{\"name\":\"Ervin Wu\",\"day\":\"Mon\",\"start\":5,\"end\":7,\"week_start_date\":\"9-26-2016\"}"
-
-
-* how to delete/drop and add database.
-	http://www.dropwizard.io/0.7.1/docs/manual/migrations.html
-	open http://localhost:8080/people
-
 # Building Docker Image
 ```
 docker build -t comp110/web-scheduling ~/web-scheduling/
