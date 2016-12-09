@@ -1,3 +1,0 @@
-#!/bin/bash
-cd $OPENSHIFT_REPO_DIR
-nohup java -jar target/diy-0.0.1-SNAPSHOT.jar server example.openshift.yml > ${OPENSHIFT_DIY_LOG_DIR}/example.log 2>&1 & 
