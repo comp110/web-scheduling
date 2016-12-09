@@ -22,17 +22,17 @@ var LogIn = React.createClass({
                 'Content-Type': 'application/json'
             },
             headers: {
-        "Authorization": "Basic " + btoa(user.username + ":" + user.password)
+        "Authorization": "BasicNoAuthPrompt " + btoa(user.username + ":" + user.password)
       },
             type: 'GET',
             url: '/api/protected',
             dataType: 'text',
             success: function(response) {
-                alert(response);
-               
+                // Show
+                alert('todo: show appropriate new buttons and such, hide login button');
             }
         });
-        
+
     },
     _onChange: function(){
         this.setState({
@@ -50,7 +50,7 @@ var LogIn = React.createClass({
                         <AddUser setUser={this.handleSetUser}/>
                     </div>
                </div>);
-   } 
+   }
 });
 
 module.exports = LogIn;

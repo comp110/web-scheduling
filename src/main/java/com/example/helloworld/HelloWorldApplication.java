@@ -76,7 +76,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
         // Enable variable substitution with environment variables
        bootstrap.addBundle(new AssetsBundle("/assets/FrontEndDevelopment", "/", "index.html"));
-   
+
     //   bootstrap.addBundle(new AssetsBundle("/assets", "/js",  "load-events.js"));
    //  bootstrap.addBundle(new AssetsBundle("/assets", "/js", "calendar-events.js"));
      // bootstrap.addBundle(new AssetsBundle("/assets/FrontEndDevelopment", "/css", "style.css"));
@@ -96,7 +96,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
             }
         });
         bootstrap.addBundle(hibernateBundle);
-       
+
         bootstrap.addBundle(new ViewBundle<HelloWorldConfiguration>() {
             @Override
             public Map<String, Map<String, String>> getViewConfiguration(HelloWorldConfiguration configuration) {
@@ -136,6 +136,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
                 .setAuthenticator(authenticator)
                 .setAuthorizer(new ExampleAuthorizer())
                 .setRealm("SUPER SECRET STUFF")
+                .setPrefix("BasicNoAuthPrompt")
                 .buildAuthFilter()));
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(User.class));
         environment.jersey().register(RolesAllowedDynamicFeature.class);

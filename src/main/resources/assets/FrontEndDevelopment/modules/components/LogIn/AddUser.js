@@ -5,11 +5,10 @@ var AddUser = React.createClass({
         var user = {
             username: this.refs.username.value,
             password: this.refs.password.value
-            
+
         };
         this.props.setUser(user);
-        this.refs.username.value = '';
-        this.refs.password.value = '';
+        e.preventDefault();
     },
     render: function(){
         return(
@@ -26,5 +25,5 @@ var AddUser = React.createClass({
         );
     }
 });
-        
+
 module.exports= AddUser;
