@@ -31,13 +31,23 @@
 var ALL_SCHEDULES = null;
 var DAYS_OF_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 
-  var username ="ervin";
-  var password = "123";
-
 function getNextSundayDate() {
   var today = new Date();
   var days = 7 - today.getDay();
   return new Date(today.getTime() + days * 24 * 60 * 60 * 1000);
+}
+
+function getBasicAuthHash() {
+  // Get hash cookie
+  var cookies = document.cookie.split('; ');
+  for (index in cookies) {
+    var cookie = cookies[index].split('=');
+    var name = cookies[0]
+    var value = cookies[1] | true;
+    if (name == 'auth') return value;
+  }
+
+  return null;
 }
 
 function runKarenBot() {
@@ -48,10 +58,9 @@ function runKarenBot() {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-  
+
     headers: {
-    //"Authorization": "Basic " + btoa(username + ":" + password)
-     "Authorization": "BasicNoAuthPrompt " + btoa(username+ ":" + password)
+     "Authorization": "BasicNoAuthPrompt " + getBasicAuthHash()
     },
     type: 'GET',
     url: '/api/hoursetter/copytoJson/'+ date,
@@ -69,7 +78,7 @@ function runKarenBot() {
 		      'Content-Type': 'application/json'
 		    },
 			    headers: {
-			      "Authorization": "BasicNoAuthPrompt " + btoa(username+ ":" + password)
+			      "Authorization": "BasicNoAuthPrompt " + getBasicAuthHash()
 			    },
 				    type: 'GET',
 				    url: '/api/master/copytoJson/'+ date,
@@ -78,7 +87,7 @@ function runKarenBot() {
 				        // Run KarenBot by issuing a GET request to the dropwizard server
 				        alert("Schedule successfully generated!");
 				        refreshSchedule();
-				     
+
 				    }
 				  });
     }
@@ -205,11 +214,6 @@ function refreshSchedule() {
 		      'Accept': 'application/json',
 		      'Content-Type': 'application/json'
 		    },
-		    
-		    headers: {
-		  
-		      "Authorization": "BasicNoAuthPrompt " + btoa(username+ ":" + password)
-		    },
 		    type: 'GET',
 		    url: '/api/schedule/'+ date,
 		    dataType: 'text',
@@ -217,7 +221,7 @@ function refreshSchedule() {
 		     console.log(data);
 		    buildSchedulesFromDatabaseJSON(data);
 		    renderAllSchedules();
-		     
+
 		    }
   });
 }

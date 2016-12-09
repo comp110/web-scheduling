@@ -16,13 +16,16 @@ var LogIn = React.createClass({
     handleSetUser: function(user){
         userActions.setUser(user);
 
+        var basicAuthHash = btoa(user.username + ":" + user.password);
+        document.cookie = "auth=" + basicAuthHash;
+
         $.ajax({
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             headers: {
-        "Authorization": "BasicNoAuthPrompt " + btoa(user.username + ":" + user.password)
+        "Authorization": "BasicNoAuthPrompt " + basicAuthHash
       },
             type: 'GET',
             url: '/api/protected',

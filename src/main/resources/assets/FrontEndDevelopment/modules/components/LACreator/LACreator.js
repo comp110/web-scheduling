@@ -21,10 +21,11 @@ var LACreator = React.createClass({
             name: this.refs.username.value,
             password: this.refs.password.value,
             role: this.refs.role.value
-            
+
         };
-        
+
         var jsonLA = JSON.stringify(LA);
+        var basicAuthHash = getBasicAuthHash();
         console.log(jsonLA);
 
         var xhttp = new XMLHttpRequest();
@@ -32,15 +33,16 @@ var LACreator = React.createClass({
         };
         xhttp.open("POST", "/api/userDatabase", true);
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhttp.setRequestHeader("Authorization", "BasicNoAuthPrompt " + basicAuthHash);
         xhttp.send(jsonLA);
-        
+
         createActions.addLA(LA);
-        
+
         if(this.refs.username.value!='' && this.refs.password.value!='' && this.refs.role.value!='')
             this.setState({created:true});
-        else    
+        else
             this.setState({created:false});
-        
+
         this._onChange();
         this.refs.username.value = '';
         this.refs.password.value = '';
@@ -61,11 +63,11 @@ var LACreator = React.createClass({
                              backgroundColor: '#3f4144'
                         }}>
                    <form className="form-signin">
-                        <h2 className="form-signin-heading" style={{color:"white"}}>Create LA</h2>           
+                        <h2 className="form-signin-heading" style={{color:"white"}}>Create LA</h2>
                     <label className="sr-only">Username</label>
-                    <input  className="form-control" placeholder="Username" ref="username" type="text" autoFocus={true}/>       
+                    <input  className="form-control" placeholder="Username" ref="username" type="text" autoFocus={true}/>
                     <label  className="sr-only">Password</label>
-                    <input style={{margin:0}} ref="password" type="password" className="form-control" placeholder="Password"/>          
+                    <input style={{margin:0}} ref="password" type="password" className="form-control" placeholder="Password"/>
                     <label  className="sr-only">Role</label>
                     <select  ref="role" style={{height: 40}} value={this.state.role} onChange={this.handleRoleChange} className="form-control">
                         <option value="ADMIN">ADMIN</option>
@@ -75,7 +77,7 @@ var LACreator = React.createClass({
                    <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleUserCreation}>Submit</button>
                     <div style={{color:"white"}}>An LA has been created</div>
                    </form>
-                    
+
                 </div>
             );
         }else{
@@ -84,11 +86,11 @@ var LACreator = React.createClass({
                              backgroundColor: '#3f4144'
                         }}>
                    <form className="form-signin">
-                        <h2 className="form-signin-heading" style={{color:"white"}}>Create LA</h2>           
+                        <h2 className="form-signin-heading" style={{color:"white"}}>Create LA</h2>
                     <label className="sr-only">Username</label>
-                    <input  className="form-control" placeholder="Username" ref="username" type="text" autoFocus={true}/>       
+                    <input  className="form-control" placeholder="Username" ref="username" type="text" autoFocus={true}/>
                     <label  className="sr-only">Password</label>
-                    <input style={{margin:0}} ref="password" type="password" className="form-control" placeholder="Password"/>          
+                    <input style={{margin:0}} ref="password" type="password" className="form-control" placeholder="Password"/>
                     <label  className="sr-only">Role</label>
                     <select  ref="role" style={{height: 40}} value={this.state.role} onChange={this.handleRoleChange} className="form-control">
                         <option value="ADMIN">ADMIN</option>
@@ -100,8 +102,8 @@ var LACreator = React.createClass({
                 </div>
             );
         }
-        
-        
+
+
     }
 });
 
