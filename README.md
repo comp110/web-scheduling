@@ -1,8 +1,3 @@
-# Building Docker Image
-```
-docker build -t comp110/web-scheduling ~/web-scheduling/
-```
-
 # Introduction
 
 This is an application meant for the scheduling office hours for the COMP 110 LAs.  It utilizes the [Dropwizard](http://www.dropwizard.io/) web framework for the back-end and uses [React](https://facebook.github.io/react/) for the front-end.
@@ -60,3 +55,8 @@ To test the application run the following commands.
 * how to delete/drop and add database.
 	http://www.dropwizard.io/0.7.1/docs/manual/migrations.html
 	open http://localhost:8080/people
+
+# Building Docker Image
+```
+docker build -t comp110/web-scheduling ~/web-scheduling/
+```
