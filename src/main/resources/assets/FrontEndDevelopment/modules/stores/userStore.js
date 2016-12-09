@@ -30,6 +30,9 @@ var userStore = objectAssign({}, EventEmitter.prototype, {
     },
     getProfile: function(){
         return _store.profile;
+    },
+    getUserProfile: function(){
+        return objectAssign({},_store.user, _store.profile);
     }
 });
 

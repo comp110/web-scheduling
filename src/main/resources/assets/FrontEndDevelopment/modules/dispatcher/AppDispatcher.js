@@ -33,4 +33,13 @@ AppDispatcher.laAction = function(action){
   });  
 };
 
+//Work Hour Creation Actions
+AppDispatcher.workhoursAction = function(action){
+  this.dispatch({
+     source: 'VIEW_ACTION',
+     action: action
+  });  
+};
+
+
 module.exports = AppDispatcher;

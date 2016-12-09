@@ -1,6 +1,8 @@
 import React from 'react'
 var userStore = require('../../stores/userStore');
 var userActions = require('../../actions/userActions');
+var workhoursStore = require('../../stores/workhoursStore');
+var workhoursActions = require('../../actions/workhoursActions');
 
 var hourMap = [
     "12am",
@@ -173,29 +175,30 @@ var HourSetterRow = React.createClass({
 var HourSetterTable = React.createClass({
     getInitialState: function(){
         return {
-            work_hours: workhours,
+            work_hours: workhoursStore.getWorkHours(),
             user: userStore.getUser(),
             profile: userStore.getProfile()
         };
     },
     componentWillMount(){
-//        workhours = initializeWorkHours();
         this.setState({work_hours: workhours});
         console.log("User Check", this.state.user);
         console.log("Profile Check", this.state.profile);
-        userStore.addChangeListener(this._onChange);
+        userStore.addChangeListener(this._onProfileChange);
+        workhoursStore.addChangeListener(this._onWorkHourChange)
     },
     componentWillUnmount: function(){
-        userStore.removeChangeListener(this._onChange);
+        userStore.removeChangeListener(this._onProfileChange);
+        workhoursStore.removeChangeListener(this._onWorkHourChange);
     },
     handleTDClick: function(i, j){
-        workhours = setWorkHour(i,j, workhours);
+        //workhours = setWorkHour(i,j, workhours);
         this.setState({work_hours: workhours});
+        workhoursActions.setWorkHour({hour:i,day: j});
     },
     handleClick : function(){
-        var shifts = createWorkableShifts(this.state.work_hours);
-
-
+        //var shifts = createWorkableShifts(this.state.work_hours);
+        var shifts = workhoursStore.getWorkableShifts();
         var reduced_shifts = JSON.stringify(shifts);
         var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){};
@@ -215,9 +218,13 @@ var HourSetterTable = React.createClass({
         this.refs.gender.value = '';
         this.refs.experience.value = '';
         this.refs.hoursCapacity.value = '';
+        console.log("User Profile Check", userStore.getUserProfile());
     },
-    _onChange: function(){
+    _onProfileChange: function(){
         this.setState({profile: userStore.getProfile()});
+    },
+    _onWorkHourChange: function(){
+        this.setState({work_hours: workhoursStore.getWorkHours()});
     },
     render: function(){
         return(
@@ -229,9 +236,31 @@ var HourSetterTable = React.createClass({
                                 <h2 className="form-signin-heading" style={{color:"white", alignContent: "center"}}>User Profile</h2>
                                 <form className="form-signin">
                                     <h5>Name: {this.state.user.username}</h5>
-                                    <input className="form-control" value={this.state.profile.gender} placeholder="gender" ref="gender" type="text"/>
-                                    <input className="form-control" value={this.state.profile.experience} ref="experience" placeholder="experience level"/>
-                                    <input className="form-control" value={this.state.profile.hoursCapacity} ref="hoursCapacity" placeholder="hours capacity"/>
+                                    
+                                    <select  ref="gender" style={{height: 40}} value={this.state.profile.gender} className="form-control">
+                                        <option value="male">male</option>
+                                        <option value="female">female</option>
+                                        <option value="transgender">transgender</option>
+                                        <option value="other">other</option>
+                                    </select>
+                                    <select  ref="experience" style={{height: 40}} value={this.state.profile.experience} className="form-control">
+                                        <option value={1}>1</option>
+                                        <option value={2}>2</option>
+                                        <option value={3}>3</option>
+                                    </select>
+                                    <select  ref="hoursCapacity" style={{height: 40}} value={this.state.profile.hoursCapacity} className="form-control">
+                                        <option value={1}>1</option>
+                                        <option value={2}>2</option>
+                                        <option value={3}>3</option>
+                                        <option value={4}>4</option>
+                                        <option value={5}>5</option>
+                                        <option value={6}>6</option>
+                                        <option value={7}>7</option>
+                                        <option value={8}>8</option>
+                                        <option value={9}>9</option>
+                                        <option value={10}>10</option>
+                                    </select>
+                                    
                                     <h5>Week_Start_Date: {getNextSundayDate().toLocaleDateString()}</h5>
                                 </form>
                                 
