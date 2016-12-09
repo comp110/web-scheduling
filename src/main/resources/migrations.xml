@@ -91,6 +91,27 @@
           <column name="password" type="varchar(255)">
                  <constraints nullable="false"/>
             </column>
+            <column name="day" type="varchar(255)">
+                 <constraints nullable="false"/>
+            </column>
+            <column name="start" type="integer">
+                 <constraints nullable="false"/>
+            </column>
+            <column name="end" type="integer">
+                 <constraints nullable="false"/>
+            </column>
+
+            <column name="gender" type="varchar(255)">
+                 <constraints nullable="false"/>
+            </column>
+
+            <column name="experiencelevel" type="integer">
+                 <constraints nullable="false"/>
+            </column>
+
+            <column name="hourscapacity" type="integer">
+                 <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
   <changeSet id="2" author="Ervin Wu">
@@ -99,19 +120,14 @@
             <column name="name" value="ervin"/>
             <column name="role" value="admin"/>
             <column name="password" value="123"/>
+            <column name="day" value="Mon"/>
+               <column name="start" value="10"/>
+                  <column name="end" value="12"/>
+                     <column name="gender" value="male"/>
+                        <column name="experiencelevel" value="3"/>
+                           <column name="hourscapacity" value="4"/>
         </insert>
-          <insert tableName="userTable">
-            <column name="id" value="2"/>
-            <column name="name" value="LA1"/>
-            <column name="role" value="la"/>
-            <column name="password" value="123"/>
-        </insert>
-           <insert tableName="userTable">
-            <column name="id" value="3"/>
-            <column name="name" value="LA2"/>
-            <column name="role" value="la"/>
-            <column name="password" value="comp110"/>
-        </insert>
+       
 </changeSet>
       
 </databaseChangeLog>
