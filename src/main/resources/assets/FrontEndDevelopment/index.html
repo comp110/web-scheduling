@@ -40,7 +40,7 @@ function getNextSundayDate() {
   return new Date(today.getTime() + days * 24 * 60 * 60 * 1000);
 }
 
-function runKarenBot() {\
+function runKarenBot() {
   var date = getNextSundayDate().toLocaleDateString().replace(/\//g, '-');
   // Copy appropriate JSON files from database
   $.ajax({
@@ -213,7 +213,7 @@ function refreshSchedule() {
 		    type: 'GET',
 		    url: '/api/schedule/'+ date,
 		    dataType: 'text',
-		      success: function() {
+		      success: function(data) {
 		     console.log(data);
 		    buildSchedulesFromDatabaseJSON(data);
 		    renderAllSchedules();
