@@ -285,6 +285,7 @@ var WeekSetterTable = React.createClass({
         };
       xhttp.open("POST", "/api/master", true);
       xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+              xhttp.setRequestHeader("Authorization", "BasicNoAuthPrompt ZXJ2aW46MTIz");
       xhttp.send(reduced);
 
 

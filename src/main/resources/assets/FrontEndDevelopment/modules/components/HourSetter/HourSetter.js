@@ -200,16 +200,17 @@ var HourSetterTable = React.createClass({
         //var shifts = createWorkableShifts(this.state.work_hours);
         var shifts = workhoursStore.getWorkableShifts();
         var reduced_shifts = JSON.stringify(shifts);
-        var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function(){};
-            xhttp.open("POST", "/api/hoursetter",true);
-            xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xhttp.send(reduced_shifts);
-            console.log(reduced_shifts);
-    },
-    handleProfileClick: function(){
-        var profile = {
-            gender: this.refs.gender.value,
+            var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function(){};
+                xhttp.open("POST", "/api/hoursetter",true);
+                xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xhttp.setRequestHeader("Authorization", "BasicNoAuthPrompt ZXJ2aW46MTIz");
+                xhttp.send(reduced_shifts);
+                console.log(reduced_shifts);
+        },
+        handleProfileClick: function(){
+            var profile = {
+                gender: this.refs.gender.value,
             experience: this.refs.experience.value,
             hoursCapacity: this.refs.hoursCapacity.value
             
