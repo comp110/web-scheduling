@@ -31,17 +31,16 @@
 var ALL_SCHEDULES = null;
 var DAYS_OF_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 
+  var username ="ervin";
+  var password = "123";
+
 function getNextSundayDate() {
   var today = new Date();
   var days = 7 - today.getDay();
   return new Date(today.getTime() + days * 24 * 60 * 60 * 1000);
 }
 
-function runKarenBot() {
-
-  var username ="ervin";
-  var password = "123";
-
+function runKarenBot() {\
   var date = getNextSundayDate().toLocaleDateString().replace(/\//g, '-');
   // Copy appropriate JSON files from database
   $.ajax({
@@ -49,18 +48,39 @@ function runKarenBot() {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
+  
     headers: {
-      "Authorization": "Basic " + btoa(username + ":" + password)
+    //"Authorization": "Basic " + btoa(username + ":" + password)
+     "Authorization": "BasicNoAuthPrompt " + btoa(username+ ":" + password)
     },
     type: 'GET',
     url: '/api/hoursetter/copytoJson/'+ date,
     dataType: 'text',
       success: function() {
-      $.getJSON('/api/master/copytoJson/'+date, function() {
+      /*$.getJSON('/api/master/copytoJson/'+date, function() {
+
         // Run KarenBot by issuing a GET request to the dropwizard server
         alert("Schedule successfully generated!");
         refreshSchedule();
-      });
+      });*/
+      $.ajax({
+		    headers: {
+		      'Accept': 'application/json',
+		      'Content-Type': 'application/json'
+		    },
+			    headers: {
+			      "Authorization": "BasicNoAuthPrompt " + btoa(username+ ":" + password)
+			    },
+				    type: 'GET',
+				    url: '/api/master/copytoJson/'+ date,
+				    dataType: 'text',
+				      success: function() {
+				        // Run KarenBot by issuing a GET request to the dropwizard server
+				        alert("Schedule successfully generated!");
+				        refreshSchedule();
+				     
+				    }
+				  });
     }
   });
 }
@@ -175,10 +195,30 @@ function buildSchedulesFromDatabaseJSON(database_json) {
 function refreshSchedule() {
   // Query database and build schedule
   var date = getNextSundayDate().toLocaleDateString().replace(/\//g, '-');
-  $.getJSON('/api/schedule/' + date, function(data) {
+  /*$.getJSON('/api/schedule/' + date, function(data) {
     console.log(data);
     buildSchedulesFromDatabaseJSON(data);
     renderAllSchedules();
+  });*/
+   $.ajax({
+		    headers: {
+		      'Accept': 'application/json',
+		      'Content-Type': 'application/json'
+		    },
+		    
+		    headers: {
+		  
+		      "Authorization": "BasicNoAuthPrompt " + btoa(username+ ":" + password)
+		    },
+		    type: 'GET',
+		    url: '/api/schedule/'+ date,
+		    dataType: 'text',
+		      success: function() {
+		     console.log(data);
+		    buildSchedulesFromDatabaseJSON(data);
+		    renderAllSchedules();
+		     
+		    }
   });
 }
 
