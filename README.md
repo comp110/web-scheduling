@@ -1,12 +1,6 @@
-# Building Docker Image
-```
-docker build -t comp110/web-scheduling ~/web-scheduling/
-```
-
 # Introduction
 
-The Dropwizard example application was developed to, as its name implies, provide examples of some of the features
-present in Dropwizard.
+This is an application meant for the scheduling office hours for the COMP 110 LAs.  It utilizes the [Dropwizard](http://www.dropwizard.io/) web framework for the back-end and uses [React](https://facebook.github.io/react/) for the front-end.
 
 # Overview
 
@@ -52,12 +46,7 @@ To test the application run the following commands.
 
 	http://localhost:8080
 
-* To post data into the application.
-
-	
-	curl -H "Content-Type: application/json" -X POST http://localhost:8080/people -d "{\"name\":\"Ervin Wu\",\"day\":\"Mon\",\"start\":5,\"end\":7,\"week_start_date\":\"9-26-2016\"}"
-
-
-* how to delete/drop and add database.
-	http://www.dropwizard.io/0.7.1/docs/manual/migrations.html
-	open http://localhost:8080/people
+# Building Docker Image
+```
+docker build -t comp110/web-scheduling ~/web-scheduling/
+```
