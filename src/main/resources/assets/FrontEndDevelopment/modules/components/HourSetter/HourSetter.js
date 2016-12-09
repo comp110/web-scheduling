@@ -199,12 +199,13 @@ var HourSetterTable = React.createClass({
     handleClick : function(){
         //var shifts = createWorkableShifts(this.state.work_hours);
         var shifts = workhoursStore.getWorkableShifts();
+        var basicAuthHash = getBasicAuthHash();
         var reduced_shifts = JSON.stringify(shifts);
             var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function(){};
                 xhttp.open("POST", "/api/hoursetter",true);
                 xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                xhttp.setRequestHeader("Authorization", "BasicNoAuthPrompt ZXJ2aW46MTIz");
+                xhttp.setRequestHeader("Authorization", "BasicNoAuthPrompt " + basicAuthHash);
                 xhttp.send(reduced_shifts);
                 console.log(reduced_shifts);
         },
@@ -213,7 +214,7 @@ var HourSetterTable = React.createClass({
                 gender: this.refs.gender.value,
             experience: this.refs.experience.value,
             hoursCapacity: this.refs.hoursCapacity.value
-            
+
         };
         userActions.setProfile(profile);
         this.refs.gender.value = '';
@@ -233,11 +234,11 @@ var HourSetterTable = React.createClass({
                 <div className="row">
                     <div className="col-md-6 inline-div profile-div">
                         <div className="row inner-profile">
-                            
+
                                 <h2 className="form-signin-heading" style={{color:"white", alignContent: "center"}}>User Profile</h2>
                                 <form className="form-signin">
                                     <h5>Name: {this.state.user.username}</h5>
-                                    
+
                                     <select  ref="gender" style={{height: 40}} value={this.state.profile.gender} className="form-control">
                                         <option value="male">male</option>
                                         <option value="female">female</option>
@@ -261,11 +262,11 @@ var HourSetterTable = React.createClass({
                                         <option value={9}>9</option>
                                         <option value={10}>10</option>
                                     </select>
-                                    
+
                                     <h5>Week_Start_Date: {getNextSundayDate().toLocaleDateString()}</h5>
                                 </form>
-                                
-                            
+
+
                             <button type="button" onClick={this.handleProfileClick} className="  col-md-4 offset-md-4 btn btn-primary active">Active Primary</button>
                         </div>
                     </div>

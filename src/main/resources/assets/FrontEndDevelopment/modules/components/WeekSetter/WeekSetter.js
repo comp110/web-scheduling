@@ -274,6 +274,9 @@ var WeekSetterTable = React.createClass({
     handleClick : function(){
 //        var week = createWorkableShifts(this.state.num_people);
         var reduced = [].concat.apply([], numpeople);
+
+        var basicAuthHash = getBasicAuthHash();
+
         console.log(numpeople);
         reduced = JSON.stringify(reduced);
         //reduced = reduced.toString();
@@ -285,7 +288,7 @@ var WeekSetterTable = React.createClass({
         };
       xhttp.open("POST", "/api/master", true);
       xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-              xhttp.setRequestHeader("Authorization", "BasicNoAuthPrompt ZXJ2aW46MTIz");
+              xhttp.setRequestHeader("Authorization", "BasicNoAuthPrompt " + basicAuthHash);
       xhttp.send(reduced);
 
 
