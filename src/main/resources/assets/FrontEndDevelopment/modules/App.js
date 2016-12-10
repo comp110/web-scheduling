@@ -20,10 +20,10 @@ export default React.createClass({
                     <NavLink className="nav-link view-unauth-only" to="/login" >Log In</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link view-la" to="/hourset">Set Weekly Hours</NavLink>
+                    <NavLink className="nav-link view-la" to="/hourset">My Hours</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link view-admin" to="/weekset">Set Master Schedule</NavLink>
+                    <NavLink className="nav-link view-admin" to="/weekset">Master Schedule</NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink className="nav-link view-admin" to="/create">Create New LA</NavLink>
