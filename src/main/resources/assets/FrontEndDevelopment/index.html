@@ -40,10 +40,10 @@ function getNextSundayDate() {
 function getBasicAuthHash() {
   // Get hash cookie
   var cookies = document.cookie.split('; ');
-  for (index in cookies) {
-    var cookie = cookies[index].split('=');
-    var name = cookies[0]
-    var value = cookies[1] | true;
+  for (var i = 0; i < cookies.length; i++) {
+    var cookie = cookies[i].split('=');
+    var name = cookie[0];
+    var value = cookie[1] || true;
     if (name == 'auth') return value;
   }
 
