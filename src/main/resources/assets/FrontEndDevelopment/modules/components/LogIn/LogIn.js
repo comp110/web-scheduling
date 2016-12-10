@@ -19,6 +19,9 @@ var LogIn = React.createClass({
         var basicAuthHash = btoa(user.username + ":" + user.password);
         document.cookie = "auth=" + basicAuthHash;
 
+        // Remove authorization classes
+        $('body').removeClass('authorized-la authorized-admin');
+
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -31,7 +34,12 @@ var LogIn = React.createClass({
             url: '/api/protected',
             dataType: 'text',
             success: function(response) {
-                alert('todo: show appropriate new buttons and such, hide login button');
+                // Set admin based on response
+                var admin = false;
+                alert('response needs to indicate whether logged in user is admin or LA');
+
+                $('body').addClass('authorized-la');
+                if (admin) $('body').addClass('authorized-admin');
             },
             error: function(response) {
                 alert('Invalid username/password!');

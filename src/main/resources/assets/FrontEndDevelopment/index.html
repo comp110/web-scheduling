@@ -255,11 +255,26 @@ $(document).ready(function() {
     margin: 0 auto;
 }
 
+#filter {
+  font-size:0.7rem;
+}
+
 body {
   padding-top: 20px;
   padding-bottom: 40px;
 
 }
+
+body:not(.authorized-admin) .view-admin {
+  display: none;
+}
+
+body:not(.authorized-la) .view-la {
+  display: none;
+}
+
+
+
             //Log IN CSS
 
 .wrapper {
@@ -345,7 +360,7 @@ tr {
 <div id="wrapper" style="visibility: hidden">
 		<div id="filter">
 			Filter: <input id="filter_input">
-			<button onclick="runKarenBot()">Generate Schedule</button>
+			<button onclick="runKarenBot()" class="view-admin">Generate Schedule</button>
 		</div>
 		<div  id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100%;'>
 			<div class="dhx_cal_navline">
