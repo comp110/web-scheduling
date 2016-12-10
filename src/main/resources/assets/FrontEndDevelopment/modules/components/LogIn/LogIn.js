@@ -41,7 +41,14 @@ var LogIn = React.createClass({
                 });
             },
             error: function(response) {
-                alert('Invalid username/password!');
+                    // Get the snackbar DIV
+                    var x = document.getElementById("snackbar")
+
+                    // Add the "show" class to DIV
+                    x.className = "show";
+
+                    // After 3 seconds, remove the show class from DIV
+                    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
             }
         });
 
@@ -61,6 +68,7 @@ var LogIn = React.createClass({
                     }}>
                         <AddUser setUser={this.handleSetUser}/>
                     </div>
+                    <div id="snackbar">Invalid Username/Password!</div>
                </div>);
    }
 });
