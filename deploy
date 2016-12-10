@@ -19,10 +19,3 @@ mvn clean package
 
 # Move node_modules back
 mv node_modules src/main/resources/assets/FrontEndDevelopment/node_modules
-
-# Exit on error
-set -e
-
-# Reset database
-java -jar target/dropwizard-example-1.1.0-SNAPSHOT.jar db drop-all --confirm-delete-everything example.yml
-java -jar target/dropwizard-example-1.1.0-SNAPSHOT.jar db migrate example.yml

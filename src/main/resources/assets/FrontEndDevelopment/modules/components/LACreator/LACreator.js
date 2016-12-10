@@ -6,7 +6,7 @@ var LACreator = React.createClass({
     getInitialState: function(){
         return {
             LAs: createStore.getLAs(),
-            role:  "lA",
+            role:  "la",
             gender: "female",
             experience: 2,
             hoursCapacity: 1
@@ -24,7 +24,7 @@ var LACreator = React.createClass({
             password: this.refs.password.value,
             role: this.refs.role.value,
             gender: this.refs.gender.value,
-            experience: this.refs.experience.value,
+            experienceLevel: this.refs.experience.value,
             hoursCapacity: this.refs.hoursCapacity.value
         };
 
@@ -46,17 +46,19 @@ var LACreator = React.createClass({
             this.setState({created:true});
         else
             this.setState({created:false});
-        
+
         this.refs.username.value='';
         this.refs.password.value='';
         console.log("State",this.state);
+
+        e.preventDefault();
     },
     handleChange: function(event){
         this.setState({role: this.refs.role.value});
         this.setState({gender: this.refs.gender.value});
         this.setState({experience: this.refs.experience.value});
         this.setState({hoursCapacity: this.refs.hoursCapacity.value});
-        
+
     },
     _onChange: function(){
         this.setState({
@@ -120,13 +122,13 @@ var LACreator = React.createClass({
                         <label  className="sr-only">Password</label>
                         <input style={{margin:0}} ref="password" type="password" className="form-control" placeholder="Password"/>
                         <label  className="sr-only">Role</label>
-                        <select  ref="role" style={{height: 40}} value={this.state.role} onChange={this.handleRoleChange} className="form-control">
-                            <option value="ADMIN">ADMIN</option>
-                            <option value="LA">LA</option>
+                        <select  ref="role" style={{height: 40}} value={this.state.role} className="form-control">
+                            <option value="admin">Admin</option>
+                            <option value="la">LA</option>
                         </select>
                         <select  ref="gender" style={{height: 40}} value={this.state.gender} className="form-control">
+                            <option value="male">non-female</option>
                             <option value="female">female</option>
-                            <option value="non female">non female</option>
                         </select>
                         <select  ref="experience" style={{height: 40}} value={this.state.experience} className="form-control">
                             <option value={1}>1</option>

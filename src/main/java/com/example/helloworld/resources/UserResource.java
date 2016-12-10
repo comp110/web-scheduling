@@ -33,7 +33,7 @@ public class UserResource {
     public UserResource(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
- 
+
     @POST
     @UnitOfWork
    @RolesAllowed("ADMIN")
@@ -41,12 +41,12 @@ public class UserResource {
             userDAO.create(person);
             return person;
     }
-   
+
     @GET
-   @RolesAllowed("ADMIN")
+   @RolesAllowed("BASIC_GUY")
     @UnitOfWork
     public List<User2> listUser(@Auth User user) {
         return userDAO.findAll();
-    }   
+    }
 
 }

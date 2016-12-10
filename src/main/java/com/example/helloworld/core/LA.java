@@ -29,28 +29,28 @@ public class LA {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-  
+
     @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "weekstartdate", nullable = false)
     private String weekstartdate;
-   
+
     @Column(name = "day", nullable = false)
     private String day;
-    
+
     @Column(name = "start", nullable = false)
     private int start;
-  
+
     @Column(name = "end", nullable = false)
     private int end;
-   
+
     @Column(name = "gender", nullable = false)
     private String gender;
-    
+
     @Column(name = "experiencelevel", nullable = false)
     private int experiencelevel;
-    
+
     @Column(name = "hourscapacity", nullable = false)
     private int hourscapacity;
 
@@ -131,7 +131,7 @@ public class LA {
         this.end = end;
     }
 
-    public String toString() { 
+    public String toString() {
      return "{" + "\"id\":" + getId() + ",\"name\":" + "\"" + this.name +  "\""+",\"day\":" + "\"" + this.day +  "\""+",\"start\":" + this.start  +",\"end\":"  + this.end +",\"gender\":"+"\"" +this.gender +"\""+",\"weekStartDate\":" + "\"" + this.weekstartdate +  "\"" + ",\"hoursCapacity\":" +  this.hourscapacity + ",\"experienceLevel\":" + this.experiencelevel +"}";
-    } 
+    }
 }

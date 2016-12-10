@@ -56,14 +56,8 @@ function getLoggedInUserProfile(callback) {
     success: function(response) {
         var profile = null;
         for (var i = 0; i < response.length; i++) {
-          var user = response[i];
-          if (btoa(user.name + ":" + user.password) == basicAuthHash) {
-            profile = {
-              name: user.name,
-              gender: user.gender,
-              experienceLevel: user.experienceLevel,
-              hoursCapacity: user.hoursCapacity
-            }
+          profile = response[i];
+          if (btoa(profile.name + ":" + profile.password) == basicAuthHash) {
             break;
           }
         }
@@ -216,6 +210,7 @@ function renderAllSchedules(name_filter) {
     console.log(i);
     var weekStartDate = weekStartDates[i];
     var week = ALL_SCHEDULES[weekStartDate];
+    console.log(week)
     renderWeekSchedule(week, weekStartDate, name_filter);
   }
 }
@@ -255,7 +250,7 @@ function refreshSchedule() {
 		    },
 		    type: 'GET',
 		    url: '/api/schedule/'+ date,
-		    dataType: 'text',
+		    dataType: 'json',
 		      success: function(data) {
 		     console.log(data);
 		    buildSchedulesFromDatabaseJSON(data);

@@ -26,7 +26,7 @@ public class User2  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+
     @Column(name = "name", nullable = false)
     private  String name;
     @Column(name = "role", nullable = false)
@@ -34,34 +34,22 @@ public class User2  {
     @Column(name = "password", nullable = false)
     private  String password;
 
-    @Column(name = "day", nullable = false)
-    private String day;
-    
-    @Column(name = "start", nullable = false)
-    private int start;
-  
-    @Column(name = "end", nullable = false)
-    private int end;
-   
     @Column(name = "gender", nullable = false)
     private String gender;
-    
-    @Column(name = "experiencelevel", nullable = false)
+
+    @Column(name = "experienceLevel", nullable = false)
     private int experiencelevel;
-    
-    @Column(name = "hourscapacity", nullable = false)
+
+    @Column(name = "hoursCapacity", nullable = false)
     private int hourscapacity;
 
     public User2(){
 
     }
-    public User2(String name, String role,String password,String day, int start, int end, String gender, int experiencelevel, int hourscapacity) {
+    public User2(String name, String role,String password,String gender, int experiencelevel, int hourscapacity) {
         this.name = name;
         this.role = role;
         this.password = password;
-        this.day= day;
-    this.end = end;
-    this.start = start;
     this.gender = gender;
     this.experiencelevel = experiencelevel;
     this.hourscapacity = hourscapacity;
@@ -113,29 +101,5 @@ public class User2  {
     }
     public void setExperienceLevel(int experiencelevel){
         this.experiencelevel= experiencelevel;
-    }
-  
-    public String getDay() {
-        return day;
-    }
-
-    public void setDay(String day) {
-        this.day = day;
-    }
-
-    public int getStart() {
-        return start;
-    }
-
-    public void setStart(int start) {
-        this.start = start;
-    }
-
-    public int getEnd() {
-        return end;
-    }
-
-    public void setEnd(int end) {
-        this.end = end;
     }
 }

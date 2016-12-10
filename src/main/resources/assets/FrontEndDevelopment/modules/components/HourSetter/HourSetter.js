@@ -122,7 +122,7 @@ var HourSetterTable = React.createClass({
         workhoursActions.setWorkHour({hour:i,day: j});
     },
     handleClick : function(){
-        var profile = getLoggedInUserProfile(function(profile) {
+        getLoggedInUserProfile(function(profile) {
             userActions.setProfile(profile);
             var shifts = workhoursStore.getWorkableShifts();
             var basicAuthHash = getBasicAuthHash();

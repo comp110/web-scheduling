@@ -34,16 +34,15 @@ var LogIn = React.createClass({
             url: '/api/protected',
             dataType: 'text',
             success: function(response) {
-                // Set admin based on response
-                var admin = false;
-                alert('response needs to indicate whether logged in user is admin or LA');
-
-                // Display appropriate page elements
-                $('body').addClass('authorized-la');
-                if (admin) $('body').addClass('authorized-admin');
-
                 // Go back to calendar view
                 window.location = '/#/';
+
+                // Display appropriate page elements
+                getLoggedInUserProfile(function(profile) {
+                    var admin = profile.role == 'admin';
+                    $('body').addClass('authorized-la');
+                    if (admin) $('body').addClass('authorized-admin');
+                });
             },
             error: function(response) {
                 alert('Invalid username/password!');
