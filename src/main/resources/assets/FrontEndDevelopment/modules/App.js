@@ -28,6 +28,9 @@ export default React.createClass({
                 <li className="nav-item">
                     <NavLink className="nav-link view-admin" to="/create">Create New LA</NavLink>
                 </li>
+                <li className="nav-item">
+                    <NavLink className="nav-link view-la" to="/" onClick={logout}>Logout</NavLink>
+                </li>
             </ul>
         </nav>
                     {this.props.children}

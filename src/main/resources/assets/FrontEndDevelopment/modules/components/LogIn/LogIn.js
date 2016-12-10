@@ -24,10 +24,6 @@ var LogIn = React.createClass({
 
         $.ajax({
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            headers: {
                 "Authorization": "BasicNoAuthPrompt " + basicAuthHash
             },
             type: 'GET',

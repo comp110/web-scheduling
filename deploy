@@ -19,3 +19,6 @@ mvn clean package
 
 # Move node_modules back
 mv node_modules src/main/resources/assets/FrontEndDevelopment/node_modules
+
+# Migrate database
+java -jar target/dropwizard-example-1.1.0-SNAPSHOT.jar db migrate example.yml
