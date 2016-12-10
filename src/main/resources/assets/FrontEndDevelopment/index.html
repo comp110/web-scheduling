@@ -37,6 +37,11 @@ function getNextSundayDate() {
   return new Date(today.getTime() + days * 24 * 60 * 60 * 1000);
 }
 
+function getNextWeekEndDate() {
+  var days = 6;
+  return new Date(getNextSundayDate().getTime() + days * 24 * 60 * 60 * 1000);
+}
+
 function getLoggedInUserProfile(callback) {
   var basicAuthHash = getBasicAuthHash();
   $.ajax({
@@ -287,6 +292,19 @@ $(document).ready(function() {
     width: 90%;
     height: 80%;
     margin: 0 auto;
+}
+
+#hoursetter {
+  float: none;
+}
+
+#hoursetter p {
+  text-align: center;
+}
+
+#hoursetter table, #hoursetter button {
+  margin: 0 auto;
+  width: 100%;
 }
 
 #filter {

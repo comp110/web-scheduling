@@ -147,8 +147,9 @@ var HourSetterTable = React.createClass({
     },
     render: function(){
         return(
-            <div className="col-md-12">
-
+            <div id="hoursetter" className="col-md-12">
+                        <p>Please enter your hours for {getNextSundayDate().toLocaleDateString()}
+                        - {getNextWeekEndDate().toLocaleDateString()}</p>
                         <table>
                             <thead>
                                 <th>Sun  </th>
