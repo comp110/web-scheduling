@@ -57,6 +57,7 @@ public class PersonResource {
     public void delete(@PathParam("personId") LongParam personId,@Auth User user) {
     	 peopleDAO.delete(findSafely(personId.get()));
     }
+    
     @GET
     @Path("/view_freemarker")
     @UnitOfWork
