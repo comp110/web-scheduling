@@ -149,7 +149,7 @@ var WeekSetterDataPreview = React.createClass({
         return {
             borderStyle: 'solid',
             fontSize: 20,
-            height: 523,
+            height: 393,
             marginTop: 18,
             width: '20%',
             textAlign: 'center',
@@ -189,8 +189,8 @@ var WeekSetterTableData = React.createClass({
     getInitialState: function(){
         return {
             borderStyle: 'solid',
-            fontSize: 10,
-            height: 40,
+            fontSize: 14,
+            height: 30,
             width: 50,
             textAlign: 'center',
             backgroundColor:'#00bcec',
@@ -212,10 +212,9 @@ var WeekSetterTableData = React.createClass({
     render: function(){
         return(
                      <td onClick={()=>this.handleClick(this.props)} style = {this.state}>
-                        {hourMap[this.props.hour]}
-                        <br></br>
-                        <br></br>
-                        Workers: {this.props.numObj[this.props.hour][this.props.day].numPeople}
+                        <span style={{color: this.props.numObj[this.props.hour][this.props.day].numPeople == 0 ? 'black' : 'white'}}>
+                            {hourMap[this.props.hour]}: {this.props.numObj[this.props.hour][this.props.day].numPeople}
+                        </span>
                     </td>
         );
     }
@@ -306,6 +305,8 @@ var WeekSetterTable = React.createClass({
     render: function(){
         return(
             <div>
+            <p style={{textAlign: 'center'}}>Please set the master schedule for {getNextSundayDate().toLocaleDateString()}
+            - {getNextWeekEndDate().toLocaleDateString()}</p>
             <WeekSetterDataPreview dataObj={this.state.current_data} dataObj2={this.state.num_people} handleSubtract={this.handleSubtract} handleAdd={this.handleAdd} style={{float:"left"}}/>
                 <div style={{width: '80%'}}>
                 <table style={{width: '100%'}}>
