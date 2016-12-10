@@ -174,6 +174,8 @@ var WeekSetterDataPreview = React.createClass({
             {hourMap[this.props.dataObj.hour]}
             <br></br>
             <br></br>
+            Workers:
+            <br></br>
             <button style={{margin: 'auto 1rem', color: 'black'}} onClick={()=>this.props.handleSubtract(this.props.dataObj.hour,this.props.dataObj.day)}>-</button>
             {this.props.dataObj2[this.props.dataObj.hour][this.props.dataObj.day].numPeople}
             <button style={{margin: 'auto 1rem', color: 'black'}} onClick={()=>this.props.handleAdd(this.props.dataObj.hour,this.props.dataObj.day)}> + </button>
@@ -210,11 +212,10 @@ var WeekSetterTableData = React.createClass({
     render: function(){
         return(
                      <td onClick={()=>this.handleClick(this.props)} style = {this.state}>
-                        {dayMap[this.props.day]}
-                        <br></br>
                         {hourMap[this.props.hour]}
                         <br></br>
-                        {this.props.numObj[this.props.hour][this.props.day].numPeople}
+                        <br></br>
+                        Workers: {this.props.numObj[this.props.hour][this.props.day].numPeople}
                     </td>
         );
     }
