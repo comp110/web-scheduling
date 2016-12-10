@@ -32,13 +32,11 @@ public class MasterResourceDelete {
     public MasterResourceDelete(MasterDAO peopleDAO) {
         this.peopleDAO = peopleDAO;
     }
-    
+
     @DELETE
     @UnitOfWork
     public void delete(@PathParam("personId") LongParam personId, @Auth User user) {
          peopleDAO.delete(findSafely(personId.get()));
     }
     
-
-
 }
