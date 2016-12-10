@@ -256,7 +256,6 @@ function refreshSchedule() {
 		      'Accept': 'application/json',
 		      'Content-Type': 'application/json'
 		    },
-        cache: false,
 		    type: 'GET',
 		    url: '/api/schedule/'+ date,
 		    dataType: 'json',
@@ -326,11 +325,11 @@ body.authorized-la .view-unauth-only, body.authorized-admin .view-unauth-only {
 }
 
 body:not(.authorized-admin) .view-admin {
-  //display: none;
+  display: none;
 }
 
 body:not(.authorized-la) .view-la {
-  //display: none;
+  display: none;
 }
 
 
