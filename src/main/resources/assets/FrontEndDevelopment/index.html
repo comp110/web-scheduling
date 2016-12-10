@@ -265,6 +265,10 @@ body {
 
 }
 
+body.authorized-la .view-unauth-only, body.authorized-admin .view-unauth-only {
+  display: none;
+}
+
 body:not(.authorized-admin) .view-admin {
   display: none;
 }

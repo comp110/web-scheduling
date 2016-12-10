@@ -17,16 +17,16 @@ export default React.createClass({
                     <NavLink className="nav-link" to="/" onlyActiveOnIndex>Calendar</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="/login" >Log In</NavLink>
+                    <NavLink className="nav-link view-unauth-only" to="/login" >Log In</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="/hourset">HourSet</NavLink>
+                    <NavLink className="nav-link view-la" to="/hourset">HourSet</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="/weekset">WeekSet</NavLink>
+                    <NavLink className="nav-link view-admin" to="/weekset">WeekSet</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="/create">Create New LA</NavLink>
+                    <NavLink className="nav-link view-admin" to="/create">Create New LA</NavLink>
                 </li>
             </ul>
         </nav>
