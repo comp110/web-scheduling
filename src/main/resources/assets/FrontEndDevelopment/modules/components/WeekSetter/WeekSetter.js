@@ -149,12 +149,14 @@ var WeekSetterDataPreview = React.createClass({
         return {
             borderStyle: 'solid',
             fontSize: 20,
-            height: 400,
-            width: 500,
+            height: 523,
+            marginTop: 18,
+            width: '20%',
             textAlign: 'center',
-            backgroundColor:'aqua',
-            color: 'black',
-            float: 'right'
+            background:'linear-gradient(to bottom,#3c3c3c 0,#222 100%)',
+            color: 'white',
+            float: 'right',
+            border: 'solid black 2px'
         };
     },
     handleClick: function(){
@@ -165,17 +167,16 @@ var WeekSetterDataPreview = React.createClass({
    render: function(){
        return (
         <div style={this.state}>
-           WorkSetterDataPreview
-           <br></br>
-           Day: {dayMap[this.props.dataObj.day]}
             <br></br>
-            Hour: {hourMap[this.props.dataObj.hour]}
-           <br></br>
-           <button onClick={()=>this.props.handleSubtract(this.props.dataObj.hour,this.props.dataObj.day)}>-</button>
-            Number: {this.props.dataObj2[this.props.dataObj.hour][this.props.dataObj.day].numPeople}
-           <button onClick={()=>this.props.handleAdd(this.props.dataObj.hour,this.props.dataObj.day)}> + </button>
-            <button onClick={this.handleClick}>Check</button>
-            <h5>Week_Start_Date: {getNextSundayDate().toLocaleDateString()}</h5>
+            {dayMap[this.props.dataObj.day]}
+            <br></br>
+            <br></br>
+            {hourMap[this.props.dataObj.hour]}
+            <br></br>
+            <br></br>
+            <button style={{margin: 'auto 1rem', color: 'black'}} onClick={()=>this.props.handleSubtract(this.props.dataObj.hour,this.props.dataObj.day)}>-</button>
+            {this.props.dataObj2[this.props.dataObj.hour][this.props.dataObj.day].numPeople}
+            <button style={{margin: 'auto 1rem', color: 'black'}} onClick={()=>this.props.handleAdd(this.props.dataObj.hour,this.props.dataObj.day)}> + </button>
         </div>
        );
    }
@@ -297,8 +298,8 @@ var WeekSetterTable = React.createClass({
         return(
             <div>
             <WeekSetterDataPreview dataObj={this.state.current_data} dataObj2={this.state.num_people} handleSubtract={this.handleSubtract} handleAdd={this.handleAdd} style={{float:"left"}}/>
-                <div>
-                <table>
+                <div style={{width: '80%'}}>
+                <table style={{width: '100%'}}>
                     <thead>
                         <th>Sun  </th>
                         <th>Mon  </th>
@@ -334,14 +335,7 @@ var WeekSetterTable = React.createClass({
                     <WeekSetterRow handleSubtract={this.handleSubtract} handleAdd={this.handleAdd} handleClick={this.handleTDClick} hour={20} numObj={this.state.num_people} />
                 </table>
                 </div>
-                <button style={{backgroundColor: '#4CAF50',
-                                color: 'white',
-                                width: 100,
-                                textAlign: 'center',
-                                textDecoration: 'none',
-                                display: 'inline-block',
-                                fontSize: 16,
-                                float: 'right'}} id= "button" onClick={this.handleClick}>Submit</button>
+                <button style={{width: '100%'}} onClick={this.handleClick}>Submit</button>
             </div>
         );
     }
