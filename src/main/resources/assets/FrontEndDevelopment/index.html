@@ -37,6 +37,40 @@ function getNextSundayDate() {
   return new Date(today.getTime() + days * 24 * 60 * 60 * 1000);
 }
 
+function getLoggedInUserProfile(callback) {
+  var basicAuthHash = getBasicAuthHash();
+  $.ajax({
+    headers: {
+        "Authorization": "BasicNoAuthPrompt " + basicAuthHash,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+    },
+    type: 'GET',
+    url: '/api/userDatabase',
+    dataType: 'json',
+    success: function(response) {
+        var profile = null;
+        for (var i = 0; i < response.length; i++) {
+          var user = response[i];
+          if (btoa(user.name + ":" + user.password) == basicAuthHash) {
+            profile = {
+              name: user.name,
+              gender: user.gender,
+              experienceLevel: user.experienceLevel,
+              hoursCapacity: user.hoursCapacity
+            }
+            break;
+          }
+        }
+
+        callback(profile);
+    },
+    error: function(response) {
+        alert('Unable to access /api/userDatabase!');
+    }
+  });
+}
+
 function getBasicAuthHash() {
   // Get hash cookie
   var cookies = document.cookie.split('; ');

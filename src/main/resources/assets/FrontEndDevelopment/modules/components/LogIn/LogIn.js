@@ -28,8 +28,8 @@ var LogIn = React.createClass({
                 'Content-Type': 'application/json'
             },
             headers: {
-        "Authorization": "BasicNoAuthPrompt " + basicAuthHash
-      },
+                "Authorization": "BasicNoAuthPrompt " + basicAuthHash
+            },
             type: 'GET',
             url: '/api/protected',
             dataType: 'text',
@@ -38,6 +38,7 @@ var LogIn = React.createClass({
                 var admin = false;
                 alert('response needs to indicate whether logged in user is admin or LA');
 
+                // Display appropriate page elements
                 $('body').addClass('authorized-la');
                 if (admin) $('body').addClass('authorized-admin');
 

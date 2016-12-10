@@ -122,25 +122,23 @@ var HourSetterTable = React.createClass({
         workhoursActions.setWorkHour({hour:i,day: j});
     },
     handleClick : function(){
-        var profile = {
-            name: Profile.name,
-            gender: Profile.gender,
-            experience: Profile.experience_level,
-            hoursCapacity: Profile.hours_capacity
-
-        };
-        userActions.setProfile(profile);
-        var shifts = workhoursStore.getWorkableShifts();
-        var basicAuthHash = getBasicAuthHash();
-        var reduced_shifts = JSON.stringify(shifts);
+        var profile = getLoggedInUserProfile(function(profile) {
+            userActions.setProfile(profile);
+            var shifts = workhoursStore.getWorkableShifts();
+            var basicAuthHash = getBasicAuthHash();
+            console.log(shifts);
+            var reduced_shifts = JSON.stringify(shifts);
             var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function(){};
-                xhttp.open("POST", "/api/hoursetter",true);
-                xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                xhttp.setRequestHeader("Authorization", "BasicNoAuthPrompt " + basicAuthHash);
-                xhttp.send(reduced_shifts);
-                console.log(reduced_shifts);
-        },
+            xhttp.onreadystatechange = function(){};
+            xhttp.open("POST", "/api/hoursetter",true);
+            xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhttp.setRequestHeader("Authorization", "BasicNoAuthPrompt " + basicAuthHash);
+            xhttp.send(reduced_shifts);
+            console.log(reduced_shifts);
+        });
+
+
+    },
     _onProfileChange: function(){
         this.setState({profile: userStore.getProfile()});
     },
@@ -149,8 +147,8 @@ var HourSetterTable = React.createClass({
     },
     render: function(){
         return(
-            <div className="col-md-12">                    
-                    
+            <div className="col-md-12">
+
                         <table>
                             <thead>
                                 <th>Sun  </th>
@@ -175,8 +173,8 @@ var HourSetterTable = React.createClass({
                             <HourSetterRow handleClick={this.handleTDClick} hour={20} />
                         </table>
                         <button  onClick={this.handleClick}>Submit</button>
-                    
-                
+
+
             </div>
         );
     }
