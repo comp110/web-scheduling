@@ -51,7 +51,7 @@ var createWorkableShifts = function(){
             } else if(start_time!=-1 && (checkAvailability(i,j)==true && checkAvailability(i+1,j)==false)){
                 end_time=i+1;
                 workable_shifts.push({
-                    "name": _store.profile.username,
+                    "name": _store.profile.name,
                     "gender": _store.profile.gender,
                     "experienceLevel": _store.profile.experience,
                     "hoursCapacity": _store.profile.hoursCapacity,
@@ -65,7 +65,7 @@ var createWorkableShifts = function(){
             } else if(start_time!=-1 && (checkAvailability(i,j)==false && checkAvailability(i-1,j)==true)){
                 end_time=i;
                 workable_shifts.push({
-                    "name": _store.profile.username,
+                    "name": _store.profile.name,
                     "gender": _store.profile.gender,
                     "experienceLevel": _store.profile.experience,
                     "hoursCapacity": _store.profile.hoursCapacity,

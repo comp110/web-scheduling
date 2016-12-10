@@ -6,8 +6,10 @@ var LACreator = React.createClass({
     getInitialState: function(){
         return {
             LAs: createStore.getLAs(),
-            role:  "LA",
-            created: false
+            role:  "lA",
+            gender: "female",
+            experience: 2,
+            hoursCapacity: 1
         };
     },
     componentDidMount: function(){
@@ -20,13 +22,15 @@ var LACreator = React.createClass({
         var LA = {
             name: this.refs.username.value,
             password: this.refs.password.value,
-            role: this.refs.role.value
-
+            role: this.refs.role.value,
+            gender: this.refs.gender.value,
+            experience: this.refs.experience.value,
+            hoursCapacity: this.refs.hoursCapacity.value
         };
 
         var jsonLA = JSON.stringify(LA);
         var basicAuthHash = getBasicAuthHash();
-        console.log(jsonLA);
+        console.log("JSON for post",jsonLA);
 
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -42,14 +46,17 @@ var LACreator = React.createClass({
             this.setState({created:true});
         else
             this.setState({created:false});
-
-        this._onChange();
-        this.refs.username.value = '';
-        this.refs.password.value = '';
-        this.refs.role.value='';
+        
+        this.refs.username.value='';
+        this.refs.password.value='';
+        console.log("State",this.state);
     },
-    handleRoleChange: function(event){
-        this.setState({role: event.target.value});
+    handleChange: function(event){
+        this.setState({role: this.refs.role.value});
+        this.setState({gender: this.refs.gender.value});
+        this.setState({experience: this.refs.experience.value});
+        this.setState({hoursCapacity: this.refs.hoursCapacity.value});
+        
     },
     _onChange: function(){
         this.setState({
@@ -69,9 +76,30 @@ var LACreator = React.createClass({
                     <label  className="sr-only">Password</label>
                     <input style={{margin:0}} ref="password" type="password" className="form-control" placeholder="Password"/>
                     <label  className="sr-only">Role</label>
-                    <select  ref="role" style={{height: 40}} value={this.state.role} onChange={this.handleRoleChange} className="form-control">
-                        <option value="ADMIN">ADMIN</option>
-                        <option value="LA">LA</option>
+                    <select  ref="role" style={{height: 40}} value={this.state.role} onChange={this.handleChange} className="form-control">
+                        <option value="admin">admin</option>
+                        <option value="la">la</option>
+                    </select>
+                    <select  ref="gender" style={{height: 40}} value={this.state.gender} onChange={this.handleChange} className="form-control">
+                        <option value="female">female</option>
+                        <option value="non female">non female</option>
+                    </select>
+                    <select  ref="experience" style={{height: 40}} onChange={this.handleChange} value={this.state.experience} className="form-control">
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                        <option value={3}>3</option>
+                    </select>
+                    <select  ref="hoursCapacity" style={{height: 40}} onChange={this.handleChange} value={this.state.hoursCapacity} className="form-control">
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                        <option value={3}>3</option>
+                        <option value={4}>4</option>
+                        <option value={5}>5</option>
+                        <option value={6}>6</option>
+                        <option value={7}>7</option>
+                        <option value={8}>8</option>
+                        <option value={9}>9</option>
+                        <option value={10}>10</option>
                     </select>
 
                    <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleUserCreation}>Submit</button>
@@ -87,17 +115,38 @@ var LACreator = React.createClass({
                         }}>
                    <form className="form-signin">
                         <h2 className="form-signin-heading" style={{color:"white"}}>Create LA</h2>
-                    <label className="sr-only">Username</label>
-                    <input  className="form-control" placeholder="Username" ref="username" type="text" autoFocus={true}/>
-                    <label  className="sr-only">Password</label>
-                    <input style={{margin:0}} ref="password" type="password" className="form-control" placeholder="Password"/>
-                    <label  className="sr-only">Role</label>
-                    <select  ref="role" style={{height: 40}} value={this.state.role} onChange={this.handleRoleChange} className="form-control">
-                        <option value="ADMIN">ADMIN</option>
-                        <option value="LA">LA</option>
-                    </select>
+                        <label className="sr-only">Username</label>
+                        <input  className="form-control" placeholder="Username" ref="username" type="text" autoFocus={true}/>
+                        <label  className="sr-only">Password</label>
+                        <input style={{margin:0}} ref="password" type="password" className="form-control" placeholder="Password"/>
+                        <label  className="sr-only">Role</label>
+                        <select  ref="role" style={{height: 40}} value={this.state.role} onChange={this.handleRoleChange} className="form-control">
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="LA">LA</option>
+                        </select>
+                        <select  ref="gender" style={{height: 40}} value={this.state.gender} className="form-control">
+                            <option value="female">female</option>
+                            <option value="non female">non female</option>
+                        </select>
+                        <select  ref="experience" style={{height: 40}} value={this.state.experience} className="form-control">
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                        </select>
+                        <select  ref="hoursCapacity" style={{height: 40}} value={this.state.hoursCapacity} className="form-control">
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                            <option value={5}>5</option>
+                            <option value={6}>6</option>
+                            <option value={7}>7</option>
+                            <option value={8}>8</option>
+                            <option value={9}>9</option>
+                            <option value={10}>10</option>
+                        </select>
 
-                   <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleUserCreation}>Submit</button>
+                        <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleUserCreation}>Submit</button>
                    </form>
                 </div>
             );

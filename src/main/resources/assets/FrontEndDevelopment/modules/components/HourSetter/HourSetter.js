@@ -39,77 +39,7 @@ var dayMap = [
     "Fri",
     "Sat"
 ];
-function initializeWorkHours(){
-    var work_hours =new Array(23);
-    for(var i=0; i<23; i++){
-        work_hours[i] = new Array(6);
-        work_hours[i][0]={"day": "Sun", "isAvailable": false};
-        work_hours[i][1]={"day": "Mon", "isAvailable": false};
-        work_hours[i][2]={"day": "Tue", "isAvailable": false};
-        work_hours[i][3]={"day": "Wed", "isAvailable": false};
-        work_hours[i][4]={"day": "Thu", "isAvailable": false};
-        work_hours[i][5]={"day": "Fri", "isAvailable": false};
 
-    }
-    return work_hours;
-}
-
-function setWorkHour(i,j, work_hours){
-    work_hours[i][j].isAvailable = (checkAvailability(i,j, work_hours))? false: true;
-    return work_hours;
-}
-
-function checkAvailability(i,j,work_hours){
-    return work_hours[i][j].isAvailable;
-}
-function getDay(i,j,work_hours) {
-    return work_hours[i][j].day;
-}
-function createWorkableShifts(work_hours){
-    var start_time = -1;
-    var end_time=0;
-    var workable_shifts = [];
-    for(var j=0; j<6; j++){
-        start_time=-1;
-        end_time=0;
-        for(var i = 0; i<23; i++){
-            if(start_time==-1 && checkAvailability(i,j,work_hours)==true){
-                start_time=i;
-            } else if(start_time!=-1 && (checkAvailability(i,j,work_hours)==true && checkAvailability(i+1,j,work_hours)==false)){
-                end_time=i+1;
-                workable_shifts.push({
-                    "name": Profile.name,
-                    "gender": Profile.gender,
-                    "experienceLevel": Profile.experience_level,
-                    "hoursCapacity": Profile.hours_capacity,
-                    "weekStartDate": Profile.week_start_date,
-                    "day":getDay(i,j,work_hours),
-                    "start":start_time,
-                    "end": end_time
-                });
-                start_time=-1;
-                end_time=0;
-            } else if(start_time!=-1 && (checkAvailability(i,j,work_hours)==false && checkAvailability(i-1,j,work_hours)==true)){
-                end_time=i;
-                workable_shifts.push({
-                    "name": Profile.name,
-                    "gender": Profile.gender,
-                    "experienceLevel": Profile.experience_level,
-                    "hoursCapacity": Profile.hours_capacity,
-                    "weekStartDate": Profile.week_start_date,
-                    "day":getDay(i,j,work_hours),
-                    "start":start_time,
-                    "end": end_time
-                });
-                start_time=-1;
-                end_time=0;
-            }
-        }
-    }
-    return workable_shifts;
-}
-
-var workhours = initializeWorkHours();
 var Profile = {
     "name":"COMP 110 LA",
 	"gender": "male",
@@ -181,9 +111,6 @@ var HourSetterTable = React.createClass({
         };
     },
     componentWillMount(){
-        this.setState({work_hours: workhours});
-        console.log("User Check", this.state.user);
-        console.log("Profile Check", this.state.profile);
         userStore.addChangeListener(this._onProfileChange);
         workhoursStore.addChangeListener(this._onWorkHourChange)
     },
@@ -192,12 +119,17 @@ var HourSetterTable = React.createClass({
         workhoursStore.removeChangeListener(this._onWorkHourChange);
     },
     handleTDClick: function(i, j){
-        //workhours = setWorkHour(i,j, workhours);
-        this.setState({work_hours: workhours});
         workhoursActions.setWorkHour({hour:i,day: j});
     },
     handleClick : function(){
-        //var shifts = createWorkableShifts(this.state.work_hours);
+        var profile = {
+            name: Profile.name,
+            gender: Profile.gender,
+            experience: Profile.experience_level,
+            hoursCapacity: Profile.hours_capacity
+
+        };
+        userActions.setProfile(profile);
         var shifts = workhoursStore.getWorkableShifts();
         var basicAuthHash = getBasicAuthHash();
         var reduced_shifts = JSON.stringify(shifts);
@@ -209,19 +141,6 @@ var HourSetterTable = React.createClass({
                 xhttp.send(reduced_shifts);
                 console.log(reduced_shifts);
         },
-        handleProfileClick: function(){
-            var profile = {
-                gender: this.refs.gender.value,
-            experience: this.refs.experience.value,
-            hoursCapacity: this.refs.hoursCapacity.value
-
-        };
-        userActions.setProfile(profile);
-        this.refs.gender.value = '';
-        this.refs.experience.value = '';
-        this.refs.hoursCapacity.value = '';
-        console.log("User Profile Check", userStore.getUserProfile());
-    },
     _onProfileChange: function(){
         this.setState({profile: userStore.getProfile()});
     },
@@ -230,47 +149,8 @@ var HourSetterTable = React.createClass({
     },
     render: function(){
         return(
-            <div className="col-md-12">
-                <div className="row">
-                    <div className="col-md-6 inline-div profile-div">
-                        <div className="row inner-profile">
-
-                                <h2 className="form-signin-heading" style={{color:"white", alignContent: "center"}}>User Profile</h2>
-                                <form className="form-signin">
-                                    <h5>Name: {this.state.user.username}</h5>
-
-                                    <select  ref="gender" style={{height: 40}} value={this.state.profile.gender} className="form-control">
-                                        <option value="male">male</option>
-                                        <option value="female">female</option>
-                                        <option value="transgender">transgender</option>
-                                        <option value="other">other</option>
-                                    </select>
-                                    <select  ref="experience" style={{height: 40}} value={this.state.profile.experience} className="form-control">
-                                        <option value={1}>1</option>
-                                        <option value={2}>2</option>
-                                        <option value={3}>3</option>
-                                    </select>
-                                    <select  ref="hoursCapacity" style={{height: 40}} value={this.state.profile.hoursCapacity} className="form-control">
-                                        <option value={1}>1</option>
-                                        <option value={2}>2</option>
-                                        <option value={3}>3</option>
-                                        <option value={4}>4</option>
-                                        <option value={5}>5</option>
-                                        <option value={6}>6</option>
-                                        <option value={7}>7</option>
-                                        <option value={8}>8</option>
-                                        <option value={9}>9</option>
-                                        <option value={10}>10</option>
-                                    </select>
-
-                                    <h5>Week_Start_Date: {getNextSundayDate().toLocaleDateString()}</h5>
-                                </form>
-
-
-                            <button type="button" onClick={this.handleProfileClick} className="  col-md-4 offset-md-4 btn btn-primary active">Active Primary</button>
-                        </div>
-                    </div>
-                    <div className="col-md-5 inline-div">
+            <div className="col-md-12">                    
+                    
                         <table>
                             <thead>
                                 <th>Sun  </th>
@@ -294,9 +174,9 @@ var HourSetterTable = React.createClass({
                             <HourSetterRow handleClick={this.handleTDClick} hour={19} />
                             <HourSetterRow handleClick={this.handleTDClick} hour={20} />
                         </table>
-                        <button id= "button" onClick={this.handleClick}>Submit</button>
-                    </div>
-                </div>
+                        <button  onClick={this.handleClick}>Submit</button>
+                    
+                
             </div>
         );
     }
