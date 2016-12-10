@@ -1,13 +1,27 @@
 #!/bin/bash
 
-# Exit on fail
+# Exit on error
 set -e
 
 # Build frontend
-cd src/main/resources/assets/FrontEndDevelopment && gulp default && cd ../../../../..
+cd src/main/resources/assets/FrontEndDevelopment
+gulp default
+cd ../../../../..
+
+# Temporarily disable exit on error
+set +e
+
+# Temporarily move node_modules directory
+mv src/main/resources/assets/FrontEndDevelopment/node_modules node_modules
 
 # Build jar
 mvn clean package
+
+# Move node_modules back
+mv node_modules src/main/resources/assets/FrontEndDevelopment/node_modules
+
+# Exit on error
+set -e
 
 # Reset database
 java -jar target/dropwizard-example-1.1.0-SNAPSHOT.jar db drop-all --confirm-delete-everything example.yml
