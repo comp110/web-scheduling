@@ -6,6 +6,7 @@ import io.dropwizard.hibernate.UnitOfWork;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -38,5 +39,9 @@ public class MasterResourceDelete {
     public void delete(@PathParam("personId") LongParam personId, @Auth User user) {
          peopleDAO.delete(findSafely(personId.get()));
     }
-    
+
+
+    private Master findSafely(long personId) {
+        return peopleDAO.findById(personId).orElseThrow(() -> new NotFoundException("No such user."));
+    }
 }
