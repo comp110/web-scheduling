@@ -40,6 +40,9 @@ var LogIn = React.createClass({
 
                 $('body').addClass('authorized-la');
                 if (admin) $('body').addClass('authorized-admin');
+
+                // Go back to calendar view
+                window.location = '/#/';
             },
             error: function(response) {
                 alert('Invalid username/password!');
