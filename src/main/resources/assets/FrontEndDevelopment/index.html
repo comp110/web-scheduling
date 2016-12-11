@@ -39,6 +39,23 @@ $(document).ready(function() {
   });
 });
 
+function queryEndpoint(endpoint, method, callback, errorCallback) {
+  $.ajax({
+    headers: {
+        "Authorization": "BasicNoAuthPrompt " + getBasicAuthHash()
+    },
+    type: method,
+    url: endpoint,
+    dataType: 'json',
+    success: function(response) {
+        if (callback) callback(response);
+    },
+    error: function(response) {
+      if (errorCallback) errorCallback(response);
+    }
+  });
+}
+
 function databasePeek(endpoint) {
   $.ajax({
     headers: {

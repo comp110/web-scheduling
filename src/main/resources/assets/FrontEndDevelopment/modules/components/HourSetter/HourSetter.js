@@ -55,18 +55,25 @@ var HourSetterTableData = React.createClass({
             borderStyle: 'solid',
             height: 30,
             width: 50,
-            textAlign: 'center',
-            backgroundColor:'#00bcec'
+            textAlign: 'center'
         };
     },
     handleClick: function(props){
-        this.setState({
-            backgroundColor: (this.state.backgroundColor=='#FFB100') ? '#00bcec' : '#FFB100'
-        });
         this.props.handleClick(props.hour, props.day);
     },
     render: function(){
-        if(this.state.backgroundColor=='#00bcec')
+        var available = workhoursStore.checkAvailability(this.props.hour, this.props.day);
+        console.log("available: " + available);
+        var bgcolor = available ? '#FFB100' : '#00bcec';
+        var text = available ? '&#10003' : hourMap[this.props.hour];
+        return (
+            <td onClick={()=>this.handleClick(this.props)} style = {{backgroundColor: bgcolor,
+                borderStyle: 'solid', height: 30, width: 50, textAlign: 'center'}}
+                dangerouslySetInnerHTML={{__html: text}}>
+            </td>
+        )
+
+        /*if(this.state.backgroundColor=='#00bcec')
             return(
                  <td onClick={()=>this.handleClick(this.props)} style = {this.state}>
                     {hourMap[this.props.hour]}
@@ -77,7 +84,7 @@ var HourSetterTableData = React.createClass({
                  <td onClick={()=>this.handleClick(this.props)} style = {this.state}>
                     <div dangerouslySetInnerHTML={{__html: '&#10003'}} />
                 </td>
-            );
+            );*/
     }
 });
 
@@ -148,7 +155,7 @@ var HourSetterTable = React.createClass({
                         for(var i=0;i<data.length;i++){
                             var ID = data[i].id;
                             var weekstartdate = data[i].weekStartDate;
-                            if(weekstartdate == nextdate){
+                            if(weekstartdate == nextdate && data[i].name == profile.name){
                                 //delete to ensure clean hoursetter schedule
                                 $.ajax({
                                     headers: {
