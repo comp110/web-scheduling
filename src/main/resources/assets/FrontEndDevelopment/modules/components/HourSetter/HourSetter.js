@@ -128,6 +128,51 @@ var HourSetterTable = React.createClass({
             var basicAuthHash = getBasicAuthHash();
             console.log(shifts);
             var reduced_shifts = JSON.stringify(shifts);
+
+            var nextdate = getNextSundayDate().toLocaleDateString()
+             //grabs all the data
+          $.ajax({
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+                headers: {
+                  "Authorization": "BasicNoAuthPrompt " + basicAuthHash
+                },
+                    type: 'GET',
+                    url: '/api/hoursetter/',
+                    dataType: 'json',
+                      success: function(data) {
+            
+                        //get the id
+                        for(var i=0;i<data.length;i++){
+                          var ID = data[i].id;
+                         var weekstartdate = data[i].weekStartDate;
+                            if(weekstartdate == nextdate){
+
+
+                            //delete to ensure clean hoursetter schedule
+                             $.ajax({
+                                        headers: {
+                                          'Accept': 'application/json',
+                                          'Content-Type': 'application/json'
+                                        },
+                                            headers: {
+                                              "Authorization": "BasicNoAuthPrompt " + basicAuthHash
+                                            },
+                                                type: 'Delete',
+                                                url: '/api/hoursetter/' + ID,
+                                                dataType: 'json',
+                                                  success: function() {
+                                                 
+                                            
+                                                    
+                                                }
+                                              });
+                                }
+                        }
+                    }
+                  });
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){};
             xhttp.open("POST", "/api/hoursetter",true);

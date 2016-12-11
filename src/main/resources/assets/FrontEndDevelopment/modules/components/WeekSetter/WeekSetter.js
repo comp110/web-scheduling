@@ -314,9 +314,6 @@ var WeekSetterTable = React.createClass({
                                                 url: '/api/master/' + obj,
                                                 dataType: 'json',
                                                   success: function() {
-                                                 
-
-                                                    
                                                 }
                                               });
                         }
