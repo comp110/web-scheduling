@@ -137,8 +137,9 @@ var numpeople = initializeWeek();
 
 function forceRerender() {
     // Hack to force re-render
+    var currentPage = window.location.hash;
     window.location = '/#/';
-    window.location='/#/weekset'
+    window.location = currentPage;
 }
 
 $(document).ready(function() {
