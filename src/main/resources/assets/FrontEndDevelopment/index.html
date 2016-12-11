@@ -137,12 +137,6 @@ function runKarenBot() {
     url: '/api/hoursetter/copytoJson/'+ date,
     dataType: 'text',
       success: function() {
-      /*$.getJSON('/api/master/copytoJson/'+date, function() {
-
-        // Run KarenBot by issuing a GET request to the dropwizard server
-        alert("Schedule successfully generated!");
-        refreshSchedule();
-      });*/
       $.ajax({
 		    headers: {
 		      'Accept': 'application/json',
@@ -156,9 +150,20 @@ function runKarenBot() {
 				    dataType: 'text',
 				      success: function() {
 				        // Run KarenBot by issuing a GET request to the dropwizard server
-				        alert("Schedule successfully generated!");
-				        refreshSchedule();
-
+                   $.ajax({
+                    headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json',
+                      "Authorization": "BasicNoAuthPrompt " + getBasicAuthHash()
+                    },
+                    type: 'GET',
+                    url: '/api/schedule/'+ date,
+                    dataType: 'json',
+                      success: function(data) {
+                        alert("Schedule successfully generated!");
+                        replaceExistingSchedule(data);
+                    }
+                  });
 				    }
 				  });
     }
@@ -273,27 +278,77 @@ function buildSchedulesFromDatabaseJSON(database_json) {
   }
 }
 
+function replaceExistingSchedule(data) {
+  // Get existing week schedule data
+  var postComplete, deleteComplete;
+  $.ajax({
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    type: 'GET',
+    url: '/api/officehours',
+    dataType: 'json',
+    success: function(existing) {
+      //get the id
+      var numDeleted = 0;
+      var nextdate = getNextSundayDate().toLocaleDateString();
+      if (existing.length == 0) deleteComplete = true;
+      for(var i=0;i<existing.length;i++){
+          var ID = existing[i].id;
+          var weekstartdate = existing[i].weekStartDate;
+          if(weekstartdate == nextdate){
+              //delete to ensure clean office hours schedule
+              $.ajax({
+                  headers: {
+                    "Authorization": "BasicNoAuthPrompt " + getBasicAuthHash()
+                  },
+                  type: 'Delete',
+                  url: '/api/officehours/' + ID,
+                  dataType: 'json',
+                  success: function() {
+                    numDeleted++;
+                    if (numDeleted == existing.length) deleteComplete = true;
+                    if (postComplete) refreshSchedule();
+                  }
+              });
+          }
+        }
+
+        // Push generated data to office hours endpoint
+        $.ajax({
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            "Authorization": "BasicNoAuthPrompt " + getBasicAuthHash()
+          },
+          type: 'POST',
+          url: '/api/officehours/',
+          dataType: 'json',
+          data: JSON.stringify(data),
+          success: function(data) {
+            postComplete = true;
+            if (deleteComplete) refreshSchedule();
+          }
+        });
+    }
+  });
+}
+
 function refreshSchedule() {
   // Query database and build schedule
   var date = getNextSundayDate().toLocaleDateString().replace(/\//g, '-');
-  /*$.getJSON('/api/schedule/' + date, function(data) {
-    console.log(data);
-    buildSchedulesFromDatabaseJSON(data);
-    renderAllSchedules();
-  });*/
    $.ajax({
 		    headers: {
 		      'Accept': 'application/json',
 		      'Content-Type': 'application/json'
 		    },
 		    type: 'GET',
-		    url: '/api/schedule/'+ date,
+		    url: '/api/officehours/',
 		    dataType: 'json',
 		      success: function(data) {
-		     console.log(data);
-		    buildSchedulesFromDatabaseJSON(data);
-		    renderAllSchedules();
-
+		        buildSchedulesFromDatabaseJSON(data);
+		        renderAllSchedules();
 		    }
   });
 }
