@@ -35,7 +35,8 @@ $(document).ready(function() {
   // Redirect user to calendar if not logged in
   if (getBasicAuthHash() == null) window.location = '/#/';
   else getLoggedInUserProfile(function(profile) {
-    $('#username').text(profile.name);
+    $('#username').text("Good to see you " +profile.name);
+    $('#username').css("visibility", "visible");
     updateElementsByUserRole(profile.role);
   });
 });
@@ -144,6 +145,7 @@ function logout() {
 
   // Remove username
   $('#username').text('');
+  $('#username').css("visibility", "hidden");
 
   // Delete auth cookie
   document.cookie = 'auth=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -425,6 +427,10 @@ body:not(.authorized-la) .view-la {
   text-align: right;
   min-height: 24px;
   margin: 0;
+  width: 100%;
+  background-color: #3f4144;
+  visibility: hidden;
+  color: white;
 }
 
 .hidden {

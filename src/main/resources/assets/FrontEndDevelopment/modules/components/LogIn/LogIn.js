@@ -34,7 +34,8 @@ var LogIn = React.createClass({
 
             // Display appropriate page elements
             getLoggedInUserProfile(function(profile) {
-                $('#username').text(profile.name);
+                $('#username').text("Good to see you " +profile.name);
+                $('#username').css("visibility", "visible");
                 updateElementsByUserRole(profile.role);
             });
         }, {auth: basicAuthHash}); // Auth override
