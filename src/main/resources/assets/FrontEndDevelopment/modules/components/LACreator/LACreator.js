@@ -53,8 +53,17 @@ var LACreator = React.createClass({
             // After 3 seconds, remove the show class from DIV
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
         }
-        else
+        else {
             this.setState({created:false});
+            // Get the snackbar DIV
+            var x = document.getElementById("snackbar")
+
+            // Add the "show" class to DIV
+            x.className = "show";
+
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
 
         this.refs.username.value='';
         this.refs.password.value='';
@@ -161,6 +170,7 @@ var LACreator = React.createClass({
 
                         <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleUserCreation}>Submit</button>
                    </form>
+                    <div id="snackbar">Failed to Create LA!</div>
                 </div>
             );
         }

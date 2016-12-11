@@ -167,25 +167,36 @@ var HourSetterTable = React.createClass({
 
                         // Post new data
                         var xhttp = new XMLHttpRequest();
-                        xhttp.onreadystatechange = function(){};
+
                         xhttp.open("POST", "/api/hoursetter",true);
                         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                         xhttp.setRequestHeader("Authorization", "BasicNoAuthPrompt " + basicAuthHash);
+
+                        xhttp.onreadystatechange = function(oEvent){
+                            if(xhttp.status === 200 || xhttp.status === 201 || xhttp.status === 204){
+                                // Get the snackbar DIV
+                                var x = document.getElementById("snackbar")
+                                // Add the "show" class to DIV
+                                x.className = "show";
+                                // After 3 seconds, remove the show class from DIV
+                                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                            } else {
+                                // Get the snackbar DIV
+                                var x = document.getElementById("snackbarFailed")
+                                // Add the "show" class to DIV
+                                x.className = "show";
+                                // After 3 seconds, remove the show class from DIV
+                                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                            }
+                        };
+
                         xhttp.send(reduced_shifts);
                         console.log(reduced_shifts);
+                        
                     }
                   });
 
         });
-
-        // Get the snackbar DIV
-        var x = document.getElementById("snackbar")
-
-        // Add the "show" class to DIV
-        x.className = "show";
-
-        // After 3 seconds, remove the show class from DIV
-        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 
 
     },
@@ -237,6 +248,7 @@ var App = React.createClass({
             <div>
                 <HourSetterTable/>
                 <div id="snackbar">Success!</div>
+                <div id="snackbarFailed">Error Submitting, Please Try Again</div>
             </div>
         );
     }
