@@ -39,6 +39,22 @@ $(document).ready(function() {
   });
 });
 
+function databasePeek(endpoint) {
+  $.ajax({
+    headers: {
+      "Authorization": "BasicNoAuthPrompt " + getBasicAuthHash(),
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    type: 'GET',
+    url: endpoint,
+    dataType: 'json',
+    success: function(response) {
+        console.log(response)
+    }
+  });
+}
+
 function updateElementsByUserRole(role) {
   var admin = role == 'admin';
   $('body').addClass('authorized-la');

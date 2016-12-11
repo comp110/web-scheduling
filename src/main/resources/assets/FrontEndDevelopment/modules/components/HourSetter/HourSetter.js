@@ -143,43 +143,41 @@ var HourSetterTable = React.createClass({
                     url: '/api/hoursetter/',
                     dataType: 'json',
                       success: function(data) {
-            
+
                         //get the id
                         for(var i=0;i<data.length;i++){
-                          var ID = data[i].id;
-                         var weekstartdate = data[i].weekStartDate;
+                            var ID = data[i].id;
+                            var weekstartdate = data[i].weekStartDate;
                             if(weekstartdate == nextdate){
-                            //delete to ensure clean hoursetter schedule
-                             $.ajax({
-                                        headers: {
-                                          'Accept': 'application/json',
-                                          'Content-Type': 'application/json'
-                                        },
-                                            headers: {
-                                              "Authorization": "BasicNoAuthPrompt " + basicAuthHash
-                                            },
-                                                type: 'Delete',
-                                                url: '/api/hoursetter/' + ID,
-                                                dataType: 'json',
-                                                  success: function() {
-                                                 
-                                            
-                                                    
-                                                }
-                                              });
-                                }
+                                //delete to ensure clean hoursetter schedule
+                                $.ajax({
+                                    headers: {
+                                        'Accept': 'application/json',
+                                        'Content-Type': 'application/json'
+                                    },
+                                    headers: {
+                                      "Authorization": "BasicNoAuthPrompt " + basicAuthHash
+                                    },
+                                    type: 'Delete',
+                                    url: '/api/hoursetter/' + ID,
+                                    dataType: 'json'
+                                });
+                            }
                         }
+
+                        // Post new data
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function(){};
+                        xhttp.open("POST", "/api/hoursetter",true);
+                        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                        xhttp.setRequestHeader("Authorization", "BasicNoAuthPrompt " + basicAuthHash);
+                        xhttp.send(reduced_shifts);
+                        console.log(reduced_shifts);
                     }
                   });
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function(){};
-            xhttp.open("POST", "/api/hoursetter",true);
-            xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xhttp.setRequestHeader("Authorization", "BasicNoAuthPrompt " + basicAuthHash);
-            xhttp.send(reduced_shifts);
-            console.log(reduced_shifts);
+
         });
-        
+
         // Get the snackbar DIV
         var x = document.getElementById("snackbar")
 
