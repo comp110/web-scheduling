@@ -7,8 +7,8 @@ var LACreator = React.createClass({
         return {
             LAs: createStore.getLAs(),
             role:  "la",
-            gender: "female",
-            experience: 2,
+            gender: "non-female",
+            experience: 1,
             hoursCapacity: 1
         };
     },
@@ -84,7 +84,7 @@ var LACreator = React.createClass({
                     </select>
                     <select  ref="gender" style={{height: 40}} value={this.state.gender} onChange={this.handleChange} className="form-control">
                         <option value="female">female</option>
-                        <option value="non female">non female</option>
+                        <option value="non-female">non-female</option>
                     </select>
                     <select  ref="experience" style={{height: 40}} onChange={this.handleChange} value={this.state.experience} className="form-control">
                         <option value={1}>1</option>
@@ -116,24 +116,27 @@ var LACreator = React.createClass({
                         }}>
                    <form className="form-signin">
                         <h2 className="form-signin-heading" style={{color:"white"}}>Create LA</h2>
-                        <label className="sr-only">Username</label>
+                        <label style={{color: 'white'}}>Username</label>
                         <input  className="form-control" placeholder="Username" ref="username" type="text" autoFocus={true}/>
-                        <label  className="sr-only">Password</label>
+                        <label style={{color: 'white'}}>Password</label>
                         <input style={{margin:0}} ref="password" type="password" className="form-control" placeholder="Password"/>
-                        <label  className="sr-only">Role</label>
+                        <label style={{color: 'white'}}>Role</label>
                         <select  ref="role" style={{height: 40}} value={this.state.role} className="form-control">
                             <option value="admin">Admin</option>
                             <option value="la">LA</option>
                         </select>
+                        <label style={{color: 'white'}}>Gender</label>
                         <select  ref="gender" style={{height: 40}} value={this.state.gender} className="form-control">
                             <option value="male">non-female</option>
                             <option value="female">female</option>
                         </select>
+                        <label style={{color: 'white'}}>Experience Level</label>
                         <select  ref="experience" style={{height: 40}} value={this.state.experience} className="form-control">
-                            <option value={1}>1</option>
-                            <option value={2}>2</option>
-                            <option value={3}>3</option>
+                            <option value={1}>Newbie</option>
+                            <option value={2}>Intermediate</option>
+                            <option value={3}>Advanced</option>
                         </select>
+                        <label style={{color: 'white'}}>Hour Capacity</label>
                         <select  ref="hoursCapacity" style={{height: 40}} value={this.state.hoursCapacity} className="form-control">
                             <option value={1}>1</option>
                             <option value={2}>2</option>
@@ -145,6 +148,11 @@ var LACreator = React.createClass({
                             <option value={8}>8</option>
                             <option value={9}>9</option>
                             <option value={10}>10</option>
+                            <option value={10}>11</option>
+                            <option value={10}>12</option>
+                            <option value={10}>13</option>
+                            <option value={10}>14</option>
+                            <option value={10}>15</option>
                         </select>
 
                         <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleUserCreation}>Submit</button>

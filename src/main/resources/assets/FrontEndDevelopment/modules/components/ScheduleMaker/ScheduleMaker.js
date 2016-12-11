@@ -3,15 +3,11 @@ import React from 'react'
 var ScheduleMaker = React.createClass({
     componentWillMount: function(){
         var calendar = document.getElementById('wrapper');
-        calendar.style.visibility = 'visible';
-        calendar.setAttribute( 'style','visibility: visible');
-        console.log("Mounting: " +calendar.style.visibility);
+        calendar.setAttribute( 'style','display: block');
     },
     componentWillUnmount: function(){
         var calendar = document.getElementById('wrapper');
-        calendar.style.visibility = 'hidden';
-        calendar.setAttribute( 'style','visibility: hidden');
-        console.log("Unmounting: " +calendar.style.visibility);
+        calendar.setAttribute( 'style','display: none');
     },
     render: function(){
         console.log("Rendering");

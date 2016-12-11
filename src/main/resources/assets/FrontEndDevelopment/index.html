@@ -404,7 +404,7 @@ $(document).ready(function() {
 body {
   padding-top: 0px;
   padding-bottom: 40px;
-
+  overflow-y: visible;
 }
 
 body.authorized-la .view-unauth-only, body.authorized-admin .view-unauth-only {
@@ -431,6 +431,14 @@ body:not(.authorized-la) .view-la {
   text-align: right;
   min-height: 24px;
   margin: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
 }
 
             //Log IN CSS

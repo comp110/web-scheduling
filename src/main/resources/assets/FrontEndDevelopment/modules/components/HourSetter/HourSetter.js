@@ -115,17 +115,15 @@ var HourSetterTable = React.createClass({
         workhoursActions.setWorkHour({hour:i,day: j});
     },
     handleClick : function(){
-        getLoggedInUserProfile(function(profile) {
-            userActions.setProfile(profile);
-            var shifts = workhoursStore.getWorkableShifts();
-            var basicAuthHash = getBasicAuthHash();
-            console.log(shifts);
-            var reduced_shifts = JSON.stringify(shifts);
+        //grabs all the data
+        GET('/api/hoursetter', function(data) {
+            getLoggedInUserProfile(function(profile) {
+                userActions.setProfile(profile);
+                var shifts = workhoursStore.getWorkableShifts();
+                var reduced_shifts = JSON.stringify(shifts);
 
-            var nextdate = getNextSundayDate().toLocaleDateString()
-            //grabs all the data
-            GET('/api/hoursetter', function(data) {
                 // Delete old hoursetter data
+                var nextdate = getNextSundayDate().toLocaleDateString()
                 for(var i=0;i<data.length;i++){
                     var ID = data[i].id;
                     var weekstartdate = data[i].weekStartDate;
