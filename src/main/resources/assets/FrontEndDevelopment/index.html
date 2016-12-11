@@ -157,10 +157,6 @@ function getLoggedInUserProfile(callback) {
     var profile = null;
     for (var i = 0; i < response.length; i++) {
       profile = response[i];
-      console.log("Basic auth hash: " + getBasicAuthHash());
-      console.log("Compared to: " + btoa(profile.name + ":" + profile.password))
-      console.log("Checking");
-      console.log(profile);
       if (btoa(profile.name + ":" + profile.password) == getBasicAuthHash()) {
         break;
       }
@@ -303,8 +299,6 @@ function buildSchedulesFromDatabaseJSON(database_json) {
 }
 
 function replaceExistingSchedule(data) {
-  console.log("replacing exiting schedule")
-
   // Get existing week schedule data
   var postComplete, deleteComplete;
   GET('/api/officehours', function(existing) {

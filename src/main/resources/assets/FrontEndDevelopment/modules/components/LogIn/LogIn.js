@@ -21,8 +21,6 @@ var LogIn = React.createClass({
 
         var basicAuthHash = btoa(user.username + ":" + user.password);
 
-        console.log("Loggin in as " + user.username + "; hash= " + basicAuthHash);
-
         // Override authorization in 3rd parameter
         GET('/api/protected', function() {
             // Go back to calendar view
