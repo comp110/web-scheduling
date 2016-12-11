@@ -279,14 +279,55 @@ var WeekSetterTable = React.createClass({
         var basicAuthHash = getBasicAuthHash();
 
         console.log(numpeople);
+
         reduced = JSON.stringify(reduced);
         //reduced = reduced.toString();
         console.log(reduced);
 
+        //grabs all the data
+          $.ajax({
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+                headers: {
+                  "Authorization": "BasicNoAuthPrompt " + basicAuthHash
+                },
+                    type: 'GET',
+                    url: '/api/master/',
+                    dataType: 'json',
+                      success: function(data) {
+            
+                        //get the id
+                        for(var i=0;i<data.length;i++){
+                          var obj = data[i].id;
+                            //delete to ensure clean master schedule
+                             $.ajax({
+                                        headers: {
+                                          'Accept': 'application/json',
+                                          'Content-Type': 'application/json'
+                                        },
+                                            headers: {
+                                              "Authorization": "BasicNoAuthPrompt " + basicAuthHash
+                                            },
+                                                type: 'Delete',
+                                                url: '/api/master/' + obj,
+                                                dataType: 'json',
+                                                  success: function() {
+                                                 
+
+                                                    
+                                                }
+                                              });
+                        }
+                    }
+                  });
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
 
         };
+
+
       xhttp.open("POST", "/api/master", true);
       xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
               xhttp.setRequestHeader("Authorization", "BasicNoAuthPrompt " + basicAuthHash);
