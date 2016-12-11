@@ -157,6 +157,10 @@ function getLoggedInUserProfile(callback) {
     var profile = null;
     for (var i = 0; i < response.length; i++) {
       profile = response[i];
+      console.log("Basic auth hash: " + getBasicAuthHash());
+      console.log("Compared to: " + btoa(profile.name + ":" + profile.password))
+      console.log("Checking");
+      console.log(profile);
       if (btoa(profile.name + ":" + profile.password) == getBasicAuthHash()) {
         break;
       }
@@ -172,7 +176,7 @@ function getBasicAuthHash() {
   for (var i = 0; i < cookies.length; i++) {
     var cookie = cookies[i].split('=');
     var name = cookie[0];
-    var value = cookie[1] || true;
+    var value = cookie[1] ? cookie.slice(1).join('=') : true;
     if (name == 'auth') return value;
   }
 
@@ -181,14 +185,10 @@ function getBasicAuthHash() {
 
 function runKarenBot() {
   var date = getNextSundayDate().toLocaleDateString().replace(/\//g, '-');
-  console.log(date);
   // Copy appropriate JSON files from database
   GET('/api/hoursetter/copytoJson/' + date, function() {
-    console.log("Here?");
     GET('/api/master/copytoJson/' + date, function() {
-      console.log("Here?");
       // Run karebbot
-      console.log("everything good so far");
       GET('/api/schedule/' + date, function(data) {
         replaceExistingSchedule(data);
       });

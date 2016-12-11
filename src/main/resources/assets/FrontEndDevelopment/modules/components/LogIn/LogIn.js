@@ -19,7 +19,9 @@ var LogIn = React.createClass({
         // Remove authorization classes
         $('body').removeClass('authorized-la authorized-admin');
 
-        var basicAuthHash = btoa(user.username + ":" + user.password)
+        var basicAuthHash = btoa(user.username + ":" + user.password);
+
+        console.log("Loggin in as " + user.username + "; hash= " + basicAuthHash);
 
         // Override authorization in 3rd parameter
         GET('/api/protected', function() {
