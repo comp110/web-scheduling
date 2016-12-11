@@ -409,6 +409,7 @@ var App = React.createClass({
             <div>
                 <WeekSetterTable/>
                 <div id="snackbar">Success!</div>
+                <div id="snackbarFailed">Error Submitting, Please Try Again</div>
             </div>
         );
     }
