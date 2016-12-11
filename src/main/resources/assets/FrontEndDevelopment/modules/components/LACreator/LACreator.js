@@ -29,49 +29,29 @@ var LACreator = React.createClass({
         };
 
         var jsonLA = JSON.stringify(LA);
-        var basicAuthHash = getBasicAuthHash();
-        console.log("JSON for post",jsonLA);
 
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-        };
-        xhttp.open("POST", "/api/userDatabase", true);
-        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhttp.setRequestHeader("Authorization", "BasicNoAuthPrompt " + basicAuthHash);
-        xhttp.send(jsonLA);
+        // Create LA (if one with this name does not exist)
+        GET('/api/userDatabase', function(data) {
+            // Check if name exists
+            for (var i = 0; i < data.length; i++) {
+                var user = data[i];
+                console.log("User: ");
+                console.log(user);
+                if (user.name == LA.name) {
+                    snackbarFail('LA with this username already exists!')
+                    return;
+                }
+            }
 
-        createActions.addLA(LA);
-
-        if(this.refs.username.value!='' && this.refs.password.value!='' && this.refs.role.value!='') {
-            this.setState({created:true});
-            // Get the snackbar DIV
-            var x = document.getElementById("snackbar")
-
-            // Add the "show" class to DIV
-            x.className = "show";
-
-            // After 3 seconds, remove the show class from DIV
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-        }
-        else {
-            this.setState({created:false});
-            // Get the snackbar DIV
-            var x = document.getElementById("snackbar")
-
-            // Add the "show" class to DIV
-            x.className = "show";
-
-            // After 3 seconds, remove the show class from DIV
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-        }
-
-        this.refs.username.value='';
-        this.refs.password.value='';
-        console.log("State",this.state);
+            // Create LA
+            POST('/api/userDatabase', jsonLA, function() {
+                snackbarSuccess();
+            });
+        });
 
         e.preventDefault();
-        
-        
+
+
     },
     handleChange: function(event){
         this.setState({role: this.refs.role.value});
@@ -125,7 +105,6 @@ var LACreator = React.createClass({
                     </select>
 
                    <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleUserCreation}>Submit</button>
-                    <div id="snackbar">Success!</div>
                    </form>
 
                 </div>
@@ -170,7 +149,6 @@ var LACreator = React.createClass({
 
                         <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleUserCreation}>Submit</button>
                    </form>
-                    <div id="snackbar">Failed to Create LA!</div>
                 </div>
             );
         }

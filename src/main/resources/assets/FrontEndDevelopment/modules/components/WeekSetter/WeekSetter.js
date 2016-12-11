@@ -144,7 +144,7 @@ function forceRerender() {
 
 $(document).on('loadHours', function() {
     // Set work hours based on hours in database
-    queryEndpoint('/api/master', 'GET', function(data) {
+    GET('/api/master', function(data) {
         var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
         for (var i = 0; i < data.length; i++) {
             var entry = data[i];
@@ -154,7 +154,7 @@ $(document).on('loadHours', function() {
         }
 
         forceRerender();
-    });
+    }, { error: null });
 });
 
 $(document).on('reset', function() {
@@ -301,86 +301,24 @@ var WeekSetterTable = React.createClass({
         this.setState({num_people: numpeople});
     },
     handleClick : function(){
-//        var week = createWorkableShifts(this.state.num_people);
         var reduced = [].concat.apply([], numpeople);
 
         var basicAuthHash = getBasicAuthHash();
 
-        console.log(numpeople);
-
         reduced = JSON.stringify(reduced);
-        //reduced = reduced.toString();
-        console.log(reduced);
 
-        //grabs all the data
-          $.ajax({
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-                headers: {
-                  "Authorization": "BasicNoAuthPrompt " + basicAuthHash
-                },
-                    type: 'GET',
-                    url: '/api/master/',
-                    dataType: 'json',
-                      success: function(data) {
-
-                        //get the id
-                        for(var i=0;i<data.length;i++){
-                          var obj = data[i].id;
-                            //delete to ensure clean master schedule
-                             $.ajax({
-                                        headers: {
-                                          'Accept': 'application/json',
-                                          'Content-Type': 'application/json'
-                                        },
-                                            headers: {
-                                              "Authorization": "BasicNoAuthPrompt " + basicAuthHash
-                                            },
-                                                type: 'Delete',
-                                                url: '/api/master/' + obj,
-                                                dataType: 'json',
-                                                  success: function() {
-                                                }
-                                              });
-                        }
-                    }
-                  });
-        var xhttp = new XMLHttpRequest();
-
-      xhttp.open("POST", "/api/master", true);
-      xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-              xhttp.setRequestHeader("Authorization", "BasicNoAuthPrompt " + basicAuthHash);
-      xhttp.onreadystatechange = function() {
-            if(xhttp.status === 200 || xhttp.status === 201 || xhttp.status === 204){
-                // Get the snackbar DIV
-                var x = document.getElementById("snackbar")
-                // Add the "show" class to DIV
-                x.className = "show";
-                // After 3 seconds, remove the show class from DIV
-                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-            } else {
-                // Get the snackbar DIV
-                var x = document.getElementById("snackbarFailed")
-                // Add the "show" class to DIV
-                x.className = "show";
-                // After 3 seconds, remove the show class from DIV
-                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        GET('/api/master', function(data) {
+            // Delete old data
+            for(var i=0;i<data.length;i++){
+                var obj = data[i].id;
+                DELETE('/api/master/' + obj);
             }
-        };
 
-      xhttp.send(reduced);
-
-        // Get the snackbar DIV
-        var x = document.getElementById("snackbar")
-
-        // Add the "show" class to DIV
-        x.className = "show";
-
-        // After 3 seconds, remove the show class from DIV
-        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-
+            // Send new data
+            POST('/api/master', reduced, function() {
+                snackbarSuccess();
+            });
+        });
     },
     render: function(){
         return(
@@ -436,8 +374,6 @@ var App = React.createClass({
         return(
             <div>
                 <WeekSetterTable/>
-                <div id="snackbar">Success!</div>
-                <div id="snackbarFailed">Error Submitting, Please Try Again</div>
             </div>
         );
     }

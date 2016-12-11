@@ -89,7 +89,7 @@ var _store = {
 
 $(document).on('loadHours', function() {
     // Set work hours based on hours in database
-    queryEndpoint('/api/hoursetter', 'GET', function(data) {
+    GET('/api/hoursetter', function(data) {
         getLoggedInUserProfile(function(profile) {
             var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
             for (var i = 0; i < data.length; i++) {
@@ -102,7 +102,7 @@ $(document).on('loadHours', function() {
             }
             workhoursStore.emit(CHANGE_EVENT);
         });
-    });
+    }, {error: null});
 });
 
 $(document).on('reset', function() {

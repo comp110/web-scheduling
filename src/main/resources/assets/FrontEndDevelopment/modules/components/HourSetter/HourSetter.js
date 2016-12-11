@@ -123,74 +123,23 @@ var HourSetterTable = React.createClass({
             var reduced_shifts = JSON.stringify(shifts);
 
             var nextdate = getNextSundayDate().toLocaleDateString()
-             //grabs all the data
-          $.ajax({
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-                headers: {
-                  "Authorization": "BasicNoAuthPrompt " + basicAuthHash
-                },
-                    type: 'GET',
-                    url: '/api/hoursetter/',
-                    dataType: 'json',
-                      success: function(data) {
-
-                        //get the id
-                        for(var i=0;i<data.length;i++){
-                            var ID = data[i].id;
-                            var weekstartdate = data[i].weekStartDate;
-                            if(weekstartdate == nextdate && data[i].name == profile.name){
-                                //delete to ensure clean hoursetter schedule
-                                $.ajax({
-                                    headers: {
-                                        'Accept': 'application/json',
-                                        'Content-Type': 'application/json'
-                                    },
-                                    headers: {
-                                      "Authorization": "BasicNoAuthPrompt " + basicAuthHash
-                                    },
-                                    type: 'Delete',
-                                    url: '/api/hoursetter/' + ID,
-                                    dataType: 'json'
-                                });
-                            }
-                        }
-
-                        // Post new data
-                        var xhttp = new XMLHttpRequest();
-
-                        xhttp.open("POST", "/api/hoursetter",true);
-                        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                        xhttp.setRequestHeader("Authorization", "BasicNoAuthPrompt " + basicAuthHash);
-
-                        xhttp.onreadystatechange = function(oEvent){
-                            if(xhttp.status === 200 || xhttp.status === 201 || xhttp.status === 204){
-                                // Get the snackbar DIV
-                                var x = document.getElementById("snackbar")
-                                // Add the "show" class to DIV
-                                x.className = "show";
-                                // After 3 seconds, remove the show class from DIV
-                                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-                            } else {
-                                // Get the snackbar DIV
-                                var x = document.getElementById("snackbarFailed")
-                                // Add the "show" class to DIV
-                                x.className = "show";
-                                // After 3 seconds, remove the show class from DIV
-                                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-                            }
-                        };
-
-                        xhttp.send(reduced_shifts);
-                        console.log(reduced_shifts);
-
+            //grabs all the data
+            GET('/api/hoursetter', function(data) {
+                // Delete old hoursetter data
+                for(var i=0;i<data.length;i++){
+                    var ID = data[i].id;
+                    var weekstartdate = data[i].weekStartDate;
+                    if(weekstartdate == nextdate && data[i].name == profile.name){
+                        DELETE('/api/hoursetter/' + ID);
                     }
-                  });
+                }
 
+                // Post new hoursetter data
+                POST('/api/hoursetter', reduced_shifts, function() {
+                    snackbarSuccess();
+                });
+            });
         });
-
 
     },
     _onProfileChange: function(){
@@ -240,8 +189,6 @@ var App = React.createClass({
         return(
             <div>
                 <HourSetterTable/>
-                <div id="snackbar">Success!</div>
-                <div id="snackbarFailed">Error Submitting, Please Try Again</div>
             </div>
         );
     }

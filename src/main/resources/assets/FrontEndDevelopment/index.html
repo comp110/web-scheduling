@@ -40,36 +40,60 @@ $(document).ready(function() {
   });
 });
 
-function queryEndpoint(endpoint, method, callback, errorCallback) {
+function POST(endpoint, data, callback, args) {
+  if (! args) args = {};
   $.ajax({
     headers: {
-        "Authorization": "BasicNoAuthPrompt " + getBasicAuthHash()
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        "Authorization": "BasicNoAuthPrompt " + (args.auth ? args.auth : getBasicAuthHash())
     },
-    type: method,
+    type: 'POST',
     url: endpoint,
-    dataType: 'json',
-    success: function(response) {
-        if (callback) callback(response);
+    dataType: args.dataType !== undefined ? args.dataType : 'text',
+    data: data,
+    success: callback,
+    error: args.error !== undefined ? args.error : function() {
+      snackbarFail();
+    }
+  });
+}
+
+function GET(endpoint, callback, args) {
+  if (! args) args = {};
+  $.ajax({
+    headers: {
+        "Authorization": "BasicNoAuthPrompt " + (args.auth ? args.auth : getBasicAuthHash())
     },
-    error: function(response) {
-      if (errorCallback) errorCallback(response);
+    type: 'GET',
+    url: endpoint,
+    dataType: args.dataType !== undefined ? args.dataType : 'json',
+    success: callback,
+    error: args.error !== undefined ? args.error : function() {
+      snackbarFail();
+    }
+  });
+}
+
+function DELETE(endpoint, callback, args) {
+  if (! args) args = {};
+  $.ajax({
+    headers: {
+        "Authorization": "BasicNoAuthPrompt " + (args.auth ? args.auth : getBasicAuthHash())
+    },
+    type: 'Delete',
+    url: endpoint,
+    dataType: args.dataType !== undefined ? args.dataType : 'json',
+    success: callback,
+    error: args.error !== undefined ? args.error : function() {
+      snackbarFail();
     }
   });
 }
 
 function databasePeek(endpoint) {
-  $.ajax({
-    headers: {
-      "Authorization": "BasicNoAuthPrompt " + getBasicAuthHash(),
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    type: 'GET',
-    url: endpoint,
-    dataType: 'json',
-    success: function(response) {
-        console.log(response)
-    }
+  GET(endpoint, function(data) {
+    console.log(data);
   });
 }
 
@@ -90,6 +114,30 @@ function getNextWeekEndDate() {
   return new Date(getNextSundayDate().getTime() + days * 24 * 60 * 60 * 1000);
 }
 
+function snackbarSuccess(customText) {
+  var snackbar = document.getElementById("snackbar");
+  snackbar.className = "show";
+  var oldText = $(snackbar).text();
+  var text = customText ? customText : oldText;
+  $(snackbar).text(text);
+  setTimeout(function(){
+    snackbar.className = snackbar.className.replace("show", "");
+    $(snackbar).text(oldText);
+  }, 2000);
+}
+
+function snackbarFail(customText) {
+  var snackbar = document.getElementById("snackbarFailed");
+  snackbar.className = "show";
+  var oldText = $(snackbar).text();
+  var text = customText ? customText : oldText;
+  $(snackbar).text(text);
+    setTimeout(function(){
+    snackbar.className = snackbar.className.replace("show", "");
+    $(snackbar).text(oldText);
+  }, 2000);
+}
+
 function logout() {
   // Remove authorization classes
   $('body').removeClass('authorized-la authorized-admin');
@@ -105,31 +153,17 @@ function logout() {
 }
 
 function getLoggedInUserProfile(callback) {
-  var basicAuthHash = getBasicAuthHash();
-  $.ajax({
-    headers: {
-        "Authorization": "BasicNoAuthPrompt " + basicAuthHash,
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-    },
-    type: 'GET',
-    url: '/api/userDatabase',
-    dataType: 'json',
-    success: function(response) {
-        var profile = null;
-        for (var i = 0; i < response.length; i++) {
-          profile = response[i];
-          if (btoa(profile.name + ":" + profile.password) == basicAuthHash) {
-            break;
-          }
-        }
-
-        callback(profile);
-    },
-    error: function(response) {
-        console.log('ERROR: Unable to access /api/userDatabase!');
+  GET('/api/userDatabase', function(response) {
+    var profile = null;
+    for (var i = 0; i < response.length; i++) {
+      profile = response[i];
+      if (btoa(profile.name + ":" + profile.password) == getBasicAuthHash()) {
+        break;
+      }
     }
-  });
+
+    callback(profile);
+  }, {error: null});
 }
 
 function getBasicAuthHash() {
@@ -147,52 +181,19 @@ function getBasicAuthHash() {
 
 function runKarenBot() {
   var date = getNextSundayDate().toLocaleDateString().replace(/\//g, '-');
+  console.log(date);
   // Copy appropriate JSON files from database
-  $.ajax({
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-
-    headers: {
-     "Authorization": "BasicNoAuthPrompt " + getBasicAuthHash()
-    },
-    type: 'GET',
-    url: '/api/hoursetter/copytoJson/'+ date,
-    dataType: 'text',
-      success: function() {
-      $.ajax({
-		    headers: {
-		      'Accept': 'application/json',
-		      'Content-Type': 'application/json'
-		    },
-			    headers: {
-			      "Authorization": "BasicNoAuthPrompt " + getBasicAuthHash()
-			    },
-				    type: 'GET',
-				    url: '/api/master/copytoJson/'+ date,
-				    dataType: 'text',
-				      success: function() {
-				        // Run KarenBot by issuing a GET request to the dropwizard server
-                   $.ajax({
-                    headers: {
-                      'Accept': 'application/json',
-                      'Content-Type': 'application/json',
-                      "Authorization": "BasicNoAuthPrompt " + getBasicAuthHash()
-                    },
-                    type: 'GET',
-                    url: '/api/schedule/'+ date,
-                    dataType: 'json',
-                      success: function(data) {
-                        console.log(data);
-                        alert("Schedule successfully generated!");
-                        replaceExistingSchedule(data);
-                    }
-                  });
-				    }
-				  });
-    }
-  });
+  GET('/api/hoursetter/copytoJson/' + date, function() {
+    console.log("Here?");
+    GET('/api/master/copytoJson/' + date, function() {
+      console.log("Here?");
+      // Run karebbot
+      console.log("everything good so far");
+      GET('/api/schedule/' + date, function(data) {
+        replaceExistingSchedule(data);
+      });
+    });
+  }, {dataType: 'text'});
 }
 
 function configureScheduler() {
@@ -275,10 +276,8 @@ function renderAllSchedules(name_filter) {
   // Render each week in this schedule
   var weekStartDates = Object.keys(ALL_SCHEDULES);
   for (var i = 0; i < weekStartDates.length; i++) {
-    console.log(i);
     var weekStartDate = weekStartDates[i];
     var week = ALL_SCHEDULES[weekStartDate];
-    console.log(week)
     renderWeekSchedule(week, weekStartDate, name_filter);
   }
 }
@@ -304,77 +303,48 @@ function buildSchedulesFromDatabaseJSON(database_json) {
 }
 
 function replaceExistingSchedule(data) {
+  console.log("replacing exiting schedule")
+
   // Get existing week schedule data
   var postComplete, deleteComplete;
-  $.ajax({
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    type: 'GET',
-    url: '/api/officehours',
-    dataType: 'json',
-    success: function(existing) {
-      //get the id
-      var numDeleted = 0;
-      var nextdate = getNextSundayDate().toLocaleDateString();
-      if (existing.length == 0) deleteComplete = true;
-      for(var i=0;i<existing.length;i++){
-          var ID = existing[i].id;
-          var weekstartdate = existing[i].weekStartDate;
-          if(weekstartdate == nextdate){
-              //delete to ensure clean office hours schedule
-              $.ajax({
-                  headers: {
-                    "Authorization": "BasicNoAuthPrompt " + getBasicAuthHash()
-                  },
-                  type: 'Delete',
-                  url: '/api/officehours/' + ID,
-                  dataType: 'json',
-                  success: function() {
-                    numDeleted++;
-                    if (numDeleted == existing.length) deleteComplete = true;
-                    if (postComplete) refreshSchedule();
-                  }
-              });
-          }
+  GET('/api/officehours', function(existing) {
+    // Delete existing office hours for week start date and name
+    var numDeleted = 0;
+    var nextdate = getNextSundayDate().toLocaleDateString();
+    if (existing.length == 0) deleteComplete = true;
+    for(var i=0;i<existing.length;i++){
+        var ID = existing[i].id;
+        var weekstartdate = existing[i].weekStartDate;
+        if(weekstartdate == nextdate){
+            //delete to ensure clean office hours schedule
+            DELETE('/api/officehours/' + ID, function() {
+              numDeleted++;
+              if (numDeleted == existing.length) deleteComplete = true;
+              if (postComplete) {
+                snackbarSuccess();
+                refreshSchedule();
+              }
+            });
         }
+      }
 
-        // Push generated data to office hours endpoint
-        $.ajax({
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            "Authorization": "BasicNoAuthPrompt " + getBasicAuthHash()
-          },
-          type: 'POST',
-          url: '/api/officehours/',
-          dataType: 'json',
-          data: JSON.stringify(data),
-          success: function(data) {
-            postComplete = true;
-            if (deleteComplete) refreshSchedule();
-          }
-        });
-    }
+      // Push generated data to office hours endpoint
+      POST('/api/officehours', JSON.stringify(data), function() {
+        postComplete = true;
+        if (deleteComplete) {
+          refreshSchedule();
+          snackbarSuccess();
+        }
+      })
   });
 }
 
 function refreshSchedule() {
   // Query database and build schedule
   var date = getNextSundayDate().toLocaleDateString().replace(/\//g, '-');
-   $.ajax({
-		    headers: {
-		      'Accept': 'application/json',
-		      'Content-Type': 'application/json'
-		    },
-		    type: 'GET',
-		    url: '/api/officehours/',
-		    dataType: 'json',
-		      success: function(data) {
-		        buildSchedulesFromDatabaseJSON(data);
-		        renderAllSchedules();
-		    }
+  GET('/api/officehours', function(data) {
+    buildSchedulesFromDatabaseJSON(data);
+    renderAllSchedules();
   });
 }
 
@@ -563,7 +533,9 @@ tr {
 			<div class="dhx_cal_header"></div>
 			<div class="dhx_cal_data"></div>
 		</div>
-        </div>
+    <div id="snackbar">Operation successful!</div>
+    <div id="snackbarFailed">An error occurred... Please try again later.</div>
+</div>
 <!--<div id="app2" style="visibility: hidden">Test me bro</div>-->
 <script src="dist/bundle.js"></script>
 </body>

@@ -19,42 +19,25 @@ var LogIn = React.createClass({
         // Remove authorization classes
         $('body').removeClass('authorized-la authorized-admin');
 
-        var basicAuthHash = btoa(user.username + ":" + user.password);
+        var basicAuthHash = btoa(user.username + ":" + user.password)
 
-        $.ajax({
-            headers: {
-                "Authorization": "BasicNoAuthPrompt " + basicAuthHash
-            },
-            type: 'GET',
-            url: '/api/protected',
-            dataType: 'text',
-            success: function(response) {
-                // Go back to calendar view
-                window.location = '/#/';
+        // Override authorization in 3rd parameter
+        GET('/api/protected', function() {
+            // Go back to calendar view
+            window.location = '/#/';
 
-                // Set logged in hash
-                document.cookie = "auth=" + basicAuthHash;
+            // Set logged in hash
+            document.cookie = "auth=" + basicAuthHash;
 
-                // Load weeksetter/hoursetter
-                $(document).trigger('loadHours');
+            // Load weeksetter/hoursetter
+            $(document).trigger('loadHours');
 
-                // Display appropriate page elements
-                getLoggedInUserProfile(function(profile) {
-                    $('#username').text(profile.name);
-                    updateElementsByUserRole(profile.role);
-                });
-            },
-            error: function(response) {
-                    // Get the snackbar DIV
-                    var x = document.getElementById("snackbar")
-
-                    // Add the "show" class to DIV
-                    x.className = "show";
-
-                    // After 3 seconds, remove the show class from DIV
-                    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-            }
-        });
+            // Display appropriate page elements
+            getLoggedInUserProfile(function(profile) {
+                $('#username').text(profile.name);
+                updateElementsByUserRole(profile.role);
+            });
+        }, {auth: basicAuthHash}); // Auth override
 
     },
     _onChange: function(){
