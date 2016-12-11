@@ -42,8 +42,17 @@ var LACreator = React.createClass({
 
         createActions.addLA(LA);
 
-        if(this.refs.username.value!='' && this.refs.password.value!='' && this.refs.role.value!='')
+        if(this.refs.username.value!='' && this.refs.password.value!='' && this.refs.role.value!='') {
             this.setState({created:true});
+            // Get the snackbar DIV
+            var x = document.getElementById("snackbar")
+
+            // Add the "show" class to DIV
+            x.className = "show";
+
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
         else
             this.setState({created:false});
 
@@ -53,14 +62,7 @@ var LACreator = React.createClass({
 
         e.preventDefault();
         
-        // Get the snackbar DIV
-        var x = document.getElementById("snackbar")
-
-        // Add the "show" class to DIV
-        x.className = "show";
-
-        // After 3 seconds, remove the show class from DIV
-        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        
     },
     handleChange: function(event){
         this.setState({role: this.refs.role.value});
@@ -114,7 +116,7 @@ var LACreator = React.createClass({
                     </select>
 
                    <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleUserCreation}>Submit</button>
-                    <div style={{color:"white"}}>An LA has been created</div>
+                    <div id="snackbar">Success!</div>
                    </form>
 
                 </div>
@@ -159,7 +161,6 @@ var LACreator = React.createClass({
 
                         <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleUserCreation}>Submit</button>
                    </form>
-                    <div id="snackbar">Success!</div>
                 </div>
             );
         }
