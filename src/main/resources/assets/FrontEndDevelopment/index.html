@@ -31,6 +31,20 @@
 var ALL_SCHEDULES = null;
 var DAYS_OF_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 
+$(document).ready(function() {
+  // Redirect user to calendar if not logged in
+  if (getBasicAuthHash() == null) window.location = '/#/';
+  else getLoggedInUserProfile(function(profile) {
+    updateElementsByUserRole(profile.role);
+  });
+});
+
+function updateElementsByUserRole(role) {
+  var admin = role == 'admin';
+  $('body').addClass('authorized-la');
+  if (admin) $('body').addClass('authorized-admin');
+}
+
 function getNextSundayDate() {
   var today = new Date();
   var days = 7 - today.getDay();
@@ -73,7 +87,7 @@ function getLoggedInUserProfile(callback) {
         callback(profile);
     },
     error: function(response) {
-        alert('Unable to access /api/userDatabase!');
+        console.log('ERROR: Unable to access /api/userDatabase!');
     }
   });
 }
