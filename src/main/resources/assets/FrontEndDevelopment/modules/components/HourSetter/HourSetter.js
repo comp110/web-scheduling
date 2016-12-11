@@ -63,7 +63,6 @@ var HourSetterTableData = React.createClass({
     },
     render: function(){
         var available = workhoursStore.checkAvailability(this.props.hour, this.props.day);
-        console.log("available: " + available);
         var bgcolor = available ? '#FFB100' : '#00bcec';
         var text = available ? '&#10003' : hourMap[this.props.hour];
         return (
@@ -72,19 +71,6 @@ var HourSetterTableData = React.createClass({
                 dangerouslySetInnerHTML={{__html: text}}>
             </td>
         )
-
-        /*if(this.state.backgroundColor=='#00bcec')
-            return(
-                 <td onClick={()=>this.handleClick(this.props)} style = {this.state}>
-                    {hourMap[this.props.hour]}
-                </td>
-            );
-        else
-            return(
-                 <td onClick={()=>this.handleClick(this.props)} style = {this.state}>
-                    <div dangerouslySetInnerHTML={{__html: '&#10003'}} />
-                </td>
-            );*/
     }
 });
 
@@ -199,7 +185,7 @@ var HourSetterTable = React.createClass({
 
                         xhttp.send(reduced_shifts);
                         console.log(reduced_shifts);
-                        
+
                     }
                   });
 

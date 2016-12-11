@@ -135,13 +135,24 @@ function getData(hour,week,num_people){
 }
 var numpeople = initializeWeek();
 
+function forceRerender() {
+    // Hack to force re-render
+    window.location = '/#/';
+    window.location='/#/weekset'
+}
+
 $(document).ready(function() {
     // Set work hours based on hours in database
     queryEndpoint('/api/master', 'GET', function(data) {
+        var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
         for (var i = 0; i < data.length; i++) {
-            var day = data[i];
-            console.log(day);
+            var entry = data[i];
+            var hour = entry.hour;
+            var day = days.indexOf(entry.day);
+            numpeople[hour][day].numPeople = entry.numPeople;
         }
+
+        forceRerender();
     });
 });
 
@@ -193,6 +204,7 @@ var WeekSetterDataPreview = React.createClass({
    }
 });
 
+var lastClicked = null;
 
 var WeekSetterTableData = React.createClass({
     getInitialState: function(){
@@ -207,9 +219,11 @@ var WeekSetterTableData = React.createClass({
         };
     },
     handleClick: function(props){
+        if (lastClicked != null) lastClicked.setState({backgroundColor: '#00bcec'});
         this.setState({
-            backgroundColor: (this.state.backgroundColor=='#FFB100') ? '#00bcec' : '#FFB100'
+            backgroundColor: '#FFB100'
         });
+        lastClicked = this;
         this.props.handleClick(props.hour, props.day);
     },
     handleAdd: function(i,j){
@@ -220,11 +234,11 @@ var WeekSetterTableData = React.createClass({
     },
     render: function(){
         return(
-                     <td onClick={()=>this.handleClick(this.props)} style = {this.state}>
-                        <span style={{color: this.props.numObj[this.props.hour][this.props.day].numPeople == 0 ? 'black' : 'white'}}>
-                            {hourMap[this.props.hour]}: {this.props.numObj[this.props.hour][this.props.day].numPeople}
-                        </span>
-                    </td>
+            <td className="tableCell" onClick={()=>this.handleClick(this.props)} style = {this.state}>
+                <span style={{color: this.props.numObj[this.props.hour][this.props.day].numPeople == 0 ? 'black' : 'white'}}>
+                {hourMap[this.props.hour]}: {this.props.numObj[this.props.hour][this.props.day].numPeople}
+                </span>
+            </td>
         );
     }
 });
@@ -350,7 +364,7 @@ var WeekSetterTable = React.createClass({
                 setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
             }
         };
-                
+
       xhttp.send(reduced);
 
         // Get the snackbar DIV
