@@ -16,11 +16,10 @@ var LogIn = React.createClass({
     handleSetUser: function(user){
         userActions.setUser(user);
 
-        var basicAuthHash = btoa(user.username + ":" + user.password);
-        document.cookie = "auth=" + basicAuthHash;
-
         // Remove authorization classes
         $('body').removeClass('authorized-la authorized-admin');
+
+        var basicAuthHash = btoa(user.username + ":" + user.password);
 
         $.ajax({
             headers: {
@@ -33,11 +32,12 @@ var LogIn = React.createClass({
                 // Go back to calendar view
                 window.location = '/#/';
 
+                // Set logged in hash
+                document.cookie = "auth=" + basicAuthHash;
+
                 // Display appropriate page elements
                 getLoggedInUserProfile(function(profile) {
-                    var admin = profile.role == 'admin';
-                    $('body').addClass('authorized-la');
-                    if (admin) $('body').addClass('authorized-admin');
+                    updateElementsByUserRole(profile.role);
                 });
             },
             error: function(response) {
