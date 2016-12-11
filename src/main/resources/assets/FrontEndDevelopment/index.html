@@ -35,6 +35,7 @@ $(document).ready(function() {
   // Redirect user to calendar if not logged in
   if (getBasicAuthHash() == null) window.location = '/#/';
   else getLoggedInUserProfile(function(profile) {
+    $('#username').text(profile.name);
     updateElementsByUserRole(profile.role);
   });
 });
@@ -93,8 +94,14 @@ function logout() {
   // Remove authorization classes
   $('body').removeClass('authorized-la authorized-admin');
 
+  // Remove username
+  $('#username').text('');
+
   // Delete auth cookie
-  document.cookie = 'auth=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+  document.cookie = 'auth=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+
+  // Reset hoursetter and weeksetter
+  $(document).trigger('reset');
 }
 
 function getLoggedInUserProfile(callback) {
@@ -177,6 +184,7 @@ function runKarenBot() {
                     url: '/api/schedule/'+ date,
                     dataType: 'json',
                       success: function(data) {
+                        console.log(data);
                         alert("Schedule successfully generated!");
                         replaceExistingSchedule(data);
                     }
@@ -376,6 +384,9 @@ $(document).ready(function() {
     renderAllSchedules($(this).val());
   });
 
+  // Load weeksetter and hoursetter
+  $(document).trigger('loadHours');
+
   // Scheduler Setup
   configureScheduler();
 
@@ -421,7 +432,7 @@ $(document).ready(function() {
 }
 
 body {
-  padding-top: 20px;
+  padding-top: 0px;
   padding-bottom: 40px;
 
 }
@@ -444,6 +455,12 @@ body:not(.authorized-la) .view-la {
 
 .weekCellActive {
   background-color: #FFB100 !important;
+}
+
+#username {
+  text-align: right;
+  min-height: 24px;
+  margin: 0;
 }
 
             //Log IN CSS

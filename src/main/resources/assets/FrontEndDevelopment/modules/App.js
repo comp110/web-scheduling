@@ -5,6 +5,7 @@ export default React.createClass({
   render() {
     return (
       <div className="container">
+        <p id="username"></p>
         <nav className="navbar navbar-inverse -bg-faded">
             <ul role="nav" className="nav navbar-nav">
                 <li className="nav-item active" style={{

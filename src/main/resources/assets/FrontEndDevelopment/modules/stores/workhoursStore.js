@@ -87,7 +87,7 @@ var _store = {
     profile: userStore.getUserProfile()
 };
 
-$(document).ready(function() {
+$(document).on('loadHours', function() {
     // Set work hours based on hours in database
     queryEndpoint('/api/hoursetter', 'GET', function(data) {
         getLoggedInUserProfile(function(profile) {
@@ -103,6 +103,10 @@ $(document).ready(function() {
             workhoursStore.emit(CHANGE_EVENT);
         });
     });
+});
+
+$(document).on('reset', function() {
+    _store.work_hours = initializeWorkHours();
 });
 
 function updateStore(){

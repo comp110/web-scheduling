@@ -142,7 +142,7 @@ function forceRerender() {
     window.location = currentPage;
 }
 
-$(document).ready(function() {
+$(document).on('loadHours', function() {
     // Set work hours based on hours in database
     queryEndpoint('/api/master', 'GET', function(data) {
         var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
@@ -155,6 +155,10 @@ $(document).ready(function() {
 
         forceRerender();
     });
+});
+
+$(document).on('reset', function() {
+    numpeople = initializeWeek();
 });
 
 var Profile = {

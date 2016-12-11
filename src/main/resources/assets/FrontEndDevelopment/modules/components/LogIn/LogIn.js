@@ -35,8 +35,12 @@ var LogIn = React.createClass({
                 // Set logged in hash
                 document.cookie = "auth=" + basicAuthHash;
 
+                // Load weeksetter/hoursetter
+                $(document).trigger('loadHours');
+
                 // Display appropriate page elements
                 getLoggedInUserProfile(function(profile) {
+                    $('#username').text(profile.name);
                     updateElementsByUserRole(profile.role);
                 });
             },
