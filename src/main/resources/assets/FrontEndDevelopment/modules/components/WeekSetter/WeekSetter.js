@@ -135,6 +135,15 @@ function getData(hour,week,num_people){
 }
 var numpeople = initializeWeek();
 
+$(document).ready(function() {
+    // Set work hours based on hours in database
+    queryEndpoint('/api/master', 'GET', function(data) {
+        for (var i = 0; i < data.length; i++) {
+            var day = data[i];
+            console.log(day);
+        }
+    });
+});
 
 var Profile = {
     "name":"COMP 110 LA",
@@ -297,7 +306,7 @@ var WeekSetterTable = React.createClass({
                     url: '/api/master/',
                     dataType: 'json',
                       success: function(data) {
-            
+
                         //get the id
                         for(var i=0;i<data.length;i++){
                           var obj = data[i].id;
