@@ -149,8 +149,6 @@ var HourSetterTable = React.createClass({
                           var ID = data[i].id;
                          var weekstartdate = data[i].weekStartDate;
                             if(weekstartdate == nextdate){
-
-
                             //delete to ensure clean hoursetter schedule
                              $.ajax({
                                         headers: {
