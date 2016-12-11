@@ -31,6 +31,36 @@
 var ALL_SCHEDULES = null;
 var DAYS_OF_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 
+$(document).ready(function() {
+  // Redirect user to calendar if not logged in
+  if (getBasicAuthHash() == null) window.location = '/#/';
+  else getLoggedInUserProfile(function(profile) {
+    updateElementsByUserRole(profile.role);
+  });
+});
+
+function databasePeek(endpoint) {
+  $.ajax({
+    headers: {
+      "Authorization": "BasicNoAuthPrompt " + getBasicAuthHash(),
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    type: 'GET',
+    url: endpoint,
+    dataType: 'json',
+    success: function(response) {
+        console.log(response)
+    }
+  });
+}
+
+function updateElementsByUserRole(role) {
+  var admin = role == 'admin';
+  $('body').addClass('authorized-la');
+  if (admin) $('body').addClass('authorized-admin');
+}
+
 function getNextSundayDate() {
   var today = new Date();
   var days = 7 - today.getDay();
@@ -73,7 +103,7 @@ function getLoggedInUserProfile(callback) {
         callback(profile);
     },
     error: function(response) {
-        alert('Unable to access /api/userDatabase!');
+        console.log('ERROR: Unable to access /api/userDatabase!');
     }
   });
 }
@@ -256,7 +286,6 @@ function refreshSchedule() {
 		      'Accept': 'application/json',
 		      'Content-Type': 'application/json'
 		    },
-        cache: false,
 		    type: 'GET',
 		    url: '/api/schedule/'+ date,
 		    dataType: 'json',
@@ -290,6 +319,10 @@ $(document).ready(function() {
             },
 .dhx_event_resize.dhx_footer {
 	display:none;
+}
+
+.navbar-nav .nav-item+.nav-item {
+    margin-left: 0rem;
 }
 
 #wrapper{
@@ -326,11 +359,11 @@ body.authorized-la .view-unauth-only, body.authorized-admin .view-unauth-only {
 }
 
 body:not(.authorized-admin) .view-admin {
-  //display: none;
+  display: none;
 }
 
 body:not(.authorized-la) .view-la {
-  //display: none;
+  display: none;
 }
 
 
