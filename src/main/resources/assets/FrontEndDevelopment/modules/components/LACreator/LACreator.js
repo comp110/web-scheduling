@@ -122,8 +122,8 @@ var LACreator = React.createClass({
                         <input style={{margin:0}} ref="password" type="password" className="form-control" placeholder="Password"/>
                         <label style={{color: 'white'}}>Role</label>
                         <select  ref="role" style={{height: 40}} value={this.state.role} className="form-control">
-                            <option value="admin">Admin</option>
                             <option value="la">LA</option>
+                            <option value="admin">Admin</option>
                         </select>
                         <label style={{color: 'white'}}>Gender</label>
                         <select  ref="gender" style={{height: 40}} value={this.state.gender} className="form-control">
