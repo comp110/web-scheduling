@@ -5,11 +5,11 @@ var createActions = require('../../actions/createActions');
 var LACreator = React.createClass({
     getInitialState: function(){
         return {
-            LAs: createStore.getLAs(),
-            role:  "la",
-            gender: "non-female",
-            experience: 1,
-            hoursCapacity: 1
+            // LAs: createStore.getLAs(),
+            // role:  "la",
+            // gender: "non-female",
+            // experience: 1,
+            // hoursCapacity: 1
         };
     },
     componentDidMount: function(){
