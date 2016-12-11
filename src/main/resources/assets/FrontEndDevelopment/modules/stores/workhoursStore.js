@@ -53,7 +53,7 @@ var createWorkableShifts = function(){
                 workable_shifts.push({
                     "name": _store.profile.name,
                     "gender": _store.profile.gender,
-                    "experienceLevel": _store.profile.experience,
+                    "experienceLevel": _store.profile.experienceLevel,
                     "hoursCapacity": _store.profile.hoursCapacity,
                     "weekStartDate": weekStartDate,
                     "day":getDay(i,j),
@@ -67,7 +67,7 @@ var createWorkableShifts = function(){
                 workable_shifts.push({
                     "name": _store.profile.name,
                     "gender": _store.profile.gender,
-                    "experienceLevel": _store.profile.experience,
+                    "experienceLevel": _store.profile.experienceLevel,
                     "hoursCapacity": _store.profile.hoursCapacity,
                     "weekStartDate": weekStartDate,
                     "day":getDay(i,j),
