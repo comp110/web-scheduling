@@ -48,12 +48,12 @@ public class KarenBot {
 
     // Output Results
     output(report);
-    
+
     // Convert KarenBot output to JSON
     Scorecard scorecard = report.getHigh();
     Week schedule = scorecard.getSchedule().getWeek();
     JSONArray json = schedule.toJSON(scenario);
-    
+
     // Write JSON to karenbot.json
     /*try {
         PrintWriter writer = new PrintWriter("data/karenbot.json", "UTF-8");
@@ -95,15 +95,15 @@ public class KarenBot {
     out.println("======================");
     out.println(header);
     out.println("======================");
-   
+
     	  out.println(body);
-    	 
+
     	//  jsonSchedule( body.toString());
-  
+
   }
 public static void  jsonSchedule(String body ){
 	String[] words = body.split("\\W+");
-	
+
 	int daysOfWeek = 7;
  	JSONObject object = new JSONObject();
 	for(int i =0 ; i < daysOfWeek ; i++){
@@ -120,9 +120,9 @@ public static void  jsonSchedule(String body ){
 			}
 		  }
 	}
-		
-		
-	
+
+
+
 
 
     System.out.print(object);

@@ -107,22 +107,25 @@ public class Week {
 
     return sb.toString();
   }
-  
+
   public JSONArray toJSON(String weekStartDate) {
 	  JSONArray json = new JSONArray();
 	  for (int day  = 0; day < _shifts.length; day++) {
 		  for (Shift shift : _shifts[day]) {
 			  if (shift.getCapacity() > 0) {
-				  // Add shift
-				  JSONObject shiftJSON = shift.toJSON(weekStartDate);
-				  if (shiftJSON.length() > 0) {
-					  json.put(shiftJSON);
-					  System.out.println(shift.toJSON(weekStartDate));
+				  // Get array of shifts
+				  JSONArray shiftJSON = shift.toJSON(weekStartDate);
+
+          // For each shift in shiftJSON, add it to the week json
+				  for (int i = 0; i < shiftJSON.length(); i++) {
+            json.put(shiftJSON.getJSONObject(i));
 				  }
 			  }
 		  }
 	  }
-	  
+
+    System.out.println(json);
+
 	  return json;
   }
 

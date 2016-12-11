@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 public class Shift extends HashSet<Employee> {
 
@@ -44,20 +45,22 @@ public class Shift extends HashSet<Employee> {
     List<String> names = this.stream().map(e -> e.getName()).collect(Collectors.toList());
     return String.format("%02d", _hour) + ": " + String.join(", ", names);
   }
-  
-  public JSONObject toJSON(String weekStartDate) {
-	  JSONObject json = new JSONObject();
+
+  public JSONArray toJSON(String weekStartDate) {
+	  JSONArray json = new JSONArray();
 	  ArrayList<String> days = new ArrayList<>(Arrays.asList("Sun", "Mon", "Tue", "Wed", "Thu", "Fri"));
 	  Iterator<Employee> employees = super.iterator();
 	  while (employees.hasNext()) {
-		  Employee e = employees.next();
-		  json.put("weekStartDate", weekStartDate);
-		  json.put("day", days.get(_day));
-		  json.put("name", e.getName());
-		  json.put("start", _hour);
-		  json.put("end", _hour + 1);  
+      Employee e = employees.next();
+      JSONObject shift = new JSONObject();
+		  shift.put("weekStartDate", weekStartDate);
+		  shift.put("day", days.get(_day));
+		  shift.put("name", e.getName());
+		  shift.put("start", _hour);
+		  shift.put("end", _hour + 1);
+      json.put(shift);
 	  }
-	  
+
 	  return json;
   }
 
