@@ -87,6 +87,24 @@ var _store = {
     profile: userStore.getUserProfile()
 };
 
+$(document).ready(function() {
+    // Set work hours based on hours in database
+    queryEndpoint('/api/hoursetter', 'GET', function(data) {
+        getLoggedInUserProfile(function(profile) {
+            var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
+            for (var i = 0; i < data.length; i++) {
+                var shift = data[i];
+                if (profile.name != shift.name) continue;
+                var day = days.indexOf(shift.day);
+                for (var hour = shift.start; hour < shift.end; hour++) {
+                    _store.work_hours[hour][day].isAvailable = true;
+                }
+            }
+            workhoursStore.emit(CHANGE_EVENT);
+        });
+    });
+});
+
 function updateStore(){
     _store.profile = userStore.getUserProfile();
 };
@@ -105,7 +123,8 @@ var workhoursStore = objectAssign({}, EventEmitter.prototype, {
         var shifts = createWorkableShifts();
         console.log(_store.profile);
         return shifts;
-    }
+    },
+    checkAvailability: checkAvailability
 });
 
 AppDispatcher.register(function(payload){

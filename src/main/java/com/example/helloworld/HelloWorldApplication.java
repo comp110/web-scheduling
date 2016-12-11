@@ -31,6 +31,7 @@ import com.example.helloworld.resources.UserResource;
 import com.example.helloworld.resources.LAResourceCopyJson;
 import com.example.helloworld.resources.MasterResourceCopyJson;
 import com.example.helloworld.resources.MasterResourceDelete;
+import com.example.helloworld.resources.OfficeHourResource;
 import com.example.helloworld.tasks.EchoTask;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
@@ -153,8 +154,8 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
         environment.jersey().register(new MasterResourceCopyJson(dao3));
         environment.jersey().register(new UserResource(dao4));
         environment.jersey().register(new scheduleResource());
-
-             environment.jersey().register(new MasterResourceDelete(dao3));
+        environment.jersey().register(new OfficeHourResource(dao));
+        environment.jersey().register(new MasterResourceDelete(dao3));
        // environment.jersey().register(new DefaultResource());
         environment.jersey().register(new FilteredResource());
     }
